@@ -1,0 +1,496 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20088,        488]
+NotebookOptionsPosition[     15606,        418]
+NotebookOutlinePosition[     16005,        434]
+CellTagsIndexPosition[     15962,        431]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Low rank approximations", "Title",
+ CellChangeTimes->{{3.8213726104536533`*^9, 3.821372616550712*^9}, {
+  3.821382744663859*^9, 
+  3.8213827570021143`*^9}},ExpressionUUID->"3749f0de-f693-4aaf-a5d1-\
+16a58d07f4cf"],
+
+Cell[TextData[{
+ "We have seen how the singular value decomposition can be used to identify \
+the \[OpenCurlyDoubleQuote]most important\[CloseCurlyDoubleQuote] information \
+in a matrix by choosing the \[OpenCurlyDoubleQuote]best\
+\[CloseCurlyDoubleQuote] low-rank approximation. One application of this idea \
+is in the area of ",
+ StyleBox["image compression",
+  FontWeight->"Bold"],
+ ", where we would like to represent the matrix of pixels in an image in an \
+efficient way."
+}], "Text",
+ CellChangeTimes->{{3.821372661553203*^9, 3.821372687414013*^9}, {
+  3.821372797917081*^9, 3.8213728215035667`*^9}, {3.821376874954278*^9, 
+  3.821376881889963*^9}, {3.821382038599523*^9, 3.821382070208685*^9}, {
+  3.82138276428161*^9, 3.8213827861708307`*^9}, {3.821382839933951*^9, 
+  3.821382856315794*^9}, {3.821382896902396*^9, 3.821382934176283*^9}, {
+  3.821383007558707*^9, 
+  3.8213830079799557`*^9}},ExpressionUUID->"d7076964-f2b5-4bf2-86a7-\
+3a425b151fe2"],
+
+Cell[CellGroupData[{
+
+Cell["Flags", "Section",
+ CellChangeTimes->{{3.821382880429294*^9, 
+  3.821382881489284*^9}},ExpressionUUID->"dbfdf7ce-b901-4594-b5a9-\
+8e64244300ae"],
+
+Cell["\<\
+For image compression, the use of the singular value decomposition will be \
+particularly effective in images where there are a lot of horizontal and \
+vertical lines. National flags make perfect examples as many of them can be \
+represented by rank-1 matrices. Let\[CloseCurlyQuote]s first look at one of \
+the good cases: Ireland.\
+\>", "Text",
+ CellChangeTimes->{{3.821383010220546*^9, 
+  3.8213830662243013`*^9}},ExpressionUUID->"f22aeb36-7830-4bb9-9a3c-\
+73109366af23"],
+
+Cell[CellGroupData[{
+
+Cell["Rank-1 flags", "Subsection",
+ CellChangeTimes->{{3.821383072394261*^9, 3.821383075441016*^9}, {
+  3.8213840921253*^9, 
+  3.8213840950978823`*^9}},ExpressionUUID->"5eb00f02-020c-49e5-8ca4-\
+aa4fec3d964c"],
+
+Cell["Let\[CloseCurlyQuote]s load the Irish flag from Mathematica\
+\[CloseCurlyQuote]s CountryData:", "Text",
+ CellChangeTimes->{{3.821383081088839*^9, 
+  3.82138309596605*^9}},ExpressionUUID->"6046d0fa-1d7f-4f45-be9e-\
+d6fbcc0ca3f2"],
+
+Cell["\<\
+This is an image built up out pixels represented by a matrix of size 127 x \
+255. Each entry in the matrix contains three numbers, one each representing \
+how much of red, green and blue is present in that pixel. For simplicity, let\
+\[CloseCurlyQuote]s convert these three numbers to a single number by \
+converting the colour image to grayscale.\
+\>", "Text",
+ CellChangeTimes->{{3.8213831103643837`*^9, 
+  3.8213833248742323`*^9}},ExpressionUUID->"b5b4bc32-04a2-4e64-bbf9-\
+0818428a5b70"],
+
+Cell["\<\
+Next we translate this image into 127 x 255 matrix of numbers in the range \
+[0,1] where 0 represents black and 1 represents white.\
+\>", "Text",
+ CellChangeTimes->{{3.8213833599459248`*^9, 3.821383378997982*^9}, {
+  3.821383503584065*^9, 
+  3.821383535135927*^9}},ExpressionUUID->"df4ef440-7406-48c7-99c0-\
+5ba676d7ae93"],
+
+Cell["\<\
+Now that we have a matrix, we can compute its singular value decomposition:\
+\>", "Text",
+ CellChangeTimes->{{3.821383494995969*^9, 3.82138350926128*^9}, {
+  3.821383551504621*^9, 
+  3.821383562177918*^9}},ExpressionUUID->"9a423892-17ec-4e08-a9f4-\
+fb1bb5a16985"],
+
+Cell["We can reconstruct the original matrix and image from these:", "Text",
+ CellChangeTimes->{{3.821383693872184*^9, 3.821383707359193*^9}, {
+  3.8213837392354593`*^9, 
+  3.821383741176255*^9}},ExpressionUUID->"6d9dbc82-4b3d-471e-9dbc-\
+5ae342bd3f78"],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s look at the singular values, to see how many important \
+singular vectors there are:\
+\>", "Text",
+ CellChangeTimes->{{3.8213836595139513`*^9, 
+  3.82138368104055*^9}},ExpressionUUID->"4d5d85c3-cc55-4e3f-b367-\
+d60ccd0c3cb1"],
+
+Cell["\<\
+This is a particularly nice matrix since it only has one singular value. It \
+is therefore rank-1 and we have a very efficient low-rank approximation that \
+is exact!\
+\>", "Text",
+ CellChangeTimes->{
+  3.8213836837165117`*^9, {3.821383770328486*^9, 
+   3.8213837890711317`*^9}},ExpressionUUID->"116c7595-d64c-4c06-9686-\
+330fc56bbedc"],
+
+Cell["\<\
+This represents the flag by the first singular vector in U, which is just a \
+vector with the same number 127 times. This tells us that the flag doesn\
+\[CloseCurlyQuote]t change along the vertical.\
+\>", "Text",
+ CellChangeTimes->{{3.821383852557892*^9, 
+  3.821383922658437*^9}},ExpressionUUID->"1eaff618-f5f2-46c2-b6ca-\
+61f4537b720f"],
+
+Cell["\<\
+The first singular vector in V is just a 255 element vector of three numbers, \
+representing the darkness of each of the three bands that change along the \
+horizontal.\
+\>", "Text",
+ CellChangeTimes->{{3.821383931346808*^9, 
+  3.821384022210888*^9}},ExpressionUUID->"7b2b597a-7fed-440c-9142-\
+dfda27692b1f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Higher rank flags", "Subsection",
+ CellChangeTimes->{{3.821384106132739*^9, 
+  3.821384108673048*^9}},ExpressionUUID->"bc39e82c-e57e-499f-81a1-\
+734e0db4a259"],
+
+Cell["\<\
+Other flags are less simple than the Irish flag. Let\[CloseCurlyQuote]s try \
+to figure out what rank the Greek flag is.\
+\>", "Text",
+ CellChangeTimes->{{3.821385013126275*^9, 
+  3.821385040495315*^9}},ExpressionUUID->"78a0e87f-fe3a-4590-9004-\
+48fe5562d955"],
+
+Cell["Let\[CloseCurlyQuote]s load the Greek flag from Mathematica\
+\[CloseCurlyQuote]s CountryData:", "Text",
+ CellChangeTimes->{{3.821383081088839*^9, 3.82138309596605*^9}, {
+  3.821385064148036*^9, 
+  3.8213850648173656`*^9}},ExpressionUUID->"1b0a0785-b3ea-4bbf-b9bf-\
+3d96a3a55eb4"],
+
+Cell["Now convert the colour image to grayscale.", "Text",
+ CellChangeTimes->{{3.8213831103643837`*^9, 3.8213833248742323`*^9}, {
+  3.821385089736887*^9, 
+  3.821385097310774*^9}},ExpressionUUID->"b678c033-87e3-44fa-8467-\
+dc0f283ca221"],
+
+Cell["\<\
+Next we translate this image into 169 x 255 matrix of numbers in the range \
+[0,1] where 0 represents black and 1 represents white.\
+\>", "Text",
+ CellChangeTimes->{{3.8213833599459248`*^9, 3.821383378997982*^9}, {
+  3.821383503584065*^9, 3.821383535135927*^9}, {3.8213851041799*^9, 
+  3.821385105202289*^9}},ExpressionUUID->"c8d8249f-1ba1-4699-82d2-\
+22380f73b0f9"],
+
+Cell["\<\
+Now that we have a matrix, we can compute its singular value decomposition:\
+\>", "Text",
+ CellChangeTimes->{{3.821383494995969*^9, 3.82138350926128*^9}, {
+  3.821383551504621*^9, 
+  3.821383562177918*^9}},ExpressionUUID->"cf937ae4-c415-4020-b3a5-\
+abc2dac1c9be"],
+
+Cell["It looks like there are only 3 (or maybe 6) singular values:", "Text",
+ CellChangeTimes->{{3.821385185903266*^9, 
+  3.821385203956046*^9}},ExpressionUUID->"47e35860-928e-449e-84a5-\
+c324201ddfd9"],
+
+Cell["\<\
+We can reconstruct the original matrix and image from the full set:\
+\>", "Text",
+ CellChangeTimes->{{3.821383693872184*^9, 3.821383707359193*^9}, {
+  3.8213837392354593`*^9, 3.821383741176255*^9}, {3.821385244938142*^9, 
+  3.821385247909584*^9}},ExpressionUUID->"16af7c97-13d8-462a-977a-\
+38591b2995c6"],
+
+Cell["We can see how this is built up from three rank-1 matrices:", "Text",
+ CellChangeTimes->{
+  3.8213836837165117`*^9, {3.821383770328486*^9, 3.8213837890711317`*^9}, {
+   3.82138527329053*^9, 
+   3.8213852832772713`*^9}},ExpressionUUID->"1fb2d8bb-c885-45ea-88c7-\
+75204566fbde"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Full rank flags", "Subsection",
+ CellChangeTimes->{{3.8213854589645967`*^9, 
+  3.821385462496249*^9}},ExpressionUUID->"5608ee5f-164a-4ee0-ae5b-\
+7c72c87bb9b0"],
+
+Cell["\<\
+It doesn\[CloseCurlyQuote]t take much of a change to turn a nice and simple \
+low-rank flag into something full-rank. Take the Scottish flag, for example:\
+\>", "Text",
+ CellChangeTimes->{{3.821385464213275*^9, 3.82138549712705*^9}, {
+  3.821385530828796*^9, 
+  3.821385531801023*^9}},ExpressionUUID->"7042c497-11b7-48db-8e3e-\
+1b0be51def51"],
+
+Cell["\<\
+This looks just as simple as the other flags, but from the point of view of \
+the SVD those diagonal lines are a disaster.\
+\>", "Text",
+ CellChangeTimes->{{3.821385680438339*^9, 
+  3.821385708935869*^9}},ExpressionUUID->"d1d2db8f-5d19-4c75-9802-\
+8ebf4925e504"],
+
+Cell[TextData[{
+ "Given that we know that this should be a simple one, is there something \
+that we can do to make the SVD see it? How about if we rotate the image by ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["\[Pi]", "2"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "90ab41ce-03a9-44e5-b5a1-69f7e7449f6c"],
+ " first to transform diagonal lines to horizontal and vertical, and then do \
+the SVD on the rotated image. "
+}], "Text",
+ CellChangeTimes->{{3.821385978642861*^9, 
+  3.8213860553258257`*^9}},ExpressionUUID->"ac2ac73f-3e45-4898-92bf-\
+ef64137f76b5"],
+
+Cell["First, let\[CloseCurlyQuote]s resize and rotate the flag", "Text",
+ CellChangeTimes->{{3.821386067566588*^9, 
+  3.8213861027576857`*^9}},ExpressionUUID->"542958a3-c99d-4fa3-b2d1-\
+007c6071cb71"],
+
+Cell["Now compute the SVD", "Text",
+ CellChangeTimes->{{3.821386165171637*^9, 
+  3.821386167652452*^9}},ExpressionUUID->"ea00ed71-da08-4797-858f-\
+e67743ce5ec8"],
+
+Cell["\<\
+We can check that the singular values now fall off quite a bit faster\
+\>", "Text",
+ CellChangeTimes->{{3.821386307963194*^9, 
+  3.821386319987719*^9}},ExpressionUUID->"e9c3d471-e2b4-4dda-8bd8-\
+16b2310fdaf6"],
+
+Cell["Now reconstruct the original flag.", "Text",
+ CellChangeTimes->{{3.821386361598111*^9, 3.821386367501863*^9}, {
+  3.821386493965519*^9, 
+  3.82138649550786*^9}},ExpressionUUID->"8bd7db97-1c8f-4062-be6e-\
+2a979f30df47"],
+
+Cell["We see that it\[CloseCurlyQuote]s almost perfectly rank-2!", "Text",
+ CellChangeTimes->{{3.821386497599277*^9, 3.821386515332518*^9}, 
+   3.8213866615178633`*^9},ExpressionUUID->"3aa38b2a-4927-4e3d-a39a-\
+ee21f3c70147"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Image compression", "Section",
+ CellChangeTimes->{{3.821384115462833*^9, 
+  3.821384118210629*^9}},ExpressionUUID->"67e33619-aac1-491f-ace1-\
+c91b1871ec2b"],
+
+Cell["\<\
+Compression using singular values can also be achieve with more complicated \
+images. Let\[CloseCurlyQuote]s try it with a photo of UCD. First, we load the \
+image and convert it to grayscale\
+\>", "Text",
+ CellChangeTimes->{{3.8213841216396017`*^9, 3.821384157179367*^9}, {
+  3.8213847725247793`*^9, 
+  3.821384782556816*^9}},ExpressionUUID->"d5f51845-d523-4ef8-a771-\
+189bfd1c5768"],
+
+Cell["Now convert the grayscale image to a matrix of pixel values.", "Text",
+ CellChangeTimes->{{3.821384785808263*^9, 
+  3.821384799667306*^9}},ExpressionUUID->"53ef4bd1-9038-4864-9c44-\
+d179938da54c"],
+
+Cell["Next, compute the SVD:", "Text",
+ CellChangeTimes->{{3.8213848026313066`*^9, 
+  3.82138480832417*^9}},ExpressionUUID->"5a71649c-81c9-49a3-8c83-\
+ff6167c0b209"],
+
+Cell["We can reconstruct the original image from the full SVD", "Text",
+ CellChangeTimes->{{3.821384811366639*^9, 
+  3.821384820774004*^9}},ExpressionUUID->"5f1ea7d6-391d-4832-a213-\
+fa49e59830db"],
+
+Cell["\<\
+We can also get a pretty good approximation by only including the largest \
+singular values and vectors\
+\>", "Text",
+ CellChangeTimes->{{3.821384824473394*^9, 
+  3.8213848594327507`*^9}},ExpressionUUID->"f715f0d8-12d3-499e-badf-\
+bf1faaac3190"],
+
+Cell["\<\
+If we plot the singular values, we see that they drop off rapidly until about \
+the 100th value. This suggests that stopping around rank-100 is a good choice.\
+\>", "Text",
+ CellChangeTimes->{{3.821384880127262*^9, 
+  3.8213849240534363`*^9}},ExpressionUUID->"b3243a7e-7259-45cc-823a-\
+3fcc14ad0b83"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Singular value decomposition for approximating functions", "Section",
+ CellChangeTimes->{{3.821386865128355*^9, 
+  3.821386872862752*^9}},ExpressionUUID->"05e4041f-de11-44bb-987d-\
+d36d041fdcdd"],
+
+Cell[TextData[{
+ "The singular value decomposition does not only apply to linear algebra. We \
+can also use it to get an approximation to an arbitrary function. For \
+example, say we have a functional ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["m", "n"], TraditionalForm]],ExpressionUUID->
+  "a462a17a-f75d-4ddd-ad84-76fd86599a1f"],
+ "(x), which is parametrized by n, and for each n we get a function of x. A \
+simple example is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["m", "n"], "(", "x", ")"}], "=", 
+    RowBox[{"sin", "(", 
+     RowBox[{"n", " ", "x"}], ")"}]}], TraditionalForm]],ExpressionUUID->
+  "193d7400-c4e5-41b1-b238-acdb15ee130f"],
+ " with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"0", "\[LessEqual]", "n", "\[LessEqual]", "10"}], 
+   TraditionalForm]],ExpressionUUID->"091a5871-1695-44b7-80e6-b6d5e27fe97a"],
+ ". In reality, this could be a much more complicated function that we would \
+like to approximate in terms of simple functions. In our example, we wish to \
+approximate it by a linear combination of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"sin", "(", 
+    RowBox[{"n", " ", "x"}], ")"}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "14d2f31e-98c0-4a43-9f77-602088426cae"],
+ " (i.e. basis functions) for specific values of ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "b6683060-664a-4efa-a83d-3cc4b0ce351e"],
+ ". The question then is how many specific values of n do we need in our \
+basis so that we can  faithfully reproduce the function for all n? We can \
+answer this question using the singular value decomposition. For this to \
+work, it is important that the function has sufficiently many points in the x \
+direction such that it is resolved. The number of singular values gives the \
+number of basis functions required. These will all be of the same order. Once \
+enough basis functions are included, any further singular values should \
+decrease exponentially in magnitude."
+}], "Text",
+ CellChangeTimes->{{3.821386876469549*^9, 3.8213869459887857`*^9}, {
+  3.821386976477116*^9, 
+  3.821387140709669*^9}},ExpressionUUID->"2f7fef42-7f8c-4598-aa54-\
+4fccb4f5aba9"],
+
+Cell["Let\[CloseCurlyQuote]s evaluate our function on a grid:", "Text",
+ CellChangeTimes->{{3.625592703474412*^9, 3.625592787842861*^9}, {
+   3.6255930452958393`*^9, 3.6255930579436817`*^9}, 3.82138692823139*^9, {
+   3.821387181034205*^9, 
+   3.821387185227269*^9}},ExpressionUUID->"8f03376c-acdd-49c2-bdfb-\
+261b871b7e0a"],
+
+Cell[TextData[{
+ "We see that in our ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"sin", "(", 
+    RowBox[{"n", " ", "x"}], ")"}], TraditionalForm]],ExpressionUUID->
+  "3084ddff-4fc7-4a39-a425-07ca061519ac"],
+ " example, computing the singular values reveals that it is sufficient to \
+have ~20 basis functions in order to reconstruct any value in the range 0\
+\[LessEqual]n\[LessEqual]10."
+}], "Text",
+ CellChangeTimes->{{3.625593027415509*^9, 3.62559314262429*^9}, {
+  3.821387274856439*^9, 
+  3.821387288405575*^9}},ExpressionUUID->"63f1b98c-507c-485d-b9f4-\
+6adcd44c3e32"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1210, 763},
+WindowMargins->{{143, Automatic}, {Automatic, 23}},
+FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"eafd9048-e396-4f23-a88a-cf6ebc7b00ad"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 219, 4, 98, "Title",ExpressionUUID->"3749f0de-f693-4aaf-a5d1-16a58d07f4cf"],
+Cell[802, 28, 959, 18, 58, "Text",ExpressionUUID->"d7076964-f2b5-4bf2-86a7-3a425b151fe2"],
+Cell[CellGroupData[{
+Cell[1786, 50, 150, 3, 67, "Section",ExpressionUUID->"dbfdf7ce-b901-4594-b5a9-8e64244300ae"],
+Cell[1939, 55, 484, 9, 58, "Text",ExpressionUUID->"f22aeb36-7830-4bb9-9a3c-73109366af23"],
+Cell[CellGroupData[{
+Cell[2448, 68, 209, 4, 54, "Subsection",ExpressionUUID->"5eb00f02-020c-49e5-8ca4-aa4fec3d964c"],
+Cell[2660, 74, 234, 4, 35, "Text",ExpressionUUID->"6046d0fa-1d7f-4f45-be9e-d6fbcc0ca3f2"],
+Cell[2897, 80, 501, 9, 58, "Text",ExpressionUUID->"b5b4bc32-04a2-4e64-bbf9-0818428a5b70"],
+Cell[3401, 91, 332, 7, 35, "Text",ExpressionUUID->"df4ef440-7406-48c7-99c0-5ba676d7ae93"],
+Cell[3736, 100, 273, 6, 35, "Text",ExpressionUUID->"9a423892-17ec-4e08-a9f4-fb1bb5a16985"],
+Cell[4012, 108, 253, 4, 35, "Text",ExpressionUUID->"6d9dbc82-4b3d-471e-9dbc-5ae342bd3f78"],
+Cell[4268, 114, 258, 6, 35, "Text",ExpressionUUID->"4d5d85c3-cc55-4e3f-b367-d60ccd0c3cb1"],
+Cell[4529, 122, 346, 8, 35, "Text",ExpressionUUID->"116c7595-d64c-4c06-9686-330fc56bbedc"],
+Cell[4878, 132, 348, 7, 35, "Text",ExpressionUUID->"1eaff618-f5f2-46c2-b6ca-61f4537b720f"],
+Cell[5229, 141, 318, 7, 35, "Text",ExpressionUUID->"7b2b597a-7fed-440c-9142-dfda27692b1f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5584, 153, 165, 3, 54, "Subsection",ExpressionUUID->"bc39e82c-e57e-499f-81a1-734e0db4a259"],
+Cell[5752, 158, 270, 6, 35, "Text",ExpressionUUID->"78a0e87f-fe3a-4590-9004-48fe5562d955"],
+Cell[6025, 166, 285, 5, 35, "Text",ExpressionUUID->"1b0a0785-b3ea-4bbf-b9bf-3d96a3a55eb4"],
+Cell[6313, 173, 237, 4, 35, "Text",ExpressionUUID->"b678c033-87e3-44fa-8467-dc0f283ca221"],
+Cell[6553, 179, 376, 7, 35, "Text",ExpressionUUID->"c8d8249f-1ba1-4699-82d2-22380f73b0f9"],
+Cell[6932, 188, 273, 6, 35, "Text",ExpressionUUID->"cf937ae4-c415-4020-b3a5-abc2dac1c9be"],
+Cell[7208, 196, 202, 3, 35, "Text",ExpressionUUID->"47e35860-928e-449e-84a5-c324201ddfd9"],
+Cell[7413, 201, 314, 6, 35, "Text",ExpressionUUID->"16af7c97-13d8-462a-977a-38591b2995c6"],
+Cell[7730, 209, 282, 5, 35, "Text",ExpressionUUID->"1fb2d8bb-c885-45ea-88c7-75204566fbde"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8049, 219, 165, 3, 54, "Subsection",ExpressionUUID->"5608ee5f-164a-4ee0-ae5b-7c72c87bb9b0"],
+Cell[8217, 224, 352, 7, 35, "Text",ExpressionUUID->"7042c497-11b7-48db-8e3e-1b0be51def51"],
+Cell[8572, 233, 272, 6, 35, "Text",ExpressionUUID->"d1d2db8f-5d19-4c75-9802-8ebf4925e504"],
+Cell[8847, 241, 585, 13, 62, "Text",ExpressionUUID->"ac2ac73f-3e45-4898-92bf-ef64137f76b5"],
+Cell[9435, 256, 200, 3, 35, "Text",ExpressionUUID->"542958a3-c99d-4fa3-b2d1-007c6071cb71"],
+Cell[9638, 261, 161, 3, 35, "Text",ExpressionUUID->"ea00ed71-da08-4797-858f-e67743ce5ec8"],
+Cell[9802, 266, 219, 5, 35, "Text",ExpressionUUID->"e9c3d471-e2b4-4dda-8bd8-16b2310fdaf6"],
+Cell[10024, 273, 224, 4, 35, "Text",ExpressionUUID->"8bd7db97-1c8f-4062-be6e-2a979f30df47"],
+Cell[10251, 279, 225, 3, 35, "Text",ExpressionUUID->"3aa38b2a-4927-4e3d-a39a-ee21f3c70147"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10525, 288, 162, 3, 67, "Section",ExpressionUUID->"67e33619-aac1-491f-ace1-c91b1871ec2b"],
+Cell[10690, 293, 394, 8, 35, "Text",ExpressionUUID->"d5f51845-d523-4ef8-a771-189bfd1c5768"],
+Cell[11087, 303, 202, 3, 35, "Text",ExpressionUUID->"53ef4bd1-9038-4864-9c44-d179938da54c"],
+Cell[11292, 308, 165, 3, 35, "Text",ExpressionUUID->"5a71649c-81c9-49a3-8c83-ff6167c0b209"],
+Cell[11460, 313, 197, 3, 35, "Text",ExpressionUUID->"5f1ea7d6-391d-4832-a213-fa49e59830db"],
+Cell[11660, 318, 255, 6, 35, "Text",ExpressionUUID->"f715f0d8-12d3-499e-badf-bf1faaac3190"],
+Cell[11918, 326, 310, 6, 35, "Text",ExpressionUUID->"b3243a7e-7259-45cc-823a-3fcc14ad0b83"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12265, 337, 201, 3, 67, "Section",ExpressionUUID->"05e4041f-de11-44bb-987d-d36d041fdcdd"],
+Cell[12469, 342, 2209, 49, 173, "Text",ExpressionUUID->"2f7fef42-7f8c-4598-aa54-4fccb4f5aba9"],
+Cell[14681, 393, 323, 5, 35, "Text",ExpressionUUID->"8f03376c-acdd-49c2-bdfb-261b871b7e0a"],
+Cell[15007, 400, 571, 14, 35, "Text",ExpressionUUID->"63f1b98c-507c-485d-b9f4-6adcd44c3e32"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
