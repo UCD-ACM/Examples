@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     21605,        521]
-NotebookOptionsPosition[     16929,        449]
-NotebookOutlinePosition[     17328,        465]
-CellTagsIndexPosition[     17285,        462]
+NotebookDataLength[     36926,        794]
+NotebookOptionsPosition[     31742,        715]
+NotebookOutlinePosition[     32139,        731]
+CellTagsIndexPosition[     32096,        728]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -23,8 +23,8 @@ Cell[CellGroupData[{
 Cell["Low rank approximations", "Title",
  CellChangeTimes->{{3.8213726104536533`*^9, 3.821372616550712*^9}, {
   3.821382744663859*^9, 
-  3.8213827570021143`*^9}},ExpressionUUID->"3749f0de-f693-4aaf-a5d1-\
-16a58d07f4cf"],
+  3.8213827570021143`*^9}},ExpressionUUID->"09b723de-f87e-4a20-afc5-\
+b460b5b37d5a"],
 
 Cell[TextData[{
  "We have seen how the singular value decomposition can be used to identify \
@@ -43,15 +43,15 @@ efficient way."
   3.82138276428161*^9, 3.8213827861708307`*^9}, {3.821382839933951*^9, 
   3.821382856315794*^9}, {3.821382896902396*^9, 3.821382934176283*^9}, {
   3.821383007558707*^9, 
-  3.8213830079799557`*^9}},ExpressionUUID->"d7076964-f2b5-4bf2-86a7-\
-3a425b151fe2"],
+  3.8213830079799557`*^9}},ExpressionUUID->"855e58cf-d9f2-4804-b11b-\
+11b0c5fed289"],
 
 Cell[CellGroupData[{
 
 Cell["Flags", "Section",
  CellChangeTimes->{{3.821382880429294*^9, 
-  3.821382881489284*^9}},ExpressionUUID->"dbfdf7ce-b901-4594-b5a9-\
-8e64244300ae"],
+  3.821382881489284*^9}},ExpressionUUID->"64dcab8e-0747-462b-9545-\
+e0cff57b159b"],
 
 Cell["\<\
 For image compression, the use of the singular value decomposition will be \
@@ -63,8 +63,8 @@ of the low-rank cases? \
 \>", "Text",
  CellChangeTimes->{{3.821383010220546*^9, 3.8213830662243013`*^9}, {
   3.821428300946546*^9, 
-  3.821428407792924*^9}},ExpressionUUID->"6f161d6e-5423-49ba-abd7-\
-f8f757d66770"],
+  3.821428407792924*^9}},ExpressionUUID->"e34e2a2c-e4d4-45e0-9c2e-\
+e15f27fa991f"],
 
 Cell[BoxData[
  RowBox[{
@@ -72,13 +72,13 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
     "\"\<Ireland\>\"", ",", "\"\<Norway\>\"", ",", "\"\<Germany\>\"", ",", 
-     "\"\<Finland\>\"", ",", "\"\<UnitedKingdom\>\"", ",", 
+     "\"\<Finland\>\"", ",", "\"\<United Kingdom\>\"", ",", 
      "\"\<Czech Republic\>\"", ",", "\"\<Greece\>\"", ",", "\"\<Japan\>\"", 
      ",", "\"\<Nepal\>\"", ",", "\"\<Thailand\>\"", ",", "\"\<Madagascar\>\"",
       ",", "\"\<Tanzania\>\""}], "}"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.8214287054236107`*^9, 3.8214287075228558`*^9}, {
-  3.821428882593205*^9, 3.8214288847884073`*^9}},
- CellLabel->"In[74]:=",ExpressionUUID->"8e71b92d-7ba0-4ade-9c67-5f8a5d98e182"],
+   3.821428882593205*^9, 3.8214288847884073`*^9}, 3.821992288476699*^9},
+ CellLabel->"In[1]:=",ExpressionUUID->"423bf6f8-f079-44df-ba49-250295a700c6"],
 
 Cell[BoxData[
  RowBox[{"Table", "[", 
@@ -93,21 +93,25 @@ Cell[BoxData[
     RowBox[{"country", ",", "countries"}], "}"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.821428550465108*^9, 3.821428551483494*^9}, 
    3.821428661371194*^9, {3.821428704287668*^9, 3.821428789420484*^9}},
- CellLabel->"In[75]:=",ExpressionUUID->"80cf27e4-18d9-4c01-9b3c-56a577eabff8"],
+ CellLabel->"In[2]:=",ExpressionUUID->"ac5f7b39-524a-463d-bfa4-c9a83faab9f8"],
 
 Cell[CellGroupData[{
 
 Cell["Rank-1 flags", "Subsection",
  CellChangeTimes->{{3.821383072394261*^9, 3.821383075441016*^9}, {
   3.8213840921253*^9, 
-  3.8213840950978823`*^9}},ExpressionUUID->"5eb00f02-020c-49e5-8ca4-\
-aa4fec3d964c"],
+  3.8213840950978823`*^9}},ExpressionUUID->"30fda06a-0a55-4bff-af5b-\
+684a1805746e"],
 
-Cell["Let\[CloseCurlyQuote]s load the Irish flag from Mathematica\
-\[CloseCurlyQuote]s CountryData:", "Text",
- CellChangeTimes->{{3.821383081088839*^9, 
-  3.82138309596605*^9}},ExpressionUUID->"6046d0fa-1d7f-4f45-be9e-\
-d6fbcc0ca3f2"],
+Cell["\<\
+ Let\[CloseCurlyQuote]s first look at one of the good cases: Ireland. We\
+\[CloseCurlyQuote]ll begin by loading the Irish flag from Mathematica\
+\[CloseCurlyQuote]s CountryData:\
+\>", "Text",
+ CellChangeTimes->{{3.821383081088839*^9, 3.82138309596605*^9}, {
+  3.8214283037970963`*^9, 
+  3.8214283124450903`*^9}},ExpressionUUID->"9c7c5f25-ff61-4eb4-95ef-\
+5997150ae17f"],
 
 Cell["\<\
 This is an image built up out pixels represented by a matrix of size 127 x \
@@ -117,8 +121,8 @@ how much of red, green and blue is present in that pixel. For simplicity, let\
 converting the colour image to grayscale.\
 \>", "Text",
  CellChangeTimes->{{3.8213831103643837`*^9, 
-  3.8213833248742323`*^9}},ExpressionUUID->"b5b4bc32-04a2-4e64-bbf9-\
-0818428a5b70"],
+  3.8213833248742323`*^9}},ExpressionUUID->"743a9e6f-0d80-42b5-90a6-\
+c910753da4b0"],
 
 Cell["\<\
 Next we translate this image into 127 x 255 matrix of numbers in the range \
@@ -126,30 +130,30 @@ Next we translate this image into 127 x 255 matrix of numbers in the range \
 \>", "Text",
  CellChangeTimes->{{3.8213833599459248`*^9, 3.821383378997982*^9}, {
   3.821383503584065*^9, 
-  3.821383535135927*^9}},ExpressionUUID->"df4ef440-7406-48c7-99c0-\
-5ba676d7ae93"],
+  3.821383535135927*^9}},ExpressionUUID->"777096e8-2d9b-432e-a03f-\
+04b606c97f85"],
 
 Cell["\<\
 Now that we have a matrix, we can compute its singular value decomposition:\
 \>", "Text",
  CellChangeTimes->{{3.821383494995969*^9, 3.82138350926128*^9}, {
   3.821383551504621*^9, 
-  3.821383562177918*^9}},ExpressionUUID->"9a423892-17ec-4e08-a9f4-\
-fb1bb5a16985"],
+  3.821383562177918*^9}},ExpressionUUID->"adfb5aa6-e208-47cc-9488-\
+315c75613c07"],
 
 Cell["We can reconstruct the original matrix and image from these:", "Text",
  CellChangeTimes->{{3.821383693872184*^9, 3.821383707359193*^9}, {
   3.8213837392354593`*^9, 
-  3.821383741176255*^9}},ExpressionUUID->"6d9dbc82-4b3d-471e-9dbc-\
-5ae342bd3f78"],
+  3.821383741176255*^9}},ExpressionUUID->"925040da-44e7-4c53-9d70-\
+2e4ab135100d"],
 
 Cell["\<\
 Let\[CloseCurlyQuote]s look at the singular values, to see how many important \
 singular vectors there are:\
 \>", "Text",
  CellChangeTimes->{{3.8213836595139513`*^9, 
-  3.82138368104055*^9}},ExpressionUUID->"4d5d85c3-cc55-4e3f-b367-\
-d60ccd0c3cb1"],
+  3.82138368104055*^9}},ExpressionUUID->"5e747903-f6e1-4348-ace4-\
+757a41309042"],
 
 Cell["\<\
 This is a particularly nice matrix since it only has one singular value. It \
@@ -158,8 +162,8 @@ is exact!\
 \>", "Text",
  CellChangeTimes->{
   3.8213836837165117`*^9, {3.821383770328486*^9, 
-   3.8213837890711317`*^9}},ExpressionUUID->"116c7595-d64c-4c06-9686-\
-330fc56bbedc"],
+   3.8213837890711317`*^9}},ExpressionUUID->"c3548b69-41ee-4475-a1e4-\
+4dd8d3e00a93"],
 
 Cell["\<\
 This represents the flag by the first singular vector in U, which is just a \
@@ -167,8 +171,8 @@ vector with the same number 127 times. This tells us that the flag doesn\
 \[CloseCurlyQuote]t change along the vertical.\
 \>", "Text",
  CellChangeTimes->{{3.821383852557892*^9, 
-  3.821383922658437*^9}},ExpressionUUID->"1eaff618-f5f2-46c2-b6ca-\
-61f4537b720f"],
+  3.821383922658437*^9}},ExpressionUUID->"e20c198b-8432-4394-b33a-\
+e8ffaa2dccfa"],
 
 Cell["\<\
 The first singular vector in V is just a 255 element vector of three numbers, \
@@ -176,37 +180,37 @@ representing the darkness of each of the three bands that change along the \
 horizontal.\
 \>", "Text",
  CellChangeTimes->{{3.821383931346808*^9, 
-  3.821384022210888*^9}},ExpressionUUID->"7b2b597a-7fed-440c-9142-\
-dfda27692b1f"]
+  3.821384022210888*^9}},ExpressionUUID->"59e2228e-f900-48a9-8644-\
+9277ad7086cc"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Higher rank flags", "Subsection",
  CellChangeTimes->{{3.821384106132739*^9, 
-  3.821384108673048*^9}},ExpressionUUID->"bc39e82c-e57e-499f-81a1-\
-734e0db4a259"],
+  3.821384108673048*^9}},ExpressionUUID->"a426eb15-c389-47da-9883-\
+09dac2db075f"],
 
 Cell["\<\
 Other flags are less simple than the Irish flag. Let\[CloseCurlyQuote]s try \
 to figure out what rank the Greek flag is.\
 \>", "Text",
  CellChangeTimes->{{3.821385013126275*^9, 
-  3.821385040495315*^9}},ExpressionUUID->"78a0e87f-fe3a-4590-9004-\
-48fe5562d955"],
+  3.821385040495315*^9}},ExpressionUUID->"c524b32b-ee05-4d42-8445-\
+2628e93be5a8"],
 
 Cell["Let\[CloseCurlyQuote]s load the Greek flag from Mathematica\
 \[CloseCurlyQuote]s CountryData:", "Text",
  CellChangeTimes->{{3.821383081088839*^9, 3.82138309596605*^9}, {
   3.821385064148036*^9, 
-  3.8213850648173656`*^9}},ExpressionUUID->"1b0a0785-b3ea-4bbf-b9bf-\
-3d96a3a55eb4"],
+  3.8213850648173656`*^9}},ExpressionUUID->"3db4ca5c-1221-44c9-bc1b-\
+0d66916ce503"],
 
 Cell["Now convert the colour image to grayscale.", "Text",
  CellChangeTimes->{{3.8213831103643837`*^9, 3.8213833248742323`*^9}, {
   3.821385089736887*^9, 
-  3.821385097310774*^9}},ExpressionUUID->"b678c033-87e3-44fa-8467-\
-dc0f283ca221"],
+  3.821385097310774*^9}},ExpressionUUID->"57260078-0374-435a-97ad-\
+2c340653e1f4"],
 
 Cell["\<\
 Next we translate this image into 169 x 255 matrix of numbers in the range \
@@ -214,44 +218,75 @@ Next we translate this image into 169 x 255 matrix of numbers in the range \
 \>", "Text",
  CellChangeTimes->{{3.8213833599459248`*^9, 3.821383378997982*^9}, {
   3.821383503584065*^9, 3.821383535135927*^9}, {3.8213851041799*^9, 
-  3.821385105202289*^9}},ExpressionUUID->"c8d8249f-1ba1-4699-82d2-\
-22380f73b0f9"],
+  3.821385105202289*^9}},ExpressionUUID->"66c06d97-99b3-42ee-92c6-\
+c4bb8460c878"],
 
 Cell["\<\
 Now that we have a matrix, we can compute its singular value decomposition:\
 \>", "Text",
  CellChangeTimes->{{3.821383494995969*^9, 3.82138350926128*^9}, {
   3.821383551504621*^9, 
-  3.821383562177918*^9}},ExpressionUUID->"cf937ae4-c415-4020-b3a5-\
-abc2dac1c9be"],
+  3.821383562177918*^9}},ExpressionUUID->"0eb869ad-b347-4681-9821-\
+d2b778f9ae38"],
 
 Cell["It looks like there are only 3 (or maybe 6) singular values:", "Text",
  CellChangeTimes->{{3.821385185903266*^9, 
-  3.821385203956046*^9}},ExpressionUUID->"47e35860-928e-449e-84a5-\
-c324201ddfd9"],
+  3.821385203956046*^9}},ExpressionUUID->"10e9de26-7844-4186-87e3-\
+ba0abd981392"],
 
 Cell["\<\
 We can reconstruct the original matrix and image from the full set:\
 \>", "Text",
  CellChangeTimes->{{3.821383693872184*^9, 3.821383707359193*^9}, {
   3.8213837392354593`*^9, 3.821383741176255*^9}, {3.821385244938142*^9, 
-  3.821385247909584*^9}},ExpressionUUID->"16af7c97-13d8-462a-977a-\
-38591b2995c6"],
+  3.821385247909584*^9}},ExpressionUUID->"83e580b9-8f9e-4c13-aa58-\
+e6c3167f1ced"],
 
 Cell["We can see how this is built up from three rank-1 matrices:", "Text",
  CellChangeTimes->{
   3.8213836837165117`*^9, {3.821383770328486*^9, 3.8213837890711317`*^9}, {
    3.82138527329053*^9, 
-   3.8213852832772713`*^9}},ExpressionUUID->"1fb2d8bb-c885-45ea-88c7-\
-75204566fbde"]
+   3.8213852832772713`*^9}},ExpressionUUID->"555a9137-fed0-4a03-911f-\
+fc9604e94457"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Medium rank flags", "Subsection",
+ CellChangeTimes->{{3.8219850548104267`*^9, 
+  3.8219850575656557`*^9}},ExpressionUUID->"646ba898-e66f-409f-866e-\
+bdd4573fd460"],
+
+Cell["\<\
+The Japanese flag is an example of a medium rank case. Let\[CloseCurlyQuote]s \
+first work its SVD\
+\>", "Text",
+ CellChangeTimes->{{3.821987021204845*^9, 3.821987038504848*^9}, {
+  3.821989376315324*^9, 
+  3.821989379290986*^9}},ExpressionUUID->"4340fc92-bbbf-4f41-905e-\
+0b60c65adca8"],
+
+Cell["There are only about 30-40 singular values:", "Text",
+ CellChangeTimes->{{3.821989405305398*^9, 3.821989415206152*^9}, {
+  3.821989499664124*^9, 
+  3.8219895000135603`*^9}},ExpressionUUID->"5297c120-7856-4191-95e8-\
+f54b5954d610"],
+
+Cell["\<\
+We can try to understand how the flag is built up by looking at its rank-1 \
+pieces\
+\>", "Text",
+ CellChangeTimes->{{3.821989449188657*^9, 
+  3.821989494043456*^9}},ExpressionUUID->"e63cd0f9-c6dc-4f17-8dd4-\
+82e40a46af68"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Full rank flags", "Subsection",
  CellChangeTimes->{{3.8213854589645967`*^9, 
-  3.821385462496249*^9}},ExpressionUUID->"5608ee5f-164a-4ee0-ae5b-\
-7c72c87bb9b0"],
+  3.821385462496249*^9}},ExpressionUUID->"edea8dc1-80b9-4981-bd06-\
+98944afda4ec"],
 
 Cell["\<\
 It doesn\[CloseCurlyQuote]t take much of a change to turn a nice and simple \
@@ -259,59 +294,292 @@ low-rank flag into something full-rank. Take the Scottish flag, for example:\
 \>", "Text",
  CellChangeTimes->{{3.821385464213275*^9, 3.82138549712705*^9}, {
   3.821385530828796*^9, 
-  3.821385531801023*^9}},ExpressionUUID->"7042c497-11b7-48db-8e3e-\
-1b0be51def51"],
+  3.821385531801023*^9}},ExpressionUUID->"97617940-3a61-48f4-a80f-\
+1524ba95079e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"scotlandFlag", "=", 
+   RowBox[{"ImageResize", "[", 
+    RowBox[{
+     GraphicsBox[
+      TagBox[RasterBox[CompressedData["
+1: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
+        
+        "], {{0, 720.}, {1200., 0}}, {0, 255},
+        ColorFunction->RGBColor],
+       BoxForm`ImageTag["Byte", ColorSpace -> "RGB", Interleaving -> True],
+       Selectable->False],
+      DefaultBaseStyle->"ImageGraphics",
+      ImageSizeRaw->{1200., 720.},
+      PlotRange->{{0, 1200.}, {0, 720.}}], ",", "425"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.819716277809256*^9, 3.819716284715848*^9}, {
+  3.819718542863409*^9, 3.819718592157333*^9}},
+ CellLabel->"In[68]:=",ExpressionUUID->"45244930-11ba-47d7-8653-6d169eba5487"],
 
 Cell["\<\
 This looks just as simple as the other flags, but from the point of view of \
 the SVD those diagonal lines are a disaster.\
 \>", "Text",
  CellChangeTimes->{{3.821385680438339*^9, 
-  3.821385708935869*^9}},ExpressionUUID->"d1d2db8f-5d19-4c75-9802-\
-8ebf4925e504"],
+  3.821385708935869*^9}},ExpressionUUID->"6c4f6f20-63b4-40ad-8224-\
+086dce176892"],
 
 Cell[TextData[{
  "Given that we know that this should be a simple one, is there something \
 that we can do to make the SVD see it? How about if we rotate the image by ",
  Cell[BoxData[
   FormBox[
-   FractionBox["\[Pi]", "2"], TraditionalForm]],
-  FormatType->TraditionalForm,ExpressionUUID->
-  "90ab41ce-03a9-44e5-b5a1-69f7e7449f6c"],
+   FractionBox["\[Pi]", "2"], TraditionalForm]],ExpressionUUID->
+  "e1d87163-9b80-452d-a24e-1a42d558d42c"],
  " first to transform diagonal lines to horizontal and vertical, and then do \
 the SVD on the rotated image. "
 }], "Text",
  CellChangeTimes->{{3.821385978642861*^9, 
-  3.8213860553258257`*^9}},ExpressionUUID->"ac2ac73f-3e45-4898-92bf-\
-ef64137f76b5"],
+  3.8213860553258257`*^9}},ExpressionUUID->"a5e1a861-2d07-48c2-b813-\
+d6558456e037"],
 
 Cell["First, let\[CloseCurlyQuote]s resize and rotate the flag", "Text",
  CellChangeTimes->{{3.821386067566588*^9, 
-  3.8213861027576857`*^9}},ExpressionUUID->"542958a3-c99d-4fa3-b2d1-\
-007c6071cb71"],
+  3.8213861027576857`*^9}},ExpressionUUID->"4e382bb4-7ead-4907-a996-\
+797d0355a8a0"],
 
 Cell["Now compute the SVD", "Text",
  CellChangeTimes->{{3.821386165171637*^9, 
-  3.821386167652452*^9}},ExpressionUUID->"ea00ed71-da08-4797-858f-\
-e67743ce5ec8"],
+  3.821386167652452*^9}},ExpressionUUID->"0108f4d6-cab0-4eee-97be-\
+ec4a78539e13"],
 
 Cell["\<\
 We can check that the singular values now fall off quite a bit faster\
 \>", "Text",
  CellChangeTimes->{{3.821386307963194*^9, 
-  3.821386319987719*^9}},ExpressionUUID->"e9c3d471-e2b4-4dda-8bd8-\
-16b2310fdaf6"],
+  3.821386319987719*^9}},ExpressionUUID->"a9ca3387-7399-4ac7-bdc2-\
+83e578cc129d"],
 
 Cell["Now reconstruct the original flag.", "Text",
  CellChangeTimes->{{3.821386361598111*^9, 3.821386367501863*^9}, {
   3.821386493965519*^9, 
-  3.82138649550786*^9}},ExpressionUUID->"8bd7db97-1c8f-4062-be6e-\
-2a979f30df47"],
+  3.82138649550786*^9}},ExpressionUUID->"603ef2dd-a3a4-421f-8aef-\
+db187fdac7cc"],
 
 Cell["We see that it\[CloseCurlyQuote]s almost perfectly rank-2!", "Text",
  CellChangeTimes->{{3.821386497599277*^9, 3.821386515332518*^9}, 
-   3.8213866615178633`*^9},ExpressionUUID->"3aa38b2a-4927-4e3d-a39a-\
-ee21f3c70147"]
+   3.8213866615178633`*^9},ExpressionUUID->"b4b8801a-715f-4594-925d-\
+acf709dddc70"]
 }, Open  ]]
 }, Open  ]],
 
@@ -319,8 +587,8 @@ Cell[CellGroupData[{
 
 Cell["Image compression", "Section",
  CellChangeTimes->{{3.821384115462833*^9, 
-  3.821384118210629*^9}},ExpressionUUID->"67e33619-aac1-491f-ace1-\
-c91b1871ec2b"],
+  3.821384118210629*^9}},ExpressionUUID->"45c5e031-d63f-45db-a213-\
+51b9b22e3349"],
 
 Cell["\<\
 Compression using singular values can also be achieve with more complicated \
@@ -329,47 +597,47 @@ image and convert it to grayscale\
 \>", "Text",
  CellChangeTimes->{{3.8213841216396017`*^9, 3.821384157179367*^9}, {
   3.8213847725247793`*^9, 
-  3.821384782556816*^9}},ExpressionUUID->"d5f51845-d523-4ef8-a771-\
-189bfd1c5768"],
+  3.821384782556816*^9}},ExpressionUUID->"e1dd4dcd-c76f-4c30-91e1-\
+53c7156a4b3c"],
 
 Cell["Now convert the grayscale image to a matrix of pixel values.", "Text",
  CellChangeTimes->{{3.821384785808263*^9, 
-  3.821384799667306*^9}},ExpressionUUID->"53ef4bd1-9038-4864-9c44-\
-d179938da54c"],
+  3.821384799667306*^9}},ExpressionUUID->"79159806-e65b-4969-bded-\
+7a6f8afad5d1"],
 
 Cell["Next, compute the SVD:", "Text",
  CellChangeTimes->{{3.8213848026313066`*^9, 
-  3.82138480832417*^9}},ExpressionUUID->"5a71649c-81c9-49a3-8c83-\
-ff6167c0b209"],
+  3.82138480832417*^9}},ExpressionUUID->"4d776144-9549-443d-9a1c-\
+56f81ed2b539"],
 
 Cell["We can reconstruct the original image from the full SVD", "Text",
  CellChangeTimes->{{3.821384811366639*^9, 
-  3.821384820774004*^9}},ExpressionUUID->"5f1ea7d6-391d-4832-a213-\
-fa49e59830db"],
+  3.821384820774004*^9}},ExpressionUUID->"13e9e8df-c023-4edf-b94c-\
+205179575df4"],
 
 Cell["\<\
 We can also get a pretty good approximation by only including the largest \
 singular values and vectors\
 \>", "Text",
  CellChangeTimes->{{3.821384824473394*^9, 
-  3.8213848594327507`*^9}},ExpressionUUID->"f715f0d8-12d3-499e-badf-\
-bf1faaac3190"],
+  3.8213848594327507`*^9}},ExpressionUUID->"f1c312d7-4502-44d2-a571-\
+574c926db748"],
 
 Cell["\<\
 If we plot the singular values, we see that they drop off rapidly until about \
 the 100th value. This suggests that stopping around rank-100 is a good choice.\
 \>", "Text",
  CellChangeTimes->{{3.821384880127262*^9, 
-  3.8213849240534363`*^9}},ExpressionUUID->"b3243a7e-7259-45cc-823a-\
-3fcc14ad0b83"]
+  3.8213849240534363`*^9}},ExpressionUUID->"5e36d840-f09a-4f31-81cf-\
+ccc319a6e8a5"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Singular value decomposition for approximating functions", "Section",
  CellChangeTimes->{{3.821386865128355*^9, 
-  3.821386872862752*^9}},ExpressionUUID->"05e4041f-de11-44bb-987d-\
-d36d041fdcdd"],
+  3.821386872862752*^9}},ExpressionUUID->"ba41e971-cf5f-4594-abee-\
+947401361656"],
 
 Cell[TextData[{
  "The singular value decomposition does not only apply to linear algebra. We \
@@ -378,7 +646,7 @@ example, say we have a functional ",
  Cell[BoxData[
   FormBox[
    SubscriptBox["m", "n"], TraditionalForm]],ExpressionUUID->
-  "a462a17a-f75d-4ddd-ad84-76fd86599a1f"],
+  "46f7acc8-d4a3-4079-bacf-7f6207d6908f"],
  "(x), which is parametrized by n, and for each n we get a function of x. A \
 simple example is ",
  Cell[BoxData[
@@ -388,26 +656,24 @@ simple example is ",
      SubscriptBox["m", "n"], "(", "x", ")"}], "=", 
     RowBox[{"sin", "(", 
      RowBox[{"n", " ", "x"}], ")"}]}], TraditionalForm]],ExpressionUUID->
-  "193d7400-c4e5-41b1-b238-acdb15ee130f"],
+  "87d06857-0447-4ca8-8aa5-d8824cd35978"],
  " with ",
  Cell[BoxData[
   FormBox[
    RowBox[{"0", "\[LessEqual]", "n", "\[LessEqual]", "10"}], 
-   TraditionalForm]],ExpressionUUID->"091a5871-1695-44b7-80e6-b6d5e27fe97a"],
+   TraditionalForm]],ExpressionUUID->"d4d469a5-7a8d-486f-91f9-eb524cc3f744"],
  ". In reality, this could be a much more complicated function that we would \
 like to approximate in terms of simple functions. In our example, we wish to \
 approximate it by a linear combination of ",
  Cell[BoxData[
   FormBox[
    RowBox[{"sin", "(", 
-    RowBox[{"n", " ", "x"}], ")"}], TraditionalForm]],
-  FormatType->TraditionalForm,ExpressionUUID->
-  "14d2f31e-98c0-4a43-9f77-602088426cae"],
+    RowBox[{"n", " ", "x"}], ")"}], TraditionalForm]],ExpressionUUID->
+  "03df8bd6-4bd5-4ae5-8dbd-b27a6a762cc2"],
  " (i.e. basis functions) for specific values of ",
  Cell[BoxData[
-  FormBox["n", TraditionalForm]],
-  FormatType->TraditionalForm,ExpressionUUID->
-  "b6683060-664a-4efa-a83d-3cc4b0ce351e"],
+  FormBox["n", TraditionalForm]],ExpressionUUID->
+  "24150cd0-f137-4f37-9ef4-f486f00504ed"],
  ". The question then is how many specific values of n do we need in our \
 basis so that we can  faithfully reproduce the function for all n? We can \
 answer this question using the singular value decomposition. For this to \
@@ -419,15 +685,15 @@ decrease exponentially in magnitude."
 }], "Text",
  CellChangeTimes->{{3.821386876469549*^9, 3.8213869459887857`*^9}, {
   3.821386976477116*^9, 
-  3.821387140709669*^9}},ExpressionUUID->"2f7fef42-7f8c-4598-aa54-\
-4fccb4f5aba9"],
+  3.821387140709669*^9}},ExpressionUUID->"72c8a520-a3d0-4cf8-8f87-\
+4e38b9a51dcd"],
 
 Cell["Let\[CloseCurlyQuote]s evaluate our function on a grid:", "Text",
  CellChangeTimes->{{3.625592703474412*^9, 3.625592787842861*^9}, {
    3.6255930452958393`*^9, 3.6255930579436817`*^9}, 3.82138692823139*^9, {
    3.821387181034205*^9, 
-   3.821387185227269*^9}},ExpressionUUID->"8f03376c-acdd-49c2-bdfb-\
-261b871b7e0a"],
+   3.821387185227269*^9}},ExpressionUUID->"88a3b692-730b-405a-af55-\
+e86fa95425b2"],
 
 Cell[TextData[{
  "We see that in our ",
@@ -435,20 +701,20 @@ Cell[TextData[{
   FormBox[
    RowBox[{"sin", "(", 
     RowBox[{"n", " ", "x"}], ")"}], TraditionalForm]],ExpressionUUID->
-  "3084ddff-4fc7-4a39-a425-07ca061519ac"],
+  "5a563cb4-71ad-40cf-a460-2d625fabba88"],
  " example, computing the singular values reveals that it is sufficient to \
 have ~20 basis functions in order to reconstruct any value in the range 0\
 \[LessEqual]n\[LessEqual]10."
 }], "Text",
  CellChangeTimes->{{3.625593027415509*^9, 3.62559314262429*^9}, {
   3.821387274856439*^9, 
-  3.821387288405575*^9}},ExpressionUUID->"63f1b98c-507c-485d-b9f4-\
-6adcd44c3e32"]
+  3.821387288405575*^9}},ExpressionUUID->"de4a0222-457b-41ce-9049-\
+3d85d61397d7"]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1210, 763},
-WindowMargins->{{Automatic, -312}, {Automatic, 0}},
+WindowMargins->{{Automatic, 5}, {Automatic, 40}},
 FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"eafd9048-e396-4f23-a88a-cf6ebc7b00ad"
@@ -465,62 +731,69 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 219, 4, 98, "Title",ExpressionUUID->"3749f0de-f693-4aaf-a5d1-16a58d07f4cf"],
-Cell[802, 28, 959, 18, 58, "Text",ExpressionUUID->"d7076964-f2b5-4bf2-86a7-3a425b151fe2"],
+Cell[580, 22, 219, 4, 98, "Title",ExpressionUUID->"09b723de-f87e-4a20-afc5-b460b5b37d5a"],
+Cell[802, 28, 959, 18, 58, "Text",ExpressionUUID->"855e58cf-d9f2-4804-b11b-11b0c5fed289"],
 Cell[CellGroupData[{
-Cell[1786, 50, 150, 3, 67, "Section",ExpressionUUID->"dbfdf7ce-b901-4594-b5a9-8e64244300ae"],
-Cell[1939, 55, 612, 11, 81, "Text",ExpressionUUID->"6f161d6e-5423-49ba-abd7-f8f757d66770"],
-Cell[2554, 68, 633, 12, 52, "Input",ExpressionUUID->"8e71b92d-7ba0-4ade-9c67-5f8a5d98e182"],
-Cell[3190, 82, 556, 13, 30, "Input",ExpressionUUID->"80cf27e4-18d9-4c01-9b3c-56a577eabff8"],
+Cell[1786, 50, 150, 3, 67, "Section",ExpressionUUID->"64dcab8e-0747-462b-9545-e0cff57b159b"],
+Cell[1939, 55, 612, 11, 81, "Text",ExpressionUUID->"e34e2a2c-e4d4-45e0-9c2e-e15f27fa991f"],
+Cell[2554, 68, 656, 12, 52, "Input",ExpressionUUID->"423bf6f8-f079-44df-ba49-250295a700c6"],
+Cell[3213, 82, 555, 13, 30, "Input",ExpressionUUID->"ac5f7b39-524a-463d-bfa4-c9a83faab9f8"],
 Cell[CellGroupData[{
-Cell[3771, 99, 209, 4, 54, "Subsection",ExpressionUUID->"5eb00f02-020c-49e5-8ca4-aa4fec3d964c"],
-Cell[3983, 105, 234, 4, 35, "Text",ExpressionUUID->"6046d0fa-1d7f-4f45-be9e-d6fbcc0ca3f2"],
-Cell[4220, 111, 501, 9, 58, "Text",ExpressionUUID->"b5b4bc32-04a2-4e64-bbf9-0818428a5b70"],
-Cell[4724, 122, 332, 7, 35, "Text",ExpressionUUID->"df4ef440-7406-48c7-99c0-5ba676d7ae93"],
-Cell[5059, 131, 273, 6, 35, "Text",ExpressionUUID->"9a423892-17ec-4e08-a9f4-fb1bb5a16985"],
-Cell[5335, 139, 253, 4, 35, "Text",ExpressionUUID->"6d9dbc82-4b3d-471e-9dbc-5ae342bd3f78"],
-Cell[5591, 145, 258, 6, 35, "Text",ExpressionUUID->"4d5d85c3-cc55-4e3f-b367-d60ccd0c3cb1"],
-Cell[5852, 153, 346, 8, 35, "Text",ExpressionUUID->"116c7595-d64c-4c06-9686-330fc56bbedc"],
-Cell[6201, 163, 348, 7, 35, "Text",ExpressionUUID->"1eaff618-f5f2-46c2-b6ca-61f4537b720f"],
-Cell[6552, 172, 318, 7, 35, "Text",ExpressionUUID->"7b2b597a-7fed-440c-9142-dfda27692b1f"]
+Cell[3793, 99, 209, 4, 54, "Subsection",ExpressionUUID->"30fda06a-0a55-4bff-af5b-684a1805746e"],
+Cell[4005, 105, 379, 8, 35, "Text",ExpressionUUID->"9c7c5f25-ff61-4eb4-95ef-5997150ae17f"],
+Cell[4387, 115, 501, 9, 58, "Text",ExpressionUUID->"743a9e6f-0d80-42b5-90a6-c910753da4b0"],
+Cell[4891, 126, 332, 7, 35, "Text",ExpressionUUID->"777096e8-2d9b-432e-a03f-04b606c97f85"],
+Cell[5226, 135, 273, 6, 35, "Text",ExpressionUUID->"adfb5aa6-e208-47cc-9488-315c75613c07"],
+Cell[5502, 143, 253, 4, 35, "Text",ExpressionUUID->"925040da-44e7-4c53-9d70-2e4ab135100d"],
+Cell[5758, 149, 258, 6, 35, "Text",ExpressionUUID->"5e747903-f6e1-4348-ace4-757a41309042"],
+Cell[6019, 157, 346, 8, 35, "Text",ExpressionUUID->"c3548b69-41ee-4475-a1e4-4dd8d3e00a93"],
+Cell[6368, 167, 348, 7, 35, "Text",ExpressionUUID->"e20c198b-8432-4394-b33a-e8ffaa2dccfa"],
+Cell[6719, 176, 318, 7, 35, "Text",ExpressionUUID->"59e2228e-f900-48a9-8644-9277ad7086cc"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6907, 184, 165, 3, 54, "Subsection",ExpressionUUID->"bc39e82c-e57e-499f-81a1-734e0db4a259"],
-Cell[7075, 189, 270, 6, 35, "Text",ExpressionUUID->"78a0e87f-fe3a-4590-9004-48fe5562d955"],
-Cell[7348, 197, 285, 5, 35, "Text",ExpressionUUID->"1b0a0785-b3ea-4bbf-b9bf-3d96a3a55eb4"],
-Cell[7636, 204, 237, 4, 35, "Text",ExpressionUUID->"b678c033-87e3-44fa-8467-dc0f283ca221"],
-Cell[7876, 210, 376, 7, 35, "Text",ExpressionUUID->"c8d8249f-1ba1-4699-82d2-22380f73b0f9"],
-Cell[8255, 219, 273, 6, 35, "Text",ExpressionUUID->"cf937ae4-c415-4020-b3a5-abc2dac1c9be"],
-Cell[8531, 227, 202, 3, 35, "Text",ExpressionUUID->"47e35860-928e-449e-84a5-c324201ddfd9"],
-Cell[8736, 232, 314, 6, 35, "Text",ExpressionUUID->"16af7c97-13d8-462a-977a-38591b2995c6"],
-Cell[9053, 240, 282, 5, 35, "Text",ExpressionUUID->"1fb2d8bb-c885-45ea-88c7-75204566fbde"]
+Cell[7074, 188, 165, 3, 54, "Subsection",ExpressionUUID->"a426eb15-c389-47da-9883-09dac2db075f"],
+Cell[7242, 193, 270, 6, 35, "Text",ExpressionUUID->"c524b32b-ee05-4d42-8445-2628e93be5a8"],
+Cell[7515, 201, 285, 5, 35, "Text",ExpressionUUID->"3db4ca5c-1221-44c9-bc1b-0d66916ce503"],
+Cell[7803, 208, 237, 4, 35, "Text",ExpressionUUID->"57260078-0374-435a-97ad-2c340653e1f4"],
+Cell[8043, 214, 376, 7, 35, "Text",ExpressionUUID->"66c06d97-99b3-42ee-92c6-c4bb8460c878"],
+Cell[8422, 223, 273, 6, 35, "Text",ExpressionUUID->"0eb869ad-b347-4681-9821-d2b778f9ae38"],
+Cell[8698, 231, 202, 3, 35, "Text",ExpressionUUID->"10e9de26-7844-4186-87e3-ba0abd981392"],
+Cell[8903, 236, 314, 6, 35, "Text",ExpressionUUID->"83e580b9-8f9e-4c13-aa58-e6c3167f1ced"],
+Cell[9220, 244, 282, 5, 35, "Text",ExpressionUUID->"555a9137-fed0-4a03-911f-fc9604e94457"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9372, 250, 165, 3, 54, "Subsection",ExpressionUUID->"5608ee5f-164a-4ee0-ae5b-7c72c87bb9b0"],
-Cell[9540, 255, 352, 7, 35, "Text",ExpressionUUID->"7042c497-11b7-48db-8e3e-1b0be51def51"],
-Cell[9895, 264, 272, 6, 35, "Text",ExpressionUUID->"d1d2db8f-5d19-4c75-9802-8ebf4925e504"],
-Cell[10170, 272, 585, 13, 62, "Text",ExpressionUUID->"ac2ac73f-3e45-4898-92bf-ef64137f76b5"],
-Cell[10758, 287, 200, 3, 35, "Text",ExpressionUUID->"542958a3-c99d-4fa3-b2d1-007c6071cb71"],
-Cell[10961, 292, 161, 3, 35, "Text",ExpressionUUID->"ea00ed71-da08-4797-858f-e67743ce5ec8"],
-Cell[11125, 297, 219, 5, 35, "Text",ExpressionUUID->"e9c3d471-e2b4-4dda-8bd8-16b2310fdaf6"],
-Cell[11347, 304, 224, 4, 35, "Text",ExpressionUUID->"8bd7db97-1c8f-4062-be6e-2a979f30df47"],
-Cell[11574, 310, 225, 3, 35, "Text",ExpressionUUID->"3aa38b2a-4927-4e3d-a39a-ee21f3c70147"]
+Cell[9539, 254, 169, 3, 54, "Subsection",ExpressionUUID->"646ba898-e66f-409f-866e-bdd4573fd460"],
+Cell[9711, 259, 297, 7, 35, "Text",ExpressionUUID->"4340fc92-bbbf-4f41-905e-0b60c65adca8"],
+Cell[10011, 268, 236, 4, 35, "Text",ExpressionUUID->"5297c120-7856-4191-95e8-f54b5954d610"],
+Cell[10250, 274, 233, 6, 35, "Text",ExpressionUUID->"e63cd0f9-c6dc-4f17-8dd4-82e40a46af68"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10520, 285, 165, 3, 54, "Subsection",ExpressionUUID->"edea8dc1-80b9-4981-bd06-98944afda4ec"],
+Cell[10688, 290, 352, 7, 35, "Text",ExpressionUUID->"97617940-3a61-48f4-a80f-1524ba95079e"],
+Cell[11043, 299, 13755, 232, 69, "Input",ExpressionUUID->"45244930-11ba-47d7-8653-6d169eba5487"],
+Cell[24801, 533, 272, 6, 35, "Text",ExpressionUUID->"6c4f6f20-63b4-40ad-8224-086dce176892"],
+Cell[25076, 541, 554, 12, 62, "Text",ExpressionUUID->"a5e1a861-2d07-48c2-b813-d6558456e037"],
+Cell[25633, 555, 200, 3, 35, "Text",ExpressionUUID->"4e382bb4-7ead-4907-a996-797d0355a8a0"],
+Cell[25836, 560, 161, 3, 35, "Text",ExpressionUUID->"0108f4d6-cab0-4eee-97be-ec4a78539e13"],
+Cell[26000, 565, 219, 5, 35, "Text",ExpressionUUID->"a9ca3387-7399-4ac7-bdc2-83e578cc129d"],
+Cell[26222, 572, 224, 4, 35, "Text",ExpressionUUID->"603ef2dd-a3a4-421f-8aef-db187fdac7cc"],
+Cell[26449, 578, 225, 3, 35, "Text",ExpressionUUID->"b4b8801a-715f-4594-925d-acf709dddc70"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11848, 319, 162, 3, 67, "Section",ExpressionUUID->"67e33619-aac1-491f-ace1-c91b1871ec2b"],
-Cell[12013, 324, 394, 8, 35, "Text",ExpressionUUID->"d5f51845-d523-4ef8-a771-189bfd1c5768"],
-Cell[12410, 334, 202, 3, 35, "Text",ExpressionUUID->"53ef4bd1-9038-4864-9c44-d179938da54c"],
-Cell[12615, 339, 165, 3, 35, "Text",ExpressionUUID->"5a71649c-81c9-49a3-8c83-ff6167c0b209"],
-Cell[12783, 344, 197, 3, 35, "Text",ExpressionUUID->"5f1ea7d6-391d-4832-a213-fa49e59830db"],
-Cell[12983, 349, 255, 6, 35, "Text",ExpressionUUID->"f715f0d8-12d3-499e-badf-bf1faaac3190"],
-Cell[13241, 357, 310, 6, 35, "Text",ExpressionUUID->"b3243a7e-7259-45cc-823a-3fcc14ad0b83"]
+Cell[26723, 587, 162, 3, 67, "Section",ExpressionUUID->"45c5e031-d63f-45db-a213-51b9b22e3349"],
+Cell[26888, 592, 394, 8, 35, "Text",ExpressionUUID->"e1dd4dcd-c76f-4c30-91e1-53c7156a4b3c"],
+Cell[27285, 602, 202, 3, 35, "Text",ExpressionUUID->"79159806-e65b-4969-bded-7a6f8afad5d1"],
+Cell[27490, 607, 165, 3, 35, "Text",ExpressionUUID->"4d776144-9549-443d-9a1c-56f81ed2b539"],
+Cell[27658, 612, 197, 3, 35, "Text",ExpressionUUID->"13e9e8df-c023-4edf-b94c-205179575df4"],
+Cell[27858, 617, 255, 6, 35, "Text",ExpressionUUID->"f1c312d7-4502-44d2-a571-574c926db748"],
+Cell[28116, 625, 310, 6, 35, "Text",ExpressionUUID->"5e36d840-f09a-4f31-81cf-ccc319a6e8a5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13588, 368, 201, 3, 67, "Section",ExpressionUUID->"05e4041f-de11-44bb-987d-d36d041fdcdd"],
-Cell[13792, 373, 2209, 49, 173, "Text",ExpressionUUID->"2f7fef42-7f8c-4598-aa54-4fccb4f5aba9"],
-Cell[16004, 424, 323, 5, 35, "Text",ExpressionUUID->"8f03376c-acdd-49c2-bdfb-261b871b7e0a"],
-Cell[16330, 431, 571, 14, 35, "Text",ExpressionUUID->"63f1b98c-507c-485d-b9f4-6adcd44c3e32"]
+Cell[28463, 636, 201, 3, 67, "Section",ExpressionUUID->"ba41e971-cf5f-4594-abee-947401361656"],
+Cell[28667, 641, 2147, 47, 173, "Text",ExpressionUUID->"72c8a520-a3d0-4cf8-8f87-4e38b9a51dcd"],
+Cell[30817, 690, 323, 5, 35, "Text",ExpressionUUID->"88a3b692-730b-405a-af55-e86fa95425b2"],
+Cell[31143, 697, 571, 14, 35, "Text",ExpressionUUID->"de4a0222-457b-41ce-9049-3d85d61397d7"]
 }, Open  ]]
 }, Open  ]]
 }

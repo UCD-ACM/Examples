@@ -1,0 +1,1521 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     63055,       1513]
+NotebookOptionsPosition[     52250,       1378]
+NotebookOutlinePosition[     52746,       1396]
+CellTagsIndexPosition[     52703,       1393]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Principal Component Analysis", "Section",
+ CellChangeTimes->{{3.821298065639636*^9, 3.8212980721688423`*^9}, {
+  3.821989679723143*^9, 
+  3.8219896866761436`*^9}},ExpressionUUID->"71f30d7c-0d3d-4783-9b7b-\
+e231f4081234"],
+
+Cell["\<\
+We have seen in the lectures how Principal Component Analysis can be used to \
+find the \[OpenCurlyDoubleQuote]most important directions\
+\[CloseCurlyDoubleQuote] in data. Let\[CloseCurlyQuote]s try it out with a \
+simple 2D dataset that roughly fits on a line:\
+\>", "Text",
+ CellChangeTimes->{{3.821261714371255*^9, 3.8212617148696632`*^9}, {
+  3.8219897689842377`*^9, 
+  3.821989831978258*^9}},ExpressionUUID->"13af3e83-451e-4a4e-88d7-\
+1000ad6fc587"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"3", "+", 
+        RowBox[{"2", "x"}], "+", 
+        RowBox[{"RandomVariate", "[", 
+         RowBox[{"NormalDistribution", "[", 
+          RowBox[{"0", ",", "0.6"}], "]"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "5", ",", "0.005"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.821183512484281*^9, 3.821183542049678*^9}, {
+   3.821183580999058*^9, 3.821183586326396*^9}, {3.821183778328753*^9, 
+   3.8211837816799097`*^9}, {3.8211838686763353`*^9, 3.821183892990655*^9}, {
+   3.821183963150795*^9, 3.82118399538337*^9}, 3.821187466643404*^9, {
+   3.821187813843504*^9, 3.8211878280974913`*^9}, {3.821352007799478*^9, 
+   3.821352016455101*^9}, {3.821994659350267*^9, 3.8219946846573277`*^9}, {
+   3.821995354085598*^9, 3.8219953729139423`*^9}, {3.821995481010845*^9, 
+   3.821995510127408*^9}, {3.821995557919126*^9, 3.82199555819276*^9}, {
+   3.821995856589182*^9, 3.821995856671425*^9}},
+ CellLabel->
+  "In[404]:=",ExpressionUUID->"c26d2979-b491-4d4f-ae69-d5ff3b1612dc"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", "data", "]"}]], "Input",
+ CellChangeTimes->{{3.821993834751796*^9, 3.821993837950075*^9}},
+ CellLabel->
+  "In[405]:=",ExpressionUUID->"33383fe4-0f7a-4b99-82e6-d6411aeaba82"],
+
+Cell["\<\
+In the video lectures we had the matrix of data with rows corresponding to \
+the variables and columns corresponding to the samples (measurements of those \
+variables). Here, we work with the standard convention in statistics and have \
+rows for samples and columns for variables so we will need to keep in mind \
+this different convention.\
+\>", "Text",
+ CellChangeTimes->{{3.821989861059564*^9, 3.821989902750708*^9}, {
+  3.821989949165165*^9, 3.8219899504028597`*^9}, {3.821989980794836*^9, 
+  3.8219900416739597`*^9}, {3.821993351010601*^9, 
+  3.821993451981394*^9}},ExpressionUUID->"bc293daf-5d4d-4a94-acf7-\
+b496d1b1e65c"],
+
+Cell["\<\
+The first thing we need to do is subtract the mean in each column (i.e. \
+standardize the data):\
+\>", "Text",
+ CellChangeTimes->{{3.821993750747079*^9, 3.821993770478919*^9}, {
+  3.82199381826602*^9, 3.8219938229880257`*^9}, {3.821995665341416*^9, 
+  3.821995672699621*^9}, {3.8219972361429787`*^9, 
+  3.821997236843732*^9}},ExpressionUUID->"b6b26fe8-754b-4b3b-baf8-\
+0a7a58ef3b15"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"standardizedData", "=", 
+   RowBox[{"Standardize", "[", 
+    RowBox[{"data", ",", "Mean", ",", 
+     RowBox[{"1", "&"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.821993618645382*^9, 3.8219936864360332`*^9}, {
+   3.821995639350088*^9, 3.821995655714013*^9}, 3.821996742438181*^9},
+ CellLabel->
+  "In[406]:=",ExpressionUUID->"d01f2047-ccfc-4d32-979a-9f5940748afd"],
+
+Cell[BoxData[
+ RowBox[{"\[Mu]", "=", 
+  RowBox[{"Mean", "/@", 
+   RowBox[{"Transpose", "[", "data", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.821995692214918*^9, 3.821995736244199*^9}},
+ CellLabel->
+  "In[407]:=",ExpressionUUID->"437b6333-1c71-49cb-9848-d84084e12c35"],
+
+Cell[BoxData[
+ RowBox[{"\[Sigma]", "=", 
+  RowBox[{"StandardDeviation", "/@", 
+   RowBox[{"Transpose", "[", "data", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.821995692214918*^9, 3.82199574484863*^9}},
+ CellLabel->
+  "In[408]:=",ExpressionUUID->"7e6e9579-7c60-4fe0-9791-c448a15f2eb7"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", "standardizedData", "]"}]], "Input",
+ CellChangeTimes->{{3.821993831831574*^9, 3.821993857309126*^9}},
+ CellLabel->
+  "In[409]:=",ExpressionUUID->"39bee789-22b0-40b8-8f8d-0b4eadb84423"],
+
+Cell["Next we compute the singular value decomposition.", "Text",
+ CellChangeTimes->{{3.821993897758915*^9, 
+  3.821993908180545*^9}},ExpressionUUID->"a30f84de-ae8b-4c7b-97de-\
+c819284bd632"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"U", ",", "\[CapitalSigma]", ",", "V"}], "}"}], "=", 
+   RowBox[{"SingularValueDecomposition", "[", "standardizedData", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Sigma]s", "=", 
+   RowBox[{"Diagonal", "[", "\[CapitalSigma]", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8212618519305487`*^9, 3.821261870287751*^9}, {
+   3.821261963337182*^9, 3.821261973178479*^9}, {3.821262276401876*^9, 
+   3.821262283794168*^9}, {3.821270514938692*^9, 3.821270520488521*^9}, {
+   3.821352223160768*^9, 3.821352234590126*^9}, {3.8219938838675957`*^9, 
+   3.821993932815226*^9}, 3.821996008649548*^9, {3.8219967327519827`*^9, 
+   3.821996739622121*^9}, {3.822026153532114*^9, 3.822026163993668*^9}},
+ CellLabel->
+  "In[414]:=",ExpressionUUID->"af74fc54-8b44-4918-be38-6ede77eb598c"],
+
+Cell["\<\
+As expected, we have two singular values, one which is much larger than the \
+other. This reflects the fact that there is much more variance along the line \
+than orthogonal to it.\
+\>", "Text",
+ CellChangeTimes->{{3.821993948030292*^9, 
+  3.821993987436459*^9}},ExpressionUUID->"11f67241-72b5-4653-a7d1-\
+123a18402950"],
+
+Cell["\<\
+The singular vectors in the columns of V give us the \
+\[OpenCurlyDoubleQuote]most important\[CloseCurlyDoubleQuote] directions in \
+the data\
+\>", "Text",
+ CellChangeTimes->{{3.821994485779088*^9, 
+  3.821994532624415*^9}},ExpressionUUID->"41482608-8006-4da5-af59-\
+d3259d1e2ef8"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"standardizedData", ",", 
+     RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]}], "]"}], ",", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Thick", ",", 
+      RowBox[{"Line", "[", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"\[Sigma]s", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], 
+         SqrtBox[
+          RowBox[{
+           RowBox[{"Length", "[", "data", "]"}], "-", "1"}]]], 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", 
+          RowBox[{"-", 
+           RowBox[{"V", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "1"}], "]"}], "]"}]}]}], "}"}]}], "]"}]}], 
+     "}"}], "]"}], ",", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Thick", ",", 
+      RowBox[{"Line", "[", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"\[Sigma]s", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], 
+         SqrtBox[
+          RowBox[{
+           RowBox[{"Length", "[", "data", "]"}], "-", "1"}]]], 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", 
+          RowBox[{"V", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "}"}]}], "]"}]}], 
+     "}"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.821994514968671*^9, 3.821994625296584*^9}, {
+  3.8219947123576097`*^9, 3.821994719208687*^9}, {3.821994771291559*^9, 
+  3.821994784893441*^9}, {3.821994822734104*^9, 3.821994826501153*^9}, {
+  3.821995311898563*^9, 3.821995340147822*^9}, {3.821995399879834*^9, 
+  3.821995464667021*^9}, {3.821995502385129*^9, 3.821995503089501*^9}, {
+  3.8219955346708393`*^9, 3.821995619641123*^9}, {3.821995826868766*^9, 
+  3.821995931812011*^9}, {3.821996010758544*^9, 3.821996011675497*^9}, {
+  3.821996705125779*^9, 3.821996705274102*^9}},
+ CellLabel->
+  "In[416]:=",ExpressionUUID->"c9bbdc93-e452-4cb9-acba-0f93dd7f6852"],
+
+Cell["\<\
+The singular vectors in the columns of U give us the projection of the data \
+long those \[OpenCurlyDoubleQuote]most important\[CloseCurlyDoubleQuote] \
+directions (i.e. the same as standardizedData.V)\
+\>", "Text",
+ CellChangeTimes->{{3.821994485779088*^9, 3.821994532624415*^9}, {
+  3.8219948442301817`*^9, 
+  3.8219948898067417`*^9}},ExpressionUUID->"7ba9227e-d85d-4804-9cbc-\
+2ad09d70cc6c"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"U", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", 
+      RowBox[{"1", ";;", "2"}]}], "]"}], "]"}], ".", 
+   RowBox[{"\[CapitalSigma]", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"1", ";;", "2"}], ",", 
+      RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8219941406245527`*^9, 3.821994149032875*^9}, {
+  3.821994198993887*^9, 3.821994227359392*^9}, {3.821994298993411*^9, 
+  3.821994325200536*^9}},
+ CellLabel->
+  "In[179]:=",ExpressionUUID->"e347afe2-3daa-4da4-b452-84ed75088a6a"],
+
+Cell["\<\
+We can also directly compute this projected form of the data using \
+PrincipalComponents\
+\>", "Text",
+ CellChangeTimes->{{3.821995944656753*^9, 
+  3.821995958522593*^9}},ExpressionUUID->"396910eb-ad24-4c15-a09a-\
+fddeef6de798"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"PrincipalComponents", "[", "standardizedData", "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.821296954428936*^9, 3.8212969610848713`*^9}, {
+   3.821297046382584*^9, 3.821297049224703*^9}, {3.821297080759111*^9, 
+   3.82129708319392*^9}, {3.821297115143008*^9, 3.821297117942663*^9}, {
+   3.821993484309148*^9, 3.8219935044129763`*^9}, {3.821993669295561*^9, 
+   3.8219936927695932`*^9}, 3.821994436904553*^9},
+ CellLabel->
+  "In[180]:=",ExpressionUUID->"3f945c97-df4e-4628-a1eb-d94e7c0fa318"],
+
+Cell[CellGroupData[{
+
+Cell["In higher dimensions", "Subsection",
+ CellChangeTimes->{{3.821996491584209*^9, 
+  3.8219964943847303`*^9}},ExpressionUUID->"69fc2dd0-745f-4871-bc9a-\
+569458acaa80"],
+
+Cell["Construct a 3-dimensional dataset with 3 variables:", "Text",
+ CellChangeTimes->{{3.821997198806382*^9, 
+  3.821997216970263*^9}},ExpressionUUID->"a94eff33-39da-4dcc-9d1f-\
+b82c2dcefac9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data3D", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"3", "+", 
+        RowBox[{"2", "x"}], "+", 
+        RowBox[{"RandomVariate", "[", 
+         RowBox[{"NormalDistribution", "[", 
+          RowBox[{"0", ",", "0.6"}], "]"}], "]"}]}], ",", 
+       RowBox[{"7", "+", 
+        RowBox[{"4", "x"}], "+", 
+        RowBox[{"RandomVariate", "[", 
+         RowBox[{"NormalDistribution", "[", 
+          RowBox[{"0", ",", "6"}], "]"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "5", ",", "0.005"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.821183512484281*^9, 3.821183542049678*^9}, {
+   3.821183580999058*^9, 3.821183586326396*^9}, {3.821183778328753*^9, 
+   3.8211837816799097`*^9}, {3.8211838686763353`*^9, 3.821183892990655*^9}, {
+   3.821183963150795*^9, 3.82118399538337*^9}, 3.821187466643404*^9, {
+   3.821187813843504*^9, 3.8211878280974913`*^9}, {3.821352007799478*^9, 
+   3.821352016455101*^9}, {3.821994659350267*^9, 3.8219946846573277`*^9}, {
+   3.821995354085598*^9, 3.8219953729139423`*^9}, {3.821995481010845*^9, 
+   3.821995510127408*^9}, {3.821995557919126*^9, 3.82199555819276*^9}, {
+   3.821995856589182*^9, 3.821995856671425*^9}, {3.821996545507558*^9, 
+   3.82199659837794*^9}, {3.8219966288277473`*^9, 3.821996628919792*^9}, {
+   3.8219970546053*^9, 3.8219970547506647`*^9}},
+ CellLabel->
+  "In[225]:=",ExpressionUUID->"1bda63a2-983a-4b16-a902-742b1f6f14a3"],
+
+Cell[BoxData[
+ RowBox[{"ListPointPlot3D", "[", "data3D", "]"}]], "Input",
+ CellChangeTimes->{{3.821996616133357*^9, 3.821996617867909*^9}},
+ CellLabel->
+  "In[226]:=",ExpressionUUID->"19be27e5-be4b-4772-b195-a6632107832a"],
+
+Cell["\<\
+In this case we choose to standardise by subtracting the mean and dividing by \
+the standard deviation\
+\>", "Text",
+ CellChangeTimes->{{3.82199724472686*^9, 
+  3.821997266020989*^9}},ExpressionUUID->"08af93f2-c183-4d1f-b1c9-\
+3d5bcd736d65"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"standardizedData3D", "=", 
+   RowBox[{"Standardize", "[", "data3D", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.821993618645382*^9, 3.8219936864360332`*^9}, {
+   3.821995639350088*^9, 3.821995655714013*^9}, {3.82199666238344*^9, 
+   3.821996664052538*^9}, 3.821996766151763*^9, 3.821996875146304*^9, {
+   3.821997060305534*^9, 3.82199706396734*^9}, 3.8219971078179827`*^9},
+ CellLabel->
+  "In[390]:=",ExpressionUUID->"b888cc86-8542-42bd-ab93-2ada61862e66"],
+
+Cell[BoxData[
+ RowBox[{"\[Mu]", "=", 
+  RowBox[{"Mean", "/@", 
+   RowBox[{"Transpose", "[", "data3D", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.821995692214918*^9, 3.821995736244199*^9}, {
+  3.821996666532011*^9, 3.8219966668215227`*^9}},
+ CellLabel->
+  "In[391]:=",ExpressionUUID->"56596cd2-1f76-4b86-8307-02b5cd2fef34"],
+
+Cell[BoxData[
+ RowBox[{"\[Sigma]", "=", 
+  RowBox[{"StandardDeviation", "/@", 
+   RowBox[{"Transpose", "[", "data3D", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.821995692214918*^9, 3.82199574484863*^9}, {
+  3.821996668888715*^9, 3.8219966692606363`*^9}},
+ CellLabel->
+  "In[392]:=",ExpressionUUID->"6a4c4c45-130f-41e1-9381-2abba3a044d3"],
+
+Cell[BoxData[
+ RowBox[{"ListPointPlot3D", "[", "standardizedData3D", "]"}]], "Input",
+ CellChangeTimes->{{3.821993831831574*^9, 3.821993857309126*^9}, {
+  3.82199667493652*^9, 3.821996678741593*^9}},
+ CellLabel->
+  "In[393]:=",ExpressionUUID->"bde07c24-481b-4e47-97cb-883f26cb27f3"],
+
+Cell["Next we compute the singular value decomposition.", "Text",
+ CellChangeTimes->{{3.821993897758915*^9, 
+  3.821993908180545*^9}},ExpressionUUID->"34a552b3-4f8c-4508-8b2f-\
+8e2c78529bb7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"U", ",", "\[CapitalSigma]", ",", "V"}], "}"}], "=", 
+   RowBox[{"SingularValueDecomposition", "[", "standardizedData3D", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Sigma]s", "=", 
+   RowBox[{"Diagonal", "[", "\[CapitalSigma]", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8212618519305487`*^9, 3.821261870287751*^9}, {
+   3.821261963337182*^9, 3.821261973178479*^9}, {3.821262276401876*^9, 
+   3.821262283794168*^9}, {3.821270514938692*^9, 3.821270520488521*^9}, {
+   3.821352223160768*^9, 3.821352234590126*^9}, {3.8219938838675957`*^9, 
+   3.821993932815226*^9}, 3.821996008649548*^9, {3.821996687962088*^9, 
+   3.8219966884770603`*^9}},
+ CellLabel->
+  "In[394]:=",ExpressionUUID->"6b805889-0ff8-41e8-8b03-a66693ea9a0f"],
+
+Cell["\<\
+As expected, we have two singular values, one which is much larger than the \
+other. This reflects the fact that there is much more variance along the line \
+than orthogonal to it.\
+\>", "Text",
+ CellChangeTimes->{{3.821993948030292*^9, 
+  3.821993987436459*^9}},ExpressionUUID->"f9b2a820-8642-4251-849c-\
+81cf17d9fa5e"],
+
+Cell["\<\
+The singular vectors in the columns of V give us the \
+\[OpenCurlyDoubleQuote]most important\[CloseCurlyDoubleQuote] directions in \
+the data\
+\>", "Text",
+ CellChangeTimes->{{3.821994485779088*^9, 
+  3.821994532624415*^9}},ExpressionUUID->"508072d1-43e3-49ce-9d6c-\
+7ead8b87e770"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPointPlot3D", "[", 
+    RowBox[{"standardizedData3D", ",", 
+     RowBox[{"BoxRatios", "\[Rule]", "Automatic"}]}], "]"}], ",", 
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Thick", ",", 
+      RowBox[{"Line", "[", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"\[Sigma]s", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], 
+         SqrtBox[
+          RowBox[{
+           RowBox[{"Length", "[", "data", "]"}], "-", "1"}]]], 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+          RowBox[{"-", 
+           RowBox[{"V", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "1"}], "]"}], "]"}]}]}], "}"}]}], "]"}]}], 
+     "}"}], "]"}], ",", 
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Thick", ",", 
+      RowBox[{"Line", "[", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"\[Sigma]s", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], 
+         SqrtBox[
+          RowBox[{
+           RowBox[{"Length", "[", "data", "]"}], "-", "1"}]]], 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+          RowBox[{"V", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "}"}]}], "]"}]}], 
+     "}"}], "]"}], ",", 
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Thick", ",", 
+      RowBox[{"Line", "[", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"\[Sigma]s", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], 
+         SqrtBox[
+          RowBox[{
+           RowBox[{"Length", "[", "data", "]"}], "-", "1"}]]], 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+          RowBox[{"V", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "3"}], "]"}], "]"}]}], "}"}]}], "]"}]}], 
+     "}"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.821994514968671*^9, 3.821994625296584*^9}, {
+  3.8219947123576097`*^9, 3.821994719208687*^9}, {3.821994771291559*^9, 
+  3.821994784893441*^9}, {3.821994822734104*^9, 3.821994826501153*^9}, {
+  3.821995311898563*^9, 3.821995340147822*^9}, {3.821995399879834*^9, 
+  3.821995464667021*^9}, {3.821995502385129*^9, 3.821995503089501*^9}, {
+  3.8219955346708393`*^9, 3.821995619641123*^9}, {3.821995826868766*^9, 
+  3.821995931812011*^9}, {3.821996010758544*^9, 3.821996011675497*^9}, {
+  3.821996693239285*^9, 3.821996698154256*^9}, {3.8219967972874804`*^9, 
+  3.821996896685752*^9}, {3.821997020035323*^9, 3.8219970386502733`*^9}, {
+  3.822026063152669*^9, 3.822026063636393*^9}},
+ CellLabel->
+  "In[396]:=",ExpressionUUID->"2e3fbdc7-8b36-4afc-9c75-3fefbeea6458"],
+
+Cell["\<\
+The singular vectors in the columns of U give us the projection of the data \
+long those \[OpenCurlyDoubleQuote]most important\[CloseCurlyDoubleQuote] \
+directions (i.e. the same as standardizedData.V)\
+\>", "Text",
+ CellChangeTimes->{{3.821994485779088*^9, 3.821994532624415*^9}, {
+  3.8219948442301817`*^9, 
+  3.8219948898067417`*^9}},ExpressionUUID->"8f635ade-7d12-4158-b8aa-\
+ddc9a2cb0829"],
+
+Cell[BoxData[
+ RowBox[{"ListPointPlot3D", "[", 
+  RowBox[{
+   RowBox[{"U", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", 
+      RowBox[{"1", ";;", "3"}]}], "]"}], "]"}], ".", 
+   RowBox[{"\[CapitalSigma]", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"1", ";;", "3"}], ",", 
+      RowBox[{"1", ";;", "3"}]}], "]"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8219941406245527`*^9, 3.821994149032875*^9}, {
+  3.821994198993887*^9, 3.821994227359392*^9}, {3.821994298993411*^9, 
+  3.821994325200536*^9}, {3.821997138766798*^9, 3.821997144729169*^9}},
+ CellLabel->
+  "In[397]:=",ExpressionUUID->"8506e743-f06b-4467-b9ec-83824dc492b3"],
+
+Cell["\<\
+We can also directly compute this projected form of the data using \
+PrincipalComponents\
+\>", "Text",
+ CellChangeTimes->{{3.821995944656753*^9, 
+  3.821995958522593*^9}},ExpressionUUID->"66f3a089-4904-4909-90ad-\
+9febc0488d42"],
+
+Cell[BoxData[
+ RowBox[{"ListPointPlot3D", "[", 
+  RowBox[{"PrincipalComponents", "[", "standardizedData3D", "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.821296954428936*^9, 3.8212969610848713`*^9}, {
+   3.821297046382584*^9, 3.821297049224703*^9}, {3.821297080759111*^9, 
+   3.82129708319392*^9}, {3.821297115143008*^9, 3.821297117942663*^9}, {
+   3.821993484309148*^9, 3.8219935044129763`*^9}, {3.821993669295561*^9, 
+   3.8219936927695932`*^9}, 3.821994436904553*^9, {3.821997171825379*^9, 
+   3.821997185905403*^9}},
+ CellLabel->
+  "In[398]:=",ExpressionUUID->"7af42ab3-8102-49a3-9d8f-ca86e470d8c6"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Identifying types of flower", "Section",
+ CellChangeTimes->{{3.8219896645927277`*^9, 3.821989670170643*^9}, {
+  3.822026885405249*^9, 
+  3.822026891574415*^9}},ExpressionUUID->"ca9dccf1-41f7-4cdc-b990-\
+8b7ebf833162"],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s now use PCA to identify the type of a flower based on \
+measurements of their properties. We will work with a dataset for three \
+different types of iris: setosa, versicolor and virginica.\
+\>", "Text",
+ CellChangeTimes->{{3.821997752460844*^9, 3.821997790446974*^9}, {
+  3.8220269051508627`*^9, 3.822026954221487*^9}, {3.8220269986092052`*^9, 
+  3.8220270286473017`*^9}},ExpressionUUID->"bb70450c-5a46-4797-bf36-\
+7d8933b0ab16"],
+
+Cell[BoxData[
+ RowBox[{"WolframAlpha", "[", 
+  RowBox[{"\"\<Iris\>\"", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<Image:PlantData\>\"", ",", "1"}], "}"}], ",", 
+     "\"\<Content\>\""}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.821997923854452*^9, 3.821997927852162*^9}},
+ CellLabel->
+  "In[277]:=",ExpressionUUID->"effa7c7c-bfc7-4cd5-bbfc-2f28b425574d"],
+
+Cell["\<\
+The dataset is available directly through Mathematica and contains 4 \
+variables for the length and width of the sepals and petals (in centimeters). \
+Let\[CloseCurlyQuote]s load the data:\
+\>", "Text",
+ CellChangeTimes->{{3.822026962314794*^9, 
+  3.822027017761835*^9}},ExpressionUUID->"43058145-d45f-4e6b-b311-\
+08fa651cd2f1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"iris", "=", 
+   RowBox[{"ExampleData", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<MachineLearning\>\"", ",", "\"\<FisherIris\>\""}], "}"}], 
+     ",", " ", "\"\<Data\>\""}], "]"}]}], ";"}]], "Input",
+ CellLabel->"In[261]:=",
+ CellID->2081614806,ExpressionUUID->"357e1539-5cd1-46e4-8aa8-a4cb56b2752c"],
+
+Cell["Rearrange the data so that it is grouped by species:", "Text",
+ CellChangeTimes->{{3.822028287841877*^9, 
+  3.8220282970854073`*^9}},ExpressionUUID->"96cdb699-bcd1-411f-9285-\
+b738bba0dff8"],
+
+Cell[BoxData[
+ RowBox[{"irisbyspecies", "=", 
+  RowBox[{"GroupBy", "[", 
+   RowBox[{"iris", ",", 
+    RowBox[{"Last", "\[Rule]", "First"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.8220287940602417`*^9, 3.82202879440374*^9}, 
+   3.822028873857771*^9},
+ CellLabel->"In[506]:=",
+ CellID->1604525905,ExpressionUUID->"48ab6691-cb45-4ba9-9d14-516505d3fb25"],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s first try to plot the data. This is a 4-dimensional \
+dataset (one dimension for each variable) so we don\[CloseCurlyQuote]t have \
+an easy way to visualise it all. Instead,  just visualise three dimensions by \
+dropping one dimension\
+\>", "Text",
+ CellChangeTimes->{{3.822028428962113*^9, 
+  3.822028497848538*^9}},ExpressionUUID->"7b29358f-af96-4a22-8bb7-\
+9cdf1aa87643"],
+
+Cell[BoxData[
+ RowBox[{"ListPointPlot3D", "[", 
+  RowBox[{"irisbyspecies", "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "All", ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], "]"}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.822028374314674*^9, 3.822028416828528*^9}, 
+   3.8220287976899977`*^9},
+ CellLabel->
+  "In[504]:=",ExpressionUUID->"1e7dc639-7511-4c44-aeac-d247ae0105f0"],
+
+Cell["\<\
+It looks like there is hope for separating out the species based on their \
+properties, but it is difficult working with 4-dimensional data. Instead, let\
+\[CloseCurlyQuote]s project it onto the two-dimensional space spanned by the \
+first two principal components. We do this as before: standardize the data, \
+use the SVD to find the principal components and the projection of the data \
+onto those components and then un-standardize the result for plotting.  \
+Instead of doing those steps manually again, let\[CloseCurlyQuote]s use \
+Mathematica\[CloseCurlyQuote]s DimensionReduction function which does exactly \
+that. We tell it to use Principal Component Analysis and to project onto two \
+dimensions\
+\>", "Text",
+ CellChangeTimes->{{3.822028509199498*^9, 
+  3.822028719133795*^9}},ExpressionUUID->"21e0cb44-fac9-4a6a-8358-\
+4ff2c73bbf20"],
+
+Cell[BoxData[
+ RowBox[{"diris", "=", 
+  RowBox[{"DimensionReduction", "[", 
+   RowBox[{
+    RowBox[{"iris", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", " ", "2", ",", " ", 
+    RowBox[{"Method", "\[Rule]", "\"\<PrincipalComponentsAnalysis\>\""}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.822027352593321*^9, {3.822027742281348*^9, 3.822027767215048*^9}, 
+   3.822028723990364*^9, {3.822028928158904*^9, 3.8220289531493597`*^9}},
+ CellLabel->
+  "In[510]:=",ExpressionUUID->"2c51563c-d7a4-452b-90cf-0f6b60a802d3"],
+
+Cell["\<\
+The result is a DimensionReducerFunction which takes in a vector of 4 numbers \
+and returns a vector of two numbers obtained by projecting along the two \
+principal directions. We now apply this projection function to our iris data\
+\>", "Text",
+ CellChangeTimes->{{3.822028728499848*^9, 3.822028768968663*^9}, {
+  3.82202881732827*^9, 
+  3.822028856552979*^9}},ExpressionUUID->"ffa87055-2228-4433-83b7-\
+9d4ea8d50eaf"],
+
+Cell[BoxData[
+ RowBox[{"dirisbyspecies", "=", 
+  RowBox[{"diris", "/@", "irisbyspecies"}]}]], "Input",
+ CellChangeTimes->{{3.822027361260202*^9, 3.822027385272833*^9}, 
+   3.82202777198269*^9, {3.822028837034367*^9, 3.822028865830894*^9}},
+ CellLabel->
+  "In[511]:=",ExpressionUUID->"130735eb-0207-4f96-b5c4-caafc89c5209"],
+
+Cell["\<\
+When we plot this lower dimensional representation of the data, we can \
+clearly delineate between the species:\
+\>", "Text",
+ CellChangeTimes->{{3.82202988261653*^9, 
+  3.822029905971447*^9}},ExpressionUUID->"5ec87d40-bfd2-4a87-9ad1-\
+4c3b80edc70e"],
+
+Cell[BoxData["dirisbyspecies"], "Input",
+ CellLabel->
+  "In[700]:=",ExpressionUUID->"f6b67ef2-ea7e-4d75-b6ff-0faf356f6d9f"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", "dirisbyspecies", "]"}]], "Input",
+ CellChangeTimes->{{3.8220289603780107`*^9, 3.822028967991988*^9}},
+ CellLabel->
+  "In[512]:=",ExpressionUUID->"d9970778-e905-4027-9484-3a0aaf4ceb97"],
+
+Cell["\<\
+We can go even further than this. We have seen how we can use PCA to project \
+high-dimensional data onto a lower dimensional surface, but we could also \
+reconstruct those projected vectors in the original 4-dimensional space. For \
+example, let\[CloseCurlyQuote]s take one sample of the setosa species:\
+\>", "Text",
+ CellChangeTimes->{{3.822029909269264*^9, 3.8220299157842216`*^9}, {
+  3.822030188831064*^9, 3.82203023632477*^9}, {3.822030268053771*^9, 
+  3.822030268783704*^9}, {3.822030398771963*^9, 3.822030401340191*^9}, {
+  3.8220305784492397`*^9, 3.822030586464943*^9}, {3.822030860774939*^9, 
+  3.822030893868408*^9}},ExpressionUUID->"66290fcf-5470-4dc2-a8a7-\
+f8c298f121e1"],
+
+Cell[BoxData[
+ RowBox[{"setosa1", "=", 
+  RowBox[{
+   RowBox[{"irisbyspecies", "[", "\"\<setosa\>\"", "]"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.822029943816687*^9, 3.822029958789904*^9}},
+ CellLabel->
+  "In[538]:=",ExpressionUUID->"bbd89a78-a21f-4c23-a125-bb6ba68c8546"],
+
+Cell["We can project this onto the lower-dimensional space:", "Text",
+ CellChangeTimes->{{3.82203090988809*^9, 
+  3.82203091876994*^9}},ExpressionUUID->"8b968971-c488-4ec3-b76b-\
+5c81f91903db"],
+
+Cell[BoxData[
+ RowBox[{"pcs", "=", 
+  RowBox[{"diris", "[", "setosa1", "]"}]}]], "Input",
+ CellChangeTimes->{{3.8220309218927107`*^9, 3.822030922048188*^9}, {
+  3.8220311678977737`*^9, 3.822031168812689*^9}},
+ CellLabel->
+  "In[553]:=",ExpressionUUID->"74e65c4d-bcd3-4a38-bbaf-55e1a62d9859"],
+
+Cell["\<\
+Then we can take these principal components and combine them with the \
+principal component vectors to reconstruct a 4-vector in the original space. \
+This will be the closest point on our lower-dimensional surface to the \
+original 4-dimensional sample:\
+\>", "Text",
+ CellChangeTimes->{{3.822030928011619*^9, 3.822030979441312*^9}, {
+   3.822031113458107*^9, 3.822031129756094*^9}, {3.8220311784781427`*^9, 
+   3.822031183122361*^9}, {3.822031225153006*^9, 3.822031258526787*^9}, 
+   3.822031297032358*^9, {3.822032249364324*^9, 
+   3.8220322523225517`*^9}},ExpressionUUID->"8a701d98-f6f5-45f7-bfdf-\
+f56a43d7a158"],
+
+Cell[BoxData[
+ RowBox[{"diris", "[", 
+  RowBox[{"pcs", ",", "\"\<OriginalData\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.822031031545665*^9, 3.822031092434791*^9}, {
+  3.822031171359131*^9, 3.82203117168118*^9}},
+ CellLabel->
+  "In[555]:=",ExpressionUUID->"30dd762c-11e9-4625-baa5-4909d159db77"],
+
+Cell["\<\
+We can do these two steps (projection and reconstruction) in one go by asking \
+for the reconstructed vector directly:\
+\>", "Text",
+ CellChangeTimes->{{3.822031268154028*^9, 
+  3.822031295206451*^9}},ExpressionUUID->"8132d46f-5826-4be9-a2fe-\
+d58bda9bc7fa"],
+
+Cell[BoxData[
+ RowBox[{"diris", "[", 
+  RowBox[{"setosa1", ",", "\"\<ReconstructedVectors\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.8220309036272097`*^9, 3.822030906820197*^9}},
+ CellLabel->
+  "In[552]:=",ExpressionUUID->"87fab038-fb47-4eaa-919c-ff2e2b1025d8"],
+
+Cell[BoxData[
+ RowBox[{"diris", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"irisbyspecies", "[", "\"\<setosa\>\"", "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<ReconstructedVectors\>\""}], 
+  "]"}]], "Input",
+ CellLabel->
+  "In[583]:=",ExpressionUUID->"a1ab1433-c779-4081-a362-c73261530ce4"],
+
+Cell["Now let\[CloseCurlyQuote]s do this for all sample points and plot the \
+result:", "Text",
+ CellChangeTimes->{{3.822032352533532*^9, 
+  3.8220323686512213`*^9}},ExpressionUUID->"5df37c7b-2870-4e93-91bf-\
+e90f2f33e164"],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"coords", "=", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], "}"}], ",", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"ListPointPlot3D", "[", 
+         RowBox[{
+          RowBox[{"irisbyspecies", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "All", ",", "coords"}], "]"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}], ",", 
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Opacity", "[", "0.3", "]"}], ",", "Gray", ",", 
+           RowBox[{"InfinitePlane", "[", 
+            RowBox[{
+             RowBox[{"diris", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"irisbyspecies", "[", "\"\<setosa\>\"", "]"}], "[", 
+                RowBox[{"[", 
+                 RowBox[{"1", ";;", "3"}], "]"}], "]"}], ",", 
+               "\"\<ReconstructedVectors\>\""}], "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "coords"}], "]"}], "]"}], "]"}]}], "}"}], 
+         "]"}]}], "]"}], ",", 
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"ListPointPlot3D", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"diris", "[", 
+               RowBox[{"#", ",", "\"\<ReconstructedVectors\>\""}], "]"}], 
+              "&"}], "/@", "irisbyspecies"}], ")"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "All", ",", "coords"}], "]"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}], ",", 
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Opacity", "[", "0.3", "]"}], ",", "Gray", ",", 
+           RowBox[{"InfinitePlane", "[", 
+            RowBox[{
+             RowBox[{"diris", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"irisbyspecies", "[", "\"\<setosa\>\"", "]"}], "[", 
+                RowBox[{"[", 
+                 RowBox[{"1", ";;", "3"}], "]"}], "]"}], ",", 
+               "\"\<ReconstructedVectors\>\""}], "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "coords"}], "]"}], "]"}], "]"}]}], "}"}], 
+         "]"}]}], "]"}]}], "}"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.822029154889082*^9, 3.8220291834294147`*^9}, {
+  3.822030708224794*^9, 3.822030773040504*^9}, {3.8220313223026133`*^9, 
+  3.8220313837096357`*^9}, {3.822031670161545*^9, 3.8220318538126307`*^9}, {
+  3.8220320577145967`*^9, 3.822032091680922*^9}, {3.8220321787561483`*^9, 
+  3.822032189368094*^9}, {3.8220322860482807`*^9, 3.8220323227812157`*^9}},
+ CellLabel->
+  "In[594]:=",ExpressionUUID->"4e951649-8139-42d4-a8a9-76a2b006ece7"],
+
+Cell["\<\
+Finally, we can also use this approach to fill in missing data. For example, \
+say we had missed a measurement for our first setosa sample \
+\>", "Text",
+ CellChangeTimes->{{3.822032432615691*^9, 
+  3.822032472408146*^9}},ExpressionUUID->"b81abec2-d724-4338-8f18-\
+57aa9ba023b0"],
+
+Cell[BoxData["setosa1"], "Input",
+ CellChangeTimes->{{3.822032473840289*^9, 3.822032475976602*^9}},
+ CellLabel->
+  "In[595]:=",ExpressionUUID->"e5040bef-3fb1-4356-8a7f-402dd68d052d"],
+
+Cell[BoxData[
+ RowBox[{"setosa1missing", "=", 
+  RowBox[{"{", 
+   RowBox[{"5.1", ",", 
+    RowBox[{"Missing", "[", "]"}], ",", "1.4", ",", "0.2"}], "}"}]}]], "Input",\
+
+ CellChangeTimes->{{3.822032497818289*^9, 3.8220325006860533`*^9}},
+ CellLabel->
+  "In[596]:=",ExpressionUUID->"483caaa2-7af0-4a5a-9c69-c9150405729d"],
+
+Cell["We can still project this onto the lower dimensional space", "Text",
+ CellChangeTimes->{{3.822032486555703*^9, 
+  3.8220325174698257`*^9}},ExpressionUUID->"0df6ed88-c985-47c1-94e5-\
+294a92a2e8e6"],
+
+Cell[BoxData[
+ RowBox[{"diris", "[", "setosa1missing", "]"}]], "Input",
+ CellChangeTimes->{{3.822032520441545*^9, 3.822032529190756*^9}},
+ CellLabel->
+  "In[597]:=",ExpressionUUID->"b921edfa-57a9-4802-9d11-f4d1ccfc5b5d"],
+
+Cell["\<\
+And we can reconstruct a 4-dimensional vector from this, \
+\[OpenCurlyDoubleQuote]filling in\[CloseCurlyDoubleQuote] the missing  piece:\
+\
+\>", "Text",
+ CellChangeTimes->{{3.822032557580513*^9, 
+  3.8220325769620867`*^9}},ExpressionUUID->"b50624bb-f9a5-4e83-acf4-\
+7b784f5d5ff3"],
+
+Cell[BoxData[
+ RowBox[{"diris", "[", 
+  RowBox[{"setosa1missing", ",", "\"\<ReconstructedVectors\>\""}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.822032520441545*^9, 3.822032536709972*^9}},
+ CellLabel->
+  "In[598]:=",ExpressionUUID->"11d1296d-5bf5-4913-a79c-9e2daf19c06c"],
+
+Cell["\<\
+If all we want to do is fill in the missing piece and leave the others \
+unchanged, then we could do that too:\
+\>", "Text",
+ CellChangeTimes->{{3.822032580459586*^9, 
+  3.8220325971983843`*^9}},ExpressionUUID->"2481a076-d59d-434e-b1c9-\
+f6435968604a"],
+
+Cell[BoxData[
+ RowBox[{"diris", "[", 
+  RowBox[{"setosa1missing", ",", "\"\<ImputedVectors\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.822029297300639*^9, 3.822029315402711*^9}, {
+   3.822029568511066*^9, 3.8220295833758574`*^9}, 3.822032494131835*^9, 
+   3.822032540737076*^9},
+ CellLabel->
+  "In[600]:=",ExpressionUUID->"8e40664a-7d4f-464e-ae88-8da43a363810"],
+
+Cell["\<\
+We won\[CloseCurlyQuote]t cover this idea further in this module, but this is \
+a lot of information about data imputation available online.\
+\>", "Text",
+ CellChangeTimes->{{3.822032611018156*^9, 3.82203262726687*^9}, {
+  3.822032706976388*^9, 
+  3.822032723120388*^9}},ExpressionUUID->"328c081d-24c0-4a60-aebd-\
+b3890cd63ed1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Handwriting recognition", "Section",
+ CellChangeTimes->{{3.821985161740225*^9, 
+  3.821985166975065*^9}},ExpressionUUID->"c8917f6b-6a1e-497a-b15a-\
+0427e1e9c97a"],
+
+Cell["\<\
+We now look at another example: handwriting recognition, and in particular \
+reading numbers. The National Institute of Standards and Technology in the US \
+have produced a set of 60,000 handwritten numbers collected from Census \
+Bureau employees and high school students. Let\[CloseCurlyQuote]s first load \
+the dataset (this may take a few seconds to download the first time you run \
+it).\
+\>", "Text",
+ CellChangeTimes->{{3.822029013498911*^9, 3.822029035055365*^9}, {
+  3.822032738798958*^9, 3.822032749518331*^9}, {3.822032861665357*^9, 
+  3.822032884182498*^9}, {3.822032975517097*^9, 
+  3.8220330119261007`*^9}},ExpressionUUID->"3885e468-b429-477d-8207-\
+9041991cc8fa"],
+
+Cell[BoxData[
+ RowBox[{"ExampleData", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\"\<MachineLearning\>\"", ",", "\"\<MNIST\>\""}], "}"}], ",", 
+   "\"\<Description\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.822033673079082*^9, 3.822033674766336*^9}, {
+  3.822033706101058*^9, 3.822033723524551*^9}},
+ CellLabel->
+  "In[638]:=",ExpressionUUID->"457eb166-3576-4521-b59f-619f08d98ec2"],
+
+Cell[BoxData[
+ RowBox[{"ExampleData", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\"\<MachineLearning\>\"", ",", "\"\<MNIST\>\""}], "}"}], ",", 
+   "\"\<VariableDescriptions\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.822033673079082*^9, 3.822033674766336*^9}, {
+  3.822033706101058*^9, 3.8220337325501137`*^9}, {3.822033769551708*^9, 
+  3.822033775152437*^9}},
+ CellLabel->
+  "In[641]:=",ExpressionUUID->"3e70aa8e-793d-48e1-8296-e387b5510dad"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MNIST", "=", 
+   RowBox[{"ExampleData", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<MachineLearning\>\"", ",", "\"\<MNIST\>\""}], "}"}], ",", 
+     "\"\<TrainingData\>\""}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.82178433819939*^9, 3.821784359377384*^9}, {
+   3.821998365668429*^9, 3.821998390644134*^9}, 3.821998668594962*^9, 
+   3.822033647805273*^9, {3.822033779360832*^9, 3.822033791127304*^9}},
+ CellLabel->
+  "In[643]:=",ExpressionUUID->"1b53817b-63d7-4a67-8aa0-d91a0a1e21ff"],
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "MNIST", "]"}]], "Input",
+ CellChangeTimes->{{3.822033173440756*^9, 3.8220331765909567`*^9}},
+ CellLabel->
+  "In[645]:=",ExpressionUUID->"e1d3349a-19dd-4d55-b6b1-b248e43353b9"],
+
+Cell["\<\
+This is a list of 60,000 entries, each with an image of a handwritten number \
+and the corresponding integer label (as interpreted by a human). Take a \
+random sample of 30 entries to get an idea of what they look like\
+\>", "Text",
+ CellChangeTimes->{{3.8220330577685127`*^9, 
+  3.82203317073836*^9}},ExpressionUUID->"77564320-aac7-4fe5-8f92-\
+d440acf89c39"],
+
+Cell[BoxData[
+ RowBox[{"RandomSample", "[", 
+  RowBox[{"MNIST", ",", "30"}], "]"}]], "Input",
+ CellChangeTimes->{{3.822033018222289*^9, 3.822033048435541*^9}},
+ CellLabel->
+  "In[647]:=",ExpressionUUID->"09e153cd-90d4-4cf2-a138-4ae69390dee1"],
+
+Cell["Group the entries by the number they represent", "Text",
+ CellChangeTimes->{{3.8220332842768097`*^9, 
+  3.8220332908888597`*^9}},ExpressionUUID->"3214cc16-f618-4609-a695-\
+435f0628a557"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MNISTbynumber", "=", 
+   RowBox[{"GroupBy", "[", 
+    RowBox[{"MNIST", ",", 
+     RowBox[{"Last", "\[Rule]", "First"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.822033207695846*^9, 3.822033301592517*^9}},
+ CellLabel->
+  "In[648]:=",ExpressionUUID->"bc0a513d-f314-4c2a-97b5-2790f5d72ad9"],
+
+Cell["We will just work with the zeros and ones", "Text",
+ CellChangeTimes->{{3.822033844510476*^9, 
+  3.822033854914041*^9}},ExpressionUUID->"bc99a32a-5644-41e6-adee-\
+c0ab8a8a8d9e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"MNIST01", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Values", "[", 
+     RowBox[{"MNISTbynumber", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ";;", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MNIST01", "//", "Length"}]}], "Input",
+ CellChangeTimes->{{3.822033532139124*^9, 3.822033573159412*^9}, {
+  3.822033904596336*^9, 3.8220339395471773`*^9}},
+ CellLabel->
+  "In[657]:=",ExpressionUUID->"c28de8a6-f881-48e4-80a7-9bbf4c8fa948"],
+
+Cell[BoxData[
+ RowBox[{"28", " ", "28"}]], "Input",
+ CellChangeTimes->{{3.822033999181847*^9, 3.822034000245907*^9}},
+ CellLabel->
+  "In[659]:=",ExpressionUUID->"58f9b118-1886-4197-b1a2-0ce86cb5df87"],
+
+Cell["\<\
+If we think of each 28 x 28 image as a 784 dimensional vector, then we can \
+consider this as a set of 12,665 samples in a 784 dimensional vector space. A \
+random vector in that space won\[CloseCurlyQuote]t look like much, but the \
+12,665 samples are special as they represent important \
+\[OpenCurlyDoubleQuote]directions\[CloseCurlyDoubleQuote] in this space.\
+\>", "Text",
+ CellChangeTimes->{{3.8220339465872297`*^9, 3.822034045970973*^9}, {
+  3.822034206182135*^9, 
+  3.82203421517177*^9}},ExpressionUUID->"9c931891-2f40-4d04-8347-\
+bac4654bcd5f"],
+
+Cell[BoxData[
+ RowBox[{"Row", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Framed", "[", 
+     RowBox[{"Image", "[", 
+      RowBox[{
+       RowBox[{"RandomReal", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"28", ",", "28"}], "}"}]}], "]"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}], "]"}], ",", 
+    RowBox[{"Framed", "[", 
+     RowBox[{"Show", "[", 
+      RowBox[{
+       RowBox[{"MNIST01", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.822034047076509*^9, 3.8220341001723423`*^9}, {
+  3.8220341670969887`*^9, 3.822034199286067*^9}},
+ CellLabel->
+  "In[671]:=",ExpressionUUID->"e301be12-6beb-4b4e-a39d-2bed921734c0"],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s see if PCA will allow us to identify the important \
+\[OpenCurlyDoubleQuote]directions\[CloseCurlyDoubleQuote] corresponding to \
+zeros and ones, and even to differentiate between them. First, let\
+\[CloseCurlyQuote]s convert the images to vectors of numbers:\
+\>", "Text",
+ CellChangeTimes->{{3.822034103846882*^9, 3.822034145617293*^9}, {
+  3.822034204498136*^9, 3.822034250339089*^9}, {3.822034284771891*^9, 
+  3.822034300001247*^9}},ExpressionUUID->"b1e1e1cd-8c4e-45c3-8230-\
+00b8fb25b615"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"MNIST01data", "=", 
+   RowBox[{"Flatten", "/@", 
+    RowBox[{"ImageData", "/@", "MNIST01"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Dimensions", "[", "MNIST01data", "]"}]}], "Input",
+ CellChangeTimes->{{3.822034328588912*^9, 3.8220343440225677`*^9}},
+ CellLabel->
+  "In[676]:=",ExpressionUUID->"44e0d6d1-44db-41d4-81c4-de93e045d627"],
+
+Cell["\<\
+Now that we have a matrix, we can use PCA to reduce the 784 dimensional \
+vectors to just the two most important ones\
+\>", "Text",
+ CellChangeTimes->{{3.822034898781403*^9, 
+  3.822034927819832*^9}},ExpressionUUID->"4ae13b15-ade7-4856-a14b-\
+119b9900d6cf"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dMNIST01", "=", 
+   RowBox[{"DimensionReduction", "[", 
+    RowBox[{"MNIST01data", ",", " ", "2", ",", " ", 
+     RowBox[{"Method", "\[Rule]", "\"\<PrincipalComponentsAnalysis\>\""}]}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.822027352593321*^9, {3.822027742281348*^9, 3.822027767215048*^9}, 
+   3.822028723990364*^9, {3.822028928158904*^9, 3.8220289531493597`*^9}, {
+   3.822034359642975*^9, 3.822034379262926*^9}},
+ CellLabel->
+  "In[708]:=",ExpressionUUID->"c267d248-3bd2-49fa-9d41-ea1498783cb3"],
+
+Cell["\<\
+Now we map our dimension reduction projection function over all of the images \
+in our training set\
+\>", "Text",
+ CellChangeTimes->{{3.822034864953619*^9, 3.822034882829431*^9}, {
+  3.822034950832604*^9, 
+  3.822034952125383*^9}},ExpressionUUID->"7b6d6713-05c2-44c5-8059-\
+f72b253dfa8f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"projMNIST01", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"dMNIST01", "[", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"ImageData", "[", "#", "]"}], "]"}], "]"}], "&"}], ",", 
+     RowBox[{"MNISTbynumber", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ";;", "2"}], "]"}], "]"}], ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.8220349831977167`*^9, 3.822034986558077*^9}},
+ CellLabel->
+  "In[709]:=",ExpressionUUID->"832715bd-7e05-4936-a23e-6fa77f21e111"],
+
+Cell["\<\
+If we now visualise all of those samples on our two-dimensional space, we can \
+quite clearly distinguish between zeros and ones:\
+\>", "Text",
+ CellChangeTimes->{{3.822035019005986*^9, 
+  3.822035041884879*^9}},ExpressionUUID->"d246499a-61cf-4714-8a53-\
+a897dd4e5d06"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Values", "[", "projMNIST01", "]"}], ",", 
+   RowBox[{"PlotLegends", "\[Rule]", 
+    RowBox[{"Keys", "[", "projMNIST01", "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.82203473591787*^9, 3.8220348056616077`*^9}, {
+  3.822034992245479*^9, 3.822034993817135*^9}},
+ CellLabel->
+  "In[711]:=",ExpressionUUID->"c4d9dcdc-c888-48bf-9b94-4632e6af97dd"],
+
+Cell["\<\
+That\[CloseCurlyQuote]s all well and good, but it could be that we have just \
+trained our model to understand the images in the training dataset we used. \
+What if we were to throw a new, previously unseen image at it? The MNIST \
+dataset is separated into training and testing datasets for exactly this \
+purpose. Let\[CloseCurlyQuote]s load the test data and see how that fares\
+\>", "Text",
+ CellChangeTimes->{{3.82203506286215*^9, 
+  3.822035160758116*^9}},ExpressionUUID->"50f880f7-6776-417e-bf9c-\
+c014e4eb882e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MNISTtest", "=", 
+   RowBox[{"ExampleData", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<MachineLearning\>\"", ",", "\"\<MNIST\>\""}], "}"}], ",", 
+     "\"\<TestData\>\""}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.822035146374194*^9, 3.822035151412876*^9}},
+ CellLabel->
+  "In[712]:=",ExpressionUUID->"3a54692a-1581-4e93-9a42-73e3928dda94"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MNISTtestbynumber", "=", 
+   RowBox[{"GroupBy", "[", 
+    RowBox[{"MNISTtest", ",", 
+     RowBox[{"Last", "\[Rule]", "First"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.822033207695846*^9, 3.822033301592517*^9}, {
+  3.8220351980963507`*^9, 3.82203519994499*^9}},
+ CellLabel->
+  "In[713]:=",ExpressionUUID->"9fbe041c-9fa6-40b1-b595-5c84bb7a8d6b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"MNISTtest01", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Values", "[", 
+     RowBox[{"MNISTtestbynumber", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ";;", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MNISTtest01", "//", "Length"}]}], "Input",
+ CellChangeTimes->{{3.822033532139124*^9, 3.822033573159412*^9}, {
+  3.822033904596336*^9, 3.8220339395471773`*^9}, {3.822035202993657*^9, 
+  3.822035206668241*^9}},
+ CellLabel->
+  "In[714]:=",ExpressionUUID->"44e51f7e-6e4e-4213-a99b-08c6403342bc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"projMNISTtest01", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"dMNIST01", "[", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"ImageData", "[", "#", "]"}], "]"}], "]"}], "&"}], ",", 
+     RowBox[{"MNISTtestbynumber", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ";;", "2"}], "]"}], "]"}], ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.8220349831977167`*^9, 3.822034986558077*^9}, {
+  3.8220352271072893`*^9, 3.822035231212138*^9}},
+ CellLabel->
+  "In[716]:=",ExpressionUUID->"70c4ed4a-1b89-48c4-b9ed-6d3fc0d4e00a"],
+
+Cell["\<\
+If we now visualise all of those samples on our two-dimensional space, we can \
+quite clearly distinguish between zeros and ones:\
+\>", "Text",
+ CellChangeTimes->{{3.822035019005986*^9, 
+  3.822035041884879*^9}},ExpressionUUID->"d492e42f-3f59-48ff-801c-\
+5b64b8458865"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"Values", "[", "projMNIST01", "]"}], ",", 
+     RowBox[{"Values", "[", "projMNISTtest01", "]"}]}], "]"}], ",", 
+   RowBox[{"PlotLegends", "\[Rule]", 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"Keys", "[", "projMNIST01", "]"}], ",", 
+      RowBox[{"Keys", "[", "projMNISTtest01", "]"}]}], "]"}]}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.82203473591787*^9, 3.8220348056616077`*^9}, {
+  3.822034992245479*^9, 3.822034993817135*^9}, {3.8220352354408617`*^9, 
+  3.8220353060525103`*^9}},
+ CellLabel->
+  "In[720]:=",ExpressionUUID->"08bc32a2-c91a-4670-a5db-df82361d1f33"],
+
+Cell["\<\
+We can also reconstruct what our model thinks a zero and a one look like:\
+\>", "Text",
+ CellChangeTimes->{{3.822036374555936*^9, 
+  3.822036396134006*^9}},ExpressionUUID->"32299fd2-40b3-4170-889c-\
+83b99cb84c4f"],
+
+Cell[BoxData[
+ RowBox[{"Row", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Image", "[", 
+     RowBox[{
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"dMNIST01", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "10"}], ",", "0"}], "}"}], ",", 
+          "\"\<OriginalData\>\""}], "]"}], ",", "28"}], "]"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}], ",", 
+    RowBox[{"Image", "[", 
+     RowBox[{
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"dMNIST01", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"10", ",", "0"}], "}"}], ",", "\"\<OriginalData\>\""}], 
+         "]"}], ",", "28"}], "]"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.8220353775183573`*^9, 3.8220354754600277`*^9}, {
+   3.8220355859500217`*^9, 3.822035592453383*^9}, 3.822035694926078*^9, {
+   3.822035926338431*^9, 3.8220359317409363`*^9}, 3.8220360554867992`*^9},
+ CellLabel->
+  "In[737]:=",ExpressionUUID->"fa8fd670-f979-4f99-b17a-095802b99e62"],
+
+Cell["\<\
+And we can even use it to fill in missing data, as we did in the iris case:\
+\>", "Text",
+ CellChangeTimes->{{3.822036399949534*^9, 
+  3.822036412391017*^9}},ExpressionUUID->"123254fd-08ec-48ce-bddd-\
+63ccf3e9fa10"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vectormissing", "=", 
+   RowBox[{"MNIST01data", "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"vectormissing", "[", 
+    RowBox[{"[", 
+     RowBox[{"309", ";;", "364"}], "]"}], "]"}], "=", 
+   RowBox[{"Missing", "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"imagemissing", " ", "=", " ", 
+   RowBox[{"Image", "[", 
+    RowBox[{
+     RowBox[{"Partition", "[", 
+      RowBox[{
+       RowBox[{"Replace", "[", 
+        RowBox[{"vectormissing", ",", " ", 
+         RowBox[{"_Missing", "\[Rule]", " ", "1"}], ",", 
+         RowBox[{"{", "1", "}"}]}], "]"}], ",", "28"}], "]"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"imageimputed", "=", 
+   RowBox[{"Image", "[", 
+    RowBox[{
+     RowBox[{"Partition", "[", 
+      RowBox[{
+       RowBox[{"dMNIST01", "[", 
+        RowBox[{"vectormissing", ",", " ", "\"\<ImputedVectors\>\"", ",", " ", 
+         RowBox[{"PerformanceGoal", "->", "\"\<Quality\>\""}]}], "]"}], ",", 
+       "28"}], "]"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.822036096887414*^9, 3.822036195234859*^9}, {
+  3.822036241827203*^9, 3.822036242505948*^9}, {3.8220362876537323`*^9, 
+  3.822036315133309*^9}},
+ CellLabel->"In[761]:=",
+ CellID->746582873,ExpressionUUID->"82ff1da9-843e-465c-8b83-da06be02ccda"],
+
+Cell[BoxData[
+ RowBox[{"Row", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Show", "[", 
+     RowBox[{
+      RowBox[{"MNIST01", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}], ",", 
+    "imagemissing", ",", "imageimputed"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.8220362523313932`*^9, 3.8220362742836847`*^9}},
+ CellLabel->
+  "In[765]:=",ExpressionUUID->"e7915beb-6914-41b5-9332-6afc6929feab"]
+}, Open  ]]
+},
+WindowSize->{1420, 645},
+WindowMargins->{{Automatic, -1484}, {Automatic, 146}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, "TryRealOnly" -> False},
+FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"cf76fbb4-ce6f-4864-abff-cd231cb58e58"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 226, 4, 67, "Section",ExpressionUUID->"71f30d7c-0d3d-4783-9b7b-e231f4081234"],
+Cell[809, 28, 464, 9, 35, "Text",ExpressionUUID->"13af3e83-451e-4a4e-88d7-1000ad6fc587"],
+Cell[1276, 39, 1171, 25, 30, "Input",ExpressionUUID->"c26d2979-b491-4d4f-ae69-d5ff3b1612dc"],
+Cell[2450, 66, 213, 4, 30, "Input",ExpressionUUID->"33383fe4-0f7a-4b99-82e6-d6411aeaba82"],
+Cell[2666, 72, 638, 11, 58, "Text",ExpressionUUID->"bc293daf-5d4d-4a94-acf7-b496d1b1e65c"],
+Cell[3307, 85, 393, 8, 35, "Text",ExpressionUUID->"b6b26fe8-754b-4b3b-baf8-0a7a58ef3b15"],
+Cell[3703, 95, 406, 9, 30, "Input",ExpressionUUID->"d01f2047-ccfc-4d32-979a-9f5940748afd"],
+Cell[4112, 106, 269, 6, 30, "Input",ExpressionUUID->"437b6333-1c71-49cb-9848-d84084e12c35"],
+Cell[4384, 114, 284, 6, 30, "Input",ExpressionUUID->"7e6e9579-7c60-4fe0-9791-c448a15f2eb7"],
+Cell[4671, 122, 225, 4, 30, "Input",ExpressionUUID->"39bee789-22b0-40b8-8f8d-0b4eadb84423"],
+Cell[4899, 128, 191, 3, 35, "Text",ExpressionUUID->"a30f84de-ae8b-4c7b-97de-c819284bd632"],
+Cell[5093, 133, 859, 17, 52, "Input",ExpressionUUID->"af74fc54-8b44-4918-be38-6ede77eb598c"],
+Cell[5955, 152, 330, 7, 35, "Text",ExpressionUUID->"11f67241-72b5-4653-a7d1-123a18402950"],
+Cell[6288, 161, 291, 7, 35, "Text",ExpressionUUID->"41482608-8006-4da5-af59-d3259d1e2ef8"],
+Cell[6582, 170, 2105, 55, 104, "Input",ExpressionUUID->"c9bbdc93-e452-4cb9-acba-0f93dd7f6852"],
+Cell[8690, 227, 404, 8, 35, "Text",ExpressionUUID->"7ba9227e-d85d-4804-9cbc-2ad09d70cc6c"],
+Cell[9097, 237, 593, 16, 30, "Input",ExpressionUUID->"e347afe2-3daa-4da4-b452-84ed75088a6a"],
+Cell[9693, 255, 238, 6, 35, "Text",ExpressionUUID->"396910eb-ad24-4c15-a09a-fddeef6de798"],
+Cell[9934, 263, 547, 10, 30, "Input",ExpressionUUID->"3f945c97-df4e-4628-a1eb-d94e7c0fa318"],
+Cell[CellGroupData[{
+Cell[10506, 277, 170, 3, 54, "Subsection",ExpressionUUID->"69fc2dd0-745f-4871-bc9a-569458acaa80"],
+Cell[10679, 282, 193, 3, 35, "Text",ExpressionUUID->"a94eff33-39da-4dcc-9d1f-b82c2dcefac9"],
+Cell[10875, 287, 1521, 32, 30, "Input",ExpressionUUID->"1bda63a2-983a-4b16-a902-742b1f6f14a3"],
+Cell[12399, 321, 222, 4, 30, "Input",ExpressionUUID->"19be27e5-be4b-4772-b195-a6632107832a"],
+Cell[12624, 327, 251, 6, 35, "Text",ExpressionUUID->"08af93f2-c183-4d1f-b1c9-3d5bcd736d65"],
+Cell[12878, 335, 495, 9, 30, "Input",ExpressionUUID->"b888cc86-8542-42bd-ab93-2ada61862e66"],
+Cell[13376, 346, 322, 7, 30, "Input",ExpressionUUID->"56596cd2-1f76-4b86-8307-02b5cd2fef34"],
+Cell[13701, 355, 337, 7, 30, "Input",ExpressionUUID->"6a4c4c45-130f-41e1-9381-2abba3a044d3"],
+Cell[14041, 364, 282, 5, 30, "Input",ExpressionUUID->"bde07c24-481b-4e47-97cb-883f26cb27f3"],
+Cell[14326, 371, 191, 3, 35, "Text",ExpressionUUID->"34a552b3-4f8c-4508-8b2f-8e2c78529bb7"],
+Cell[14520, 376, 815, 17, 52, "Input",ExpressionUUID->"6b805889-0ff8-41e8-8b03-a66693ea9a0f"],
+Cell[15338, 395, 330, 7, 35, "Text",ExpressionUUID->"f9b2a820-8642-4251-849c-81cf17d9fa5e"],
+Cell[15671, 404, 291, 7, 35, "Text",ExpressionUUID->"508072d1-43e3-49ce-9d6c-7ead8b87e770"],
+Cell[15965, 413, 2894, 76, 134, "Input",ExpressionUUID->"2e3fbdc7-8b36-4afc-9c75-3fefbeea6458"],
+Cell[18862, 491, 404, 8, 35, "Text",ExpressionUUID->"8f635ade-7d12-4158-b8aa-ddc9a2cb0829"],
+Cell[19269, 501, 646, 16, 30, "Input",ExpressionUUID->"8506e743-f06b-4467-b9ec-83824dc492b3"],
+Cell[19918, 519, 238, 6, 35, "Text",ExpressionUUID->"66f3a089-4904-4909-90ad-9febc0488d42"],
+Cell[20159, 527, 606, 11, 30, "Input",ExpressionUUID->"7af42ab3-8102-49a3-9d8f-ca86e470d8c6"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20814, 544, 223, 4, 67, "Section",ExpressionUUID->"ca9dccf1-41f7-4cdc-b990-8b7ebf833162"],
+Cell[21040, 550, 462, 8, 35, "Text",ExpressionUUID->"bb70450c-5a46-4797-bf36-7d8933b0ab16"],
+Cell[21505, 560, 392, 10, 30, "Input",ExpressionUUID->"effa7c7c-bfc7-4cd5-bbfc-2f28b425574d"],
+Cell[21900, 572, 338, 7, 35, "Text",ExpressionUUID->"43058145-d45f-4e6b-b311-08fa651cd2f1"],
+Cell[22241, 581, 349, 9, 30, "Input",ExpressionUUID->"357e1539-5cd1-46e4-8aa8-a4cb56b2752c",
+ CellID->2081614806],
+Cell[22593, 592, 196, 3, 35, "Text",ExpressionUUID->"96cdb699-bcd1-411f-9285-b738bba0dff8"],
+Cell[22792, 597, 354, 8, 30, "Input",ExpressionUUID->"48ab6691-cb45-4ba9-9d14-516505d3fb25",
+ CellID->1604525905],
+Cell[23149, 607, 407, 8, 35, "Text",ExpressionUUID->"7b29358f-af96-4a22-8bb7-9cdf1aa87643"],
+Cell[23559, 617, 414, 11, 30, "Input",ExpressionUUID->"1e7dc639-7511-4c44-aeac-d247ae0105f0"],
+Cell[23976, 630, 857, 14, 104, "Text",ExpressionUUID->"21e0cb44-fac9-4a6a-8358-4ff2c73bbf20"],
+Cell[24836, 646, 552, 13, 30, "Input",ExpressionUUID->"2c51563c-d7a4-452b-90cf-0f6b60a802d3"],
+Cell[25391, 661, 429, 8, 58, "Text",ExpressionUUID->"ffa87055-2228-4433-83b7-9d4ea8d50eaf"],
+Cell[25823, 671, 322, 6, 30, "Input",ExpressionUUID->"130735eb-0207-4f96-b5c4-caafc89c5209"],
+Cell[26148, 679, 260, 6, 35, "Text",ExpressionUUID->"5ec87d40-bfd2-4a87-9ad1-4c3b80edc70e"],
+Cell[26411, 687, 123, 2, 30, "Input",ExpressionUUID->"f6b67ef2-ea7e-4d75-b6ff-0faf356f6d9f"],
+Cell[26537, 691, 225, 4, 30, "Input",ExpressionUUID->"d9970778-e905-4027-9484-3a0aaf4ceb97"],
+Cell[26765, 697, 696, 11, 58, "Text",ExpressionUUID->"66290fcf-5470-4dc2-a8a7-f8c298f121e1"],
+Cell[27464, 710, 310, 7, 30, "Input",ExpressionUUID->"bbd89a78-a21f-4c23-a125-bb6ba68c8546"],
+Cell[27777, 719, 193, 3, 35, "Text",ExpressionUUID->"8b968971-c488-4ec3-b76b-5c81f91903db"],
+Cell[27973, 724, 291, 6, 30, "Input",ExpressionUUID->"74e65c4d-bcd3-4a38-bbaf-55e1a62d9859"],
+Cell[28267, 732, 627, 11, 58, "Text",ExpressionUUID->"8a701d98-f6f5-45f7-bfdf-f56a43d7a158"],
+Cell[28897, 745, 299, 6, 30, "Input",ExpressionUUID->"30dd762c-11e9-4625-baa5-4909d159db77"],
+Cell[29199, 753, 268, 6, 35, "Text",ExpressionUUID->"8132d46f-5826-4be9-a2fe-d58bda9bc7fa"],
+Cell[29470, 761, 265, 5, 30, "Input",ExpressionUUID->"87fab038-fb47-4eaa-919c-ff2e2b1025d8"],
+Cell[29738, 768, 303, 8, 30, "Input",ExpressionUUID->"a1ab1433-c779-4081-a362-c73261530ce4"],
+Cell[30044, 778, 223, 4, 35, "Text",ExpressionUUID->"5df37c7b-2870-4e93-91bf-e90f2f33e164"],
+Cell[30270, 784, 2869, 70, 115, "Input",ExpressionUUID->"4e951649-8139-42d4-a8a9-76a2b006ece7"],
+Cell[33142, 856, 289, 6, 35, "Text",ExpressionUUID->"b81abec2-d724-4338-8f18-57aa9ba023b0"],
+Cell[33434, 864, 182, 3, 30, "Input",ExpressionUUID->"e5040bef-3fb1-4356-8a7f-402dd68d052d"],
+Cell[33619, 869, 319, 8, 30, "Input",ExpressionUUID->"483caaa2-7af0-4a5a-9c69-c9150405729d"],
+Cell[33941, 879, 202, 3, 35, "Text",ExpressionUUID->"0df6ed88-c985-47c1-94e5-294a92a2e8e6"],
+Cell[34146, 884, 220, 4, 30, "Input",ExpressionUUID->"b921edfa-57a9-4802-9d11-f4d1ccfc5b5d"],
+Cell[34369, 890, 290, 7, 35, "Text",ExpressionUUID->"b50624bb-f9a5-4e83-acf4-7b784f5d5ff3"],
+Cell[34662, 899, 273, 6, 30, "Input",ExpressionUUID->"11d1296d-5bf5-4913-a79c-9e2daf19c06c"],
+Cell[34938, 907, 262, 6, 35, "Text",ExpressionUUID->"2481a076-d59d-434e-b1c9-f6435968604a"],
+Cell[35203, 915, 364, 7, 30, "Input",ExpressionUUID->"8e40664a-7d4f-464e-ae88-8da43a363810"],
+Cell[35570, 924, 338, 7, 35, "Text",ExpressionUUID->"328c081d-24c0-4a60-aebd-b3890cd63ed1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35945, 936, 168, 3, 67, "Section",ExpressionUUID->"c8917f6b-6a1e-497a-b15a-0427e1e9c97a"],
+Cell[36116, 941, 688, 12, 58, "Text",ExpressionUUID->"3885e468-b429-477d-8207-9041991cc8fa"],
+Cell[36807, 955, 390, 9, 30, "Input",ExpressionUUID->"457eb166-3576-4521-b59f-619f08d98ec2"],
+Cell[37200, 966, 450, 10, 30, "Input",ExpressionUUID->"3e70aa8e-793d-48e1-8296-e387b5510dad"],
+Cell[37653, 978, 539, 12, 30, "Input",ExpressionUUID->"1b53817b-63d7-4a67-8aa0-d91a0a1e21ff"],
+Cell[38195, 992, 214, 4, 30, "Input",ExpressionUUID->"e1d3349a-19dd-4d55-b6b1-b248e43353b9"],
+Cell[38412, 998, 369, 7, 58, "Text",ExpressionUUID->"77564320-aac7-4fe5-8f92-d440acf89c39"],
+Cell[38784, 1007, 242, 5, 30, "Input",ExpressionUUID->"09e153cd-90d4-4cf2-a138-4ae69390dee1"],
+Cell[39029, 1014, 192, 3, 35, "Text",ExpressionUUID->"3214cc16-f618-4609-a695-435f0628a557"],
+Cell[39224, 1019, 331, 8, 30, "Input",ExpressionUUID->"bc0a513d-f314-4c2a-97b5-2790f5d72ad9"],
+Cell[39558, 1029, 183, 3, 35, "Text",ExpressionUUID->"bc99a32a-5644-41e6-adee-c0ab8a8a8d9e"],
+Cell[39744, 1034, 509, 13, 52, "Input",ExpressionUUID->"c28de8a6-f881-48e4-80a7-9bbf4c8fa948"],
+Cell[40256, 1049, 200, 4, 30, "Input",ExpressionUUID->"58f9b118-1886-4197-b1a2-0ce86cb5df87"],
+Cell[40459, 1055, 563, 10, 58, "Text",ExpressionUUID->"9c931891-2f40-4d04-8347-bac4654bcd5f"],
+Cell[41025, 1067, 858, 24, 30, "Input",ExpressionUUID->"e301be12-6beb-4b4e-a39d-2bed921734c0"],
+Cell[41886, 1093, 527, 9, 35, "Text",ExpressionUUID->"b1e1e1cd-8c4e-45c3-8230-00b8fb25b615"],
+Cell[42416, 1104, 378, 9, 52, "Input",ExpressionUUID->"44e0d6d1-44db-41d4-81c4-de93e045d627"],
+Cell[42797, 1115, 267, 6, 35, "Text",ExpressionUUID->"4ae13b15-ade7-4856-a14b-119b9900d6cf"],
+Cell[43067, 1123, 549, 12, 30, "Input",ExpressionUUID->"c267d248-3bd2-49fa-9d41-ea1498783cb3"],
+Cell[43619, 1137, 298, 7, 35, "Text",ExpressionUUID->"7b6d6713-05c2-44c5-8059-f72b253dfa8f"],
+Cell[43920, 1146, 560, 15, 30, "Input",ExpressionUUID->"832715bd-7e05-4936-a23e-6fa77f21e111"],
+Cell[44483, 1163, 279, 6, 35, "Text",ExpressionUUID->"d246499a-61cf-4714-8a53-a897dd4e5d06"],
+Cell[44765, 1171, 410, 9, 30, "Input",ExpressionUUID->"c4d9dcdc-c888-48bf-9b94-4632e6af97dd"],
+Cell[45178, 1182, 529, 9, 58, "Text",ExpressionUUID->"50f880f7-6776-417e-bf9c-c014e4eb882e"],
+Cell[45710, 1193, 396, 10, 30, "Input",ExpressionUUID->"3a54692a-1581-4e93-9a42-73e3928dda94"],
+Cell[46109, 1205, 389, 9, 30, "Input",ExpressionUUID->"9fbe041c-9fa6-40b1-b595-5c84bb7a8d6b"],
+Cell[46501, 1216, 570, 14, 52, "Input",ExpressionUUID->"44e51f7e-6e4e-4213-a99b-08c6403342bc"],
+Cell[47074, 1232, 619, 16, 30, "Input",ExpressionUUID->"70c4ed4a-1b89-48c4-b9ed-6d3fc0d4e00a"],
+Cell[47696, 1250, 279, 6, 35, "Text",ExpressionUUID->"d492e42f-3f59-48ff-801c-5b64b8458865"],
+Cell[47978, 1258, 734, 17, 30, "Input",ExpressionUUID->"08bc32a2-c91a-4670-a5db-df82361d1f33"],
+Cell[48715, 1277, 223, 5, 35, "Text",ExpressionUUID->"32299fd2-40b3-4170-889c-83b99cb84c4f"],
+Cell[48941, 1284, 1116, 30, 30, "Input",ExpressionUUID->"fa8fd670-f979-4f99-b17a-095802b99e62"],
+Cell[50060, 1316, 225, 5, 35, "Text",ExpressionUUID->"123254fd-08ec-48ce-bddd-63ccf3e9fa10"],
+Cell[50288, 1323, 1479, 38, 94, "Input",ExpressionUUID->"82ff1da9-843e-465c-8b83-da06be02ccda",
+ CellID->746582873],
+Cell[51770, 1363, 464, 12, 30, "Input",ExpressionUUID->"e7915beb-6914-41b5-9332-6afc6929feab"]
+}, Open  ]]
+}
+]
+*)
+
