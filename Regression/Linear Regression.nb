@@ -1,0 +1,916 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     36203,        908]
+NotebookOptionsPosition[     31019,        821]
+NotebookOutlinePosition[     31456,        838]
+CellTagsIndexPosition[     31413,        835]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Regression", "Title",
+ CellChangeTimes->{{3.8225678819582567`*^9, 3.82256789157771*^9}, 
+   3.8225680219112043`*^9},ExpressionUUID->"a4305c4f-c3d1-401c-a457-\
+a8f332cc52ee"],
+
+Cell[CellGroupData[{
+
+Cell["Linear regression", "Section",
+ CellChangeTimes->{{3.8212980555841312`*^9, 3.8212980628876333`*^9}, {
+  3.822568026364859*^9, 
+  3.822568049977309*^9}},ExpressionUUID->"855011b2-effd-4f4c-8a6c-\
+ff4d2d7ea5df"],
+
+Cell[CellGroupData[{
+
+Cell["Model fitting", "Subsection",
+ CellChangeTimes->{{3.6629300756494093`*^9, 3.6629301174604807`*^9}, {
+   3.662930152247402*^9, 3.662930178309421*^9}, {3.662930798413241*^9, 
+   3.662930801365119*^9}, {3.6629312698640842`*^9, 3.662931280672957*^9}, 
+   3.6629314656798353`*^9, {3.6629329013131437`*^9, 3.6629329059432497`*^9}, {
+   3.6629340858191547`*^9, 3.662934087858817*^9}, {3.662934180889139*^9, 
+   3.6629341872553883`*^9}, {3.662934522656699*^9, 3.662934524742794*^9}, {
+   3.662935184855069*^9, 3.6629351885575123`*^9}, {3.82015158002421*^9, 
+   3.820151581416563*^9}, {3.822570199288591*^9, 
+   3.822570203268334*^9}},ExpressionUUID->"9e1ea565-b32b-4676-a286-\
+125f6cb6a65c"],
+
+Cell["\<\
+Imagine we have some data taken from an experiment and we would like to find \
+a model that fits the data well.\
+\>", "Text",
+ CellChangeTimes->{{3.820151593505913*^9, 3.8201516259326057`*^9}, {
+  3.822570888079674*^9, 
+  3.822570888897443*^9}},ExpressionUUID->"c8c7110b-a8ff-48c7-88e8-\
+683f59e6b4f0"],
+
+Cell[TextData[{
+ "Here is some data I took earlier. Can you figure out a good model for this \
+data? Once you have a good idea for a model, try using Mathematica\
+\[CloseCurlyQuote]s ",
+ ButtonBox["FindFit",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/FindFit"],
+ " function to test it with the data. How would you verify that your model is \
+a good fit for the data?"
+}], "Text",
+ CellChangeTimes->{{3.822570738200376*^9, 3.822570800094943*^9}, {
+  3.8225708393555403`*^9, 3.822570872993877*^9}, {3.822570980110784*^9, 
+  3.822570980392928*^9}},ExpressionUUID->"63cf96ff-c09b-435e-98f1-\
+7a4f802d82d6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data", "=", 
+   InterpretationBox[
+    DynamicModuleBox[{Typeset`open = False}, 
+     TemplateBox[{"List", 
+       StyleBox[
+       "\"Mystery data\"", "IconizedCustomName", StripOnInput -> False], 
+       GridBox[{{
+          RowBox[{
+            TagBox["\"Head: \"", "IconizedLabel"], "\[InvisibleSpace]", 
+            TagBox["List", "IconizedItem"]}]}, {
+          RowBox[{
+            TagBox["\"Dimensions: \"", "IconizedLabel"], "\[InvisibleSpace]", 
+            
+            TagBox[
+             RowBox[{"{", 
+               RowBox[{"101", ",", "2"}], "}"}], "IconizedItem"]}]}, {
+          RowBox[{
+            TagBox["\"Byte count: \"", "IconizedLabel"], "\[InvisibleSpace]", 
+            
+            TagBox["53872", "IconizedItem"]}]}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+        "Column", 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+       Dynamic[Typeset`open]},
+      "IconizedObject"]],
+    {{0, 0}, {
+     Rational[1, 5] Pi, (Rational[-99, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[2, 5] Pi, (Rational[-49, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[3, 5] Pi, (Rational[-291, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[4, 5] Pi, (Rational[-96, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Pi, 19 Pi^2}, {
+     Rational[6, 5] Pi, (Rational[-141, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[7, 5] Pi, (Rational[-651, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[8, 5] Pi, (Rational[-184, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[9, 5] Pi, (Rational[-819, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     2 Pi, (-36) Pi^2}, {
+     Rational[11, 5] Pi, (Rational[-979, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[12, 5] Pi, (Rational[-264, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[13, 5] Pi, (Rational[-1131, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[14, 5] 
+      Pi, (Rational[-301, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     3 Pi, 51 Pi^2}, {
+     Rational[16, 5] Pi, (Rational[-336, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[17, 5] Pi, (Rational[-1411, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[18, 5] 
+      Pi, (Rational[-369, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[19, 5] Pi, (Rational[-1539, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {4 Pi, (-64) Pi^2}, {
+     Rational[21, 5] Pi, (Rational[-1659, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[22, 5] 
+      Pi, (Rational[-429, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[23, 5] Pi, (Rational[-1771, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[24, 5] 
+      Pi, (Rational[-456, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     5 Pi, 75 Pi^2}, {
+     Rational[26, 5] Pi, (Rational[-481, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[27, 5] Pi, (Rational[-1971, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[28, 5] 
+      Pi, (Rational[-504, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[29, 5] Pi, (Rational[-2059, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {6 Pi, (-84) Pi^2}, {
+     Rational[31, 5] Pi, (Rational[-2139, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[32, 5] 
+      Pi, (Rational[-544, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[33, 5] Pi, (Rational[-2211, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[34, 5] 
+      Pi, (Rational[-561, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     7 Pi, 91 Pi^2}, {
+     Rational[36, 5] Pi, (Rational[-576, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[37, 5] Pi, (Rational[-2331, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[38, 5] 
+      Pi, (Rational[-589, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[39, 5] Pi, (Rational[-2379, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {8 Pi, (-96) Pi^2}, {
+     Rational[41, 5] Pi, (Rational[-2419, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[42, 5] 
+      Pi, (Rational[-609, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[43, 5] Pi, (Rational[-2451, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[44, 5] 
+      Pi, (Rational[-616, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     9 Pi, 99 Pi^2}, {
+     Rational[46, 5] Pi, (Rational[-621, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[47, 5] Pi, (Rational[-2491, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[48, 5] 
+      Pi, (Rational[-624, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[49, 5] Pi, (Rational[-2499, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {10 Pi, (-100) Pi^2}, {
+     Rational[51, 5] Pi, (Rational[-2499, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[52, 5] 
+      Pi, (Rational[-624, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[53, 5] Pi, (Rational[-2491, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[54, 5] 
+      Pi, (Rational[-621, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     11 Pi, 99 Pi^2}, {
+     Rational[56, 5] Pi, (Rational[-616, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[57, 5] Pi, (Rational[-2451, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[58, 5] 
+      Pi, (Rational[-609, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[59, 5] Pi, (Rational[-2419, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {12 Pi, (-96) Pi^2}, {
+     Rational[61, 5] Pi, (Rational[-2379, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[62, 5] 
+      Pi, (Rational[-589, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[63, 5] Pi, (Rational[-2331, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[64, 5] 
+      Pi, (Rational[-576, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     13 Pi, 91 Pi^2}, {
+     Rational[66, 5] Pi, (Rational[-561, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[67, 5] Pi, (Rational[-2211, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[68, 5] 
+      Pi, (Rational[-544, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[69, 5] Pi, (Rational[-2139, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {14 Pi, (-84) Pi^2}, {
+     Rational[71, 5] Pi, (Rational[-2059, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[72, 5] 
+      Pi, (Rational[-504, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[73, 5] Pi, (Rational[-1971, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[74, 5] 
+      Pi, (Rational[-481, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     15 Pi, 75 Pi^2}, {
+     Rational[76, 5] Pi, (Rational[-456, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[77, 5] Pi, (Rational[-1771, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[78, 5] 
+      Pi, (Rational[-429, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[79, 5] Pi, (Rational[-1659, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {16 Pi, (-64) Pi^2}, {
+     Rational[81, 5] Pi, (Rational[-1539, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[82, 5] 
+      Pi, (Rational[-369, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[83, 5] Pi, (Rational[-1411, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[84, 5] 
+      Pi, (Rational[-336, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     17 Pi, 51 Pi^2}, {
+     Rational[86, 5] Pi, (Rational[-301, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[87, 5] Pi, (Rational[-1131, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[88, 5] 
+      Pi, (Rational[-264, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[89, 5] Pi, (Rational[-979, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     18 Pi, (-36) Pi^2}, {
+     Rational[91, 5] Pi, (Rational[-819, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[92, 5] Pi, (Rational[-184, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[93, 5] Pi, (Rational[-651, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[94, 5] Pi, (Rational[-141, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     19 Pi, 19 Pi^2}, {
+     Rational[96, 5] Pi, (Rational[-96, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[97, 5] Pi, (Rational[-291, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[98, 5] Pi, (Rational[-49, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[99, 5] Pi, (Rational[-99, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     20 Pi, 0}},
+    SelectWithContents->True,
+    Selectable->False]}], ";"}]], "Input",
+ CellChangeTimes->{{3.82257070083882*^9, 3.822570702814842*^9}},
+ CellLabel->
+  "In[189]:=",ExpressionUUID->"d8326d55-2984-4375-a087-2288d5d31151"],
+
+Cell[CellGroupData[{
+
+Cell["Analysis", "Subsubsection",
+ CellChangeTimes->{{3.822585152502647*^9, 
+  3.8225851544780416`*^9}},ExpressionUUID->"3fcde024-09d1-4a32-9647-\
+6d0fdf0d1648"],
+
+Cell["Here is how I created that mystery data:", "Text",
+ CellChangeTimes->{{3.822570895435966*^9, 3.8225709091645823`*^9}, {
+  3.8225709682166653`*^9, 
+  3.822570972137547*^9}},ExpressionUUID->"9ec25fcd-950f-4b13-bef4-\
+11ce9ed5ea7e"],
+
+Cell["\<\
+The first thing we should do is try to plot the data to see if we can \
+recognise anything\
+\>", "Text",
+ CellChangeTimes->{{3.822571032956109*^9, 
+  3.822571046196196*^9}},ExpressionUUID->"6f1e0977-e988-40bb-a39e-\
+d4a6a43a53a1"],
+
+Cell[TextData[{
+ "If we have a good idea for a model that might fit the data, then we can use \
+FindFit to look for the parameters that best fit the data. This looks like \
+the plot of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"cos", "(", "x", ")"}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "2bde85e3-9476-476a-aa76-76ee37a96a2a"],
+ " modulated by a quadratic so let\[CloseCurlyQuote]s try to fit a linear \
+model of that form to the data:"
+}], "Text",
+ CellChangeTimes->{{3.820151629779784*^9, 3.8201516682324123`*^9}, {
+  3.82257107286049*^9, 
+  3.822571146377035*^9}},ExpressionUUID->"57dde213-1794-4dc7-8589-\
+b4cc835b4eb9"],
+
+Cell["Now we plot the model against the data", "Text",
+ CellChangeTimes->{{3.820151699011963*^9, 3.820151714753317*^9}, {
+  3.822568203695649*^9, 
+  3.822568203868881*^9}},ExpressionUUID->"82ff26bd-ab12-42a4-94f6-\
+bb165d937e64"],
+
+Cell["\<\
+Now that we have seen a simple example, let\[CloseCurlyQuote]s apply what we \
+have learned in the lectures to see if we can reproduce this and in the \
+process understand what Mathematica has done to find a good fit to the data.\
+\>", "Text",
+ CellChangeTimes->{{3.822568213833042*^9, 3.82256825191229*^9}, {
+  3.822571166392281*^9, 
+  3.822571181202653*^9}},ExpressionUUID->"487c1937-74ef-44bf-a2ab-\
+effe5a506a0e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Linear Regression for a linear function", "Subsection",
+ CellChangeTimes->{{3.82134327414294*^9, 3.821343276043531*^9}, {
+  3.8225685912056923`*^9, 
+  3.822568595307932*^9}},ExpressionUUID->"79c7919a-4881-428a-a2a9-\
+a8b52c6fdc97"],
+
+Cell[TextData[{
+ "We will start with a simple problem: find the line that best fits some data \
+by determining the best fit parameters ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"\[Alpha]", ",", " ", "\[Beta]"}], ")"}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "ca6fb6c0-4bbc-4d46-9a92-d9ab26b8e197"],
+ " in our model ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"f", "(", "x", ")"}], "=", 
+    RowBox[{"\[Alpha]", "+", 
+     RowBox[{"\[Beta]", " ", "x"}]}]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "149c4cad-8555-4213-8dc3-8a8655b029a5"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.8225713040889273`*^9, 3.8225713998779783`*^9}, {
+  3.8225856417730713`*^9, 
+  3.822585713021261*^9}},ExpressionUUID->"a5a02d49-c636-4c43-8e31-\
+bbb19b3d978a"],
+
+Cell["\<\
+The first thing we need is to collect some data samples. Normally, this could \
+come from some experimental measurements, but for this example we will just \
+generate some data ourselves.  In the real world we will never have perfectly \
+clean measurements so we will expect some random noise in our samples. To \
+simulate this, we will add some random noise when we\[CloseCurlyQuote]re \
+generating the data we want to fit.\
+\>", "Text",
+ CellChangeTimes->{{3.8225713829258947`*^9, 3.8225714416822777`*^9}, {
+  3.822585215921517*^9, 
+  3.822585234097568*^9}},ExpressionUUID->"76a079be-070f-4dca-8114-\
+7e17bb7c8605"],
+
+Cell[TextData[{
+ "Now the first column are the values of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "67a387a0-9cc0-4cea-99c8-0cdfa4263767"],
+ " and the second column is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", 
+    SubscriptBox["x", "i"], ")"}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "43c66060-bcd3-439d-8e14-ca8172db74e3"],
+ ". Let\[CloseCurlyQuote]s extract those two columns from the matrix."
+}], "Text",
+ CellChangeTimes->{{3.8225852618018293`*^9, 3.822585327881577*^9}, {
+  3.8225854861295233`*^9, 3.8225854979661627`*^9}, {3.822585750267186*^9, 
+  3.822585758407312*^9}},ExpressionUUID->"b1df831c-747f-4e25-9dda-\
+8b54d97a7c18"],
+
+Cell[TextData[{
+ "The next thing we need to do is build up the matrix A representing our \
+model evaluated for each value of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "4c8e07e9-45e7-48bb-b777-441947dee26a"]
+}], "Text",
+ CellChangeTimes->{{3.822585408581045*^9, 3.822585436026154*^9}, {
+  3.822585768720145*^9, 
+  3.8225857703018513`*^9}},ExpressionUUID->"da747775-bf1c-47c6-ad5c-\
+1b6a1d42e777"],
+
+Cell[TextData[{
+ "Our model is then ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"A", 
+     TagBox[
+      RowBox[{"(", "\[NoBreak]", 
+       TagBox[GridBox[{
+          {"\[Alpha]"},
+          {"\[Beta]"}
+         },
+         GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+         GridBoxSpacings->{"Columns" -> {
+             Offset[0.27999999999999997`], {
+              Offset[0.5599999999999999]}, 
+             Offset[0.27999999999999997`]}, "Rows" -> {
+             Offset[0.2], {
+              Offset[0.4]}, 
+             Offset[0.2]}}],
+        Column], "\[NoBreak]", ")"}],
+      Function[BoxForm`e$, 
+       MatrixForm[BoxForm`e$]]]}], "=", 
+    RowBox[{"f", "(", 
+     SubscriptBox["x", "i"], ")"}]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "3717de18-5994-4546-a4cd-e3b20cb4513c"],
+ ". The matrix A is an example where we have many rows but only two columns, \
+so this is an ",
+ StyleBox["over-constrained",
+  FontWeight->"Bold"],
+ " problem. As such we won\[CloseCurlyQuote]t be able to find a perfect \
+solution (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", 
+    SubscriptBox["x", "i"], ")"}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "f0e621b5-30d9-4c13-9147-3f0c73cfd627"],
+ " is not in the column space of A!), so we will look for a solutions that \
+minimises ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"||", 
+     RowBox[{"A", 
+      TagBox[
+       RowBox[{"(", "\[NoBreak]", 
+        TagBox[GridBox[{
+           {"\[Alpha]"},
+           {"\[Beta]"}
+          },
+          GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+          
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.5599999999999999]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}}],
+         Column], "\[NoBreak]", ")"}],
+       Function[BoxForm`e$, 
+        MatrixForm[BoxForm`e$]]]}]}], "=", 
+    RowBox[{
+     RowBox[{"f", "(", 
+      SubscriptBox["x", "i"], ")"}], "||"}]}], TraditionalForm]],
+  ExpressionUUID->"d3f40769-84d6-4c86-a2e1-d17d9c114ca5"],
+ ". We saw how to do this in our linear algebra examples, where we had three \
+ways to find the best fit solution:"
+}], "Text",
+ CellChangeTimes->{{3.8211881537497272`*^9, 3.821188159829069*^9}, {
+   3.822568112921253*^9, 3.8225681317175913`*^9}, {3.822571453315569*^9, 
+   3.822571468051446*^9}, {3.822585789418632*^9, 3.822585793671241*^9}, {
+   3.822585914111702*^9, 3.822585949120154*^9}, {3.822585985358556*^9, 
+   3.822585996047901*^9}, 3.8225869601059017`*^9, {3.822587034622078*^9, 
+   3.822587191882251*^9}},ExpressionUUID->"d898eb7f-6472-4e15-b527-\
+217ed67630b7"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Method 1: Directly minimise ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"||", 
+     RowBox[{"A", 
+      TagBox[
+       RowBox[{"(", "\[NoBreak]", 
+        TagBox[GridBox[{
+           {"\[Alpha]"},
+           {"\[Beta]"}
+          },
+          GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+          
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.5599999999999999]}, 
+              Offset[0.27999999999999997`]}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.4]}, 
+              Offset[0.2]}}],
+         Column], "\[NoBreak]", ")"}],
+       Function[BoxForm`e$, 
+        MatrixForm[BoxForm`e$]]]}]}], "=", 
+    RowBox[{
+     RowBox[{"f", "(", 
+      SubscriptBox["x", "i"], ")"}], "||"}]}], TraditionalForm]],
+  ExpressionUUID->"bd35a385-7a78-4622-ae90-fc23faf8d4b4"]
+}], "Subsubsection",
+ CellChangeTimes->{{3.822587214859889*^9, 3.82258723729637*^9}, {
+  3.822588531561314*^9, 
+  3.8225885340705442`*^9}},ExpressionUUID->"b5a120ec-cccc-4363-aaaf-\
+50e46849ff34"],
+
+Cell["\<\
+We can numerically search for the minimum over the parameters \[Alpha] and \
+\[Beta]. This is an example of an unconstrained convex optimisation problem\
+\>", "Text",
+ CellChangeTimes->{{3.8225872637470427`*^9, 3.822587310437245*^9}, {
+  3.822588404277261*^9, 
+  3.822588419223712*^9}},ExpressionUUID->"53a91ac4-6adc-4bf4-8e5a-\
+a08d2d0e525b"],
+
+Cell["We now check visually that we have indeed found the minimum:", "Text",
+ CellChangeTimes->{{3.822585547666477*^9, 3.822585549298252*^9}, {
+  3.8225884303819857`*^9, 
+  3.822588444458708*^9}},ExpressionUUID->"3d02e62f-26cd-40f4-950f-\
+85a9f6023c71"],
+
+Cell[TextData[{
+ "This is equivalent to solving ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["A", "T"], "A", " ", 
+     OverscriptBox["x", "^"]}], "=", 
+    RowBox[{
+     SuperscriptBox["A", "T"], 
+     RowBox[{"f", "(", 
+      SubscriptBox["x", "i"], ")"}]}]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "139ae6a3-3f8f-47cc-807c-c8bb6a36e18c"],
+ ", i.e. using using ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["A", "T"], TraditionalForm]],ExpressionUUID->
+  "d20f1a06-2ea2-4085-9482-aee6c3399abe"],
+ "to project onto the column space of A . Note that ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["A", "T"], "A"}], ")"}], 
+    RowBox[{"-", "1"}]], TraditionalForm]],ExpressionUUID->
+  "ab90bb78-0f5d-4d77-9514-0b65fca32dc7"],
+ " exists when A has independent columns [N(A) = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"N", "(", 
+    RowBox[{
+     SuperscriptBox["A", "T"], "A"}], ")"}], TraditionalForm]],ExpressionUUID->
+  "3353025d-bbe1-4c7a-89eb-bf66e52c42f8"],
+ "]."
+}], "Text",
+ CellChangeTimes->{{3.822588475434029*^9, 3.8225885162689657`*^9}, {
+  3.822588842146174*^9, 
+  3.822588936476303*^9}},ExpressionUUID->"e64985fb-d617-40b5-8a0a-\
+1a9f24e1e984"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Method 2: QR", "Subsubsection",
+ CellChangeTimes->{{3.822588731384911*^9, 
+  3.822588734012477*^9}},ExpressionUUID->"b3a69c86-b440-488d-acfd-\
+da813965d537"],
+
+Cell[TextData[{
+ "Recall that we saw that we could solve ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["A", "T"], "A", " ", 
+     OverscriptBox["x", "^"]}], "=", 
+    RowBox[{
+     SuperscriptBox["A", "T"], 
+     RowBox[{"f", "(", 
+      SubscriptBox["x", "i"], ")"}]}]}], TraditionalForm]],ExpressionUUID->
+  "2397a100-806c-48a5-95ee-6566ee233a1b"],
+ " efficiently if we had the QR decomposition of A. We have ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["A", "T"], "A"}], "=", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"Q", " ", "R"}], ")"}], "T"], 
+      RowBox[{"(", "QR", ")"}]}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       SuperscriptBox["R", "T"], 
+       SuperscriptBox["Q", "T"], "Q", " ", "R"}], "=", 
+      RowBox[{
+       SuperscriptBox["R", "T"], "R"}]}]}]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "e9b58f8c-5d8d-43ce-a0e6-13c73c7e2628"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["A", "T"], 
+     RowBox[{"f", "(", 
+      SubscriptBox["x", "i"], ")"}]}], "=", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"Q", " ", "R"}], ")"}], "T"], 
+      RowBox[{"f", "(", 
+       SubscriptBox["x", "i"], ")"}]}], "=", 
+     RowBox[{
+      SuperscriptBox["R", "T"], 
+      SuperscriptBox["Q", "T"], 
+      RowBox[{"f", "(", 
+       SubscriptBox["x", "i"], ")"}]}]}]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "1a2a78cb-5dd8-4617-ad81-63be39e1b3aa"],
+ " so our problem reduces to ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"R", 
+     OverscriptBox["x", "^"]}], "=", 
+    RowBox[{
+     SuperscriptBox["Q", "T"], "b"}]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "42b925bc-567f-4be2-9d23-735aceb3d684"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.822588962290124*^9, 
+  3.822589210371364*^9}},ExpressionUUID->"acd17b2b-82a7-4ca4-95ac-\
+a63e22e6c4e7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Method 3: Pseudoinverse", "Subsubsection",
+ CellChangeTimes->{{3.822588749048582*^9, 
+  3.822588753882749*^9}},ExpressionUUID->"6b879a35-9c3b-476f-9155-\
+9021baae854d"],
+
+Cell["\<\
+Our third approach is to use the pseudoinverse to solve the problem directly.\
+\
+\>", "Text",
+ CellChangeTimes->{{3.8225893229953327`*^9, 
+  3.822589345868616*^9}},ExpressionUUID->"0ebaa31d-54ec-42c6-89f1-\
+136becb82ecd"],
+
+Cell["We could also this using the singular value decomposition", "Text",
+ CellChangeTimes->{{3.822589356196519*^9, 
+  3.822589371954811*^9}},ExpressionUUID->"78a124ef-4c65-41ac-ae45-\
+c1ed5714053c"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Overfitting and under-fitting", "Subsection",
+ CellChangeTimes->{{3.8225682705564013`*^9, 3.822568280964117*^9}, {
+  3.822571579951522*^9, 
+  3.822571584549178*^9}},ExpressionUUID->"2970e3d7-7a1f-42c8-8ce6-\
+71f29c104e7d"],
+
+Cell["\<\
+We might think that we could obtain a better fit by introducing more \
+parameters into our model. Similarly we might think that we could save some \
+time by using fewer parameters. While this might be true in some cases, in \
+many cases  it leads to problems of overfitting and under-fitting, \
+respectively. Let\[CloseCurlyQuote]s use Mathematica\[CloseCurlyQuote]s Fit \
+to fit three models to the data, one with too few parameters, one with two \
+many, and one with the correct number\
+\>", "Text",
+ CellChangeTimes->{{3.82257159762001*^9, 3.822571615384783*^9}, {
+  3.822589424009202*^9, 
+  3.8225895263138*^9}},ExpressionUUID->"1cfd99a0-c589-47a7-8bca-06b1d74721c7"],
+
+Cell["\<\
+The green curve representing a 10th order polynomial certainly fits the blue \
+points better (it exactly passes through them all - interpolation!) but it is \
+clearly a worse fit than the orange. We have overfit our model. We could \
+check for this by adding another point (which was not used in the training) \
+and checking if it fits the model.\
+\>", "Text",
+ CellChangeTimes->{{3.822571662802144*^9, 3.822571703661213*^9}, {
+  3.8225896233111763`*^9, 
+  3.822589731997772*^9}},ExpressionUUID->"889f3b84-bbde-44f0-8abd-\
+c24ccfba82e1"],
+
+Cell["\<\
+Similarly, the blue line (0th order polynomial) is an underfit and is not a \
+good model for the data.\
+\>", "Text",
+ CellChangeTimes->{{3.822589689894876*^9, 3.822589692343224*^9}, {
+  3.822589737383706*^9, 
+  3.822589775713043*^9}},ExpressionUUID->"c0880606-215c-447f-9d90-\
+157b69d72bb9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Linear Regression for a nonlinear function (but still linear in parameters)\
+\>", "Subsection",
+ CellChangeTimes->{{3.8225686017147923`*^9, 
+  3.822568621523211*^9}},ExpressionUUID->"90c529a4-5521-498c-9c73-\
+6a64002a1c44"],
+
+Cell[TextData[{
+ "There is nothing in linear regression that assumes our model must be a \
+liner function of the ",
+ StyleBox["variables",
+  FontWeight->"Bold"],
+ ". Let\[CloseCurlyQuote]s try it with a nonlinear function"
+}], "Text",
+ CellChangeTimes->{{3.82258978167929*^9, 3.82258978510462*^9}, {
+  3.822589819684963*^9, 
+  3.8225898583038073`*^9}},ExpressionUUID->"b62b1b71-9c51-4f82-b9d2-\
+f5f115cb0ef7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Linear Regression in multiple dimensions", "Subsection",
+ CellChangeTimes->{{3.8225686017147923`*^9, 
+  3.8225686433839083`*^9}},ExpressionUUID->"bae440e7-eac6-40bc-8683-\
+2b157c5146ba"],
+
+Cell["\<\
+It is straightforward to generalise to data in multiple dimensions:\
+\>", "Text",
+ CellChangeTimes->{{3.822589951644835*^9, 
+  3.8225899643445797`*^9}},ExpressionUUID->"2b821004-930f-47c1-a9bc-\
+e0362ee42db2"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Nonlinear regression", "Section",
+ CellChangeTimes->{{3.8225702197129107`*^9, 
+  3.822570225698262*^9}},ExpressionUUID->"61354bb9-a0da-4c72-9de9-\
+bb9d03cc7d70"],
+
+Cell["\<\
+We haven\[CloseCurlyQuote]t covered it in the lectures, but we can also fit a \
+non-linear model, where we have a non-linear function of the parameters. To \
+start, let\[CloseCurlyQuote]s make up some data to use:\
+\>", "Text",
+ CellChangeTimes->{{3.822590380658209*^9, 
+  3.822590421945737*^9}},ExpressionUUID->"80596a33-288f-4293-975d-\
+56e95d708a2c"],
+
+Cell["We can fit a nonlinear model to this data", "Text",
+ CellChangeTimes->{{3.8225904621127253`*^9, 
+  3.822590469494357*^9}},ExpressionUUID->"e8f83470-48e8-4d23-9548-\
+2f9394925bda"],
+
+Cell["Now we plot the model against the data to check it does fit", "Text",
+ CellChangeTimes->{{3.820151699011963*^9, 3.820151714753317*^9}, {
+  3.822568203695649*^9, 3.822568203868881*^9}, {3.822590473547371*^9, 
+  3.82259047671301*^9}},ExpressionUUID->"69f2904c-3028-4ed5-b30b-\
+2098217f41de"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Logistic regression", "Section",
+ CellChangeTimes->{{3.822568728819252*^9, 
+  3.8225687315689507`*^9}},ExpressionUUID->"13e1676f-6ac7-475b-a6be-\
+454999329565"],
+
+Cell["\<\
+Finally, let\[CloseCurlyQuote]s look at an example of Logistic Regression. We \
+will return to the MNIST Digits dataset we studied using Principal Component \
+Analysis.\
+\>", "Text",
+ CellChangeTimes->{{3.82259055396248*^9, 
+  3.8225906027475758`*^9}},ExpressionUUID->"00d4f850-bc20-4a02-ad81-\
+add7f188ea1a"],
+
+Cell["\<\
+To save time, we will train the model using a subset of the data.\
+\>", "Text",
+ CellChangeTimes->{{3.8225907504038553`*^9, 
+  3.822590774432714*^9}},ExpressionUUID->"23042e1c-3664-4263-8b68-\
+91be2dfca1dd"],
+
+Cell[TextData[{
+ "We could use ",
+ ButtonBox["LogitModelFit",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/LogitModelFit"],
+ " to fit a model and then used that to build a function that takes in an \
+image and returns a number, but rather than worrying about the messy details \
+we can use Classify with the LogisticRegression method specified. This takes \
+care of converting the image to a matrix and all the other messy details."
+}], "Text",
+ CellChangeTimes->{{3.8225907842571793`*^9, 3.82259091804918*^9}, {
+  3.822590975702598*^9, 
+  3.822590994870723*^9}},ExpressionUUID->"b9a9abf1-2ac1-4278-889c-\
+7c257272998e"],
+
+Cell["\<\
+We can now treat this as a function that takes in an image and returns a \
+number. Let\[CloseCurlyQuote]s look at some information about the function:\
+\>", "Text",
+ CellChangeTimes->{{3.8225910006950502`*^9, 
+  3.8225910413819838`*^9}},ExpressionUUID->"ed301760-c6f5-4eb9-b268-\
+22d20f2860d6"],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s see how well it performs by testing it on a random \
+sample of the test data\
+\>", "Text",
+ CellChangeTimes->{{3.822591053083922*^9, 
+  3.8225910697086077`*^9}},ExpressionUUID->"14e67a9a-389d-4414-880b-\
+1a81b3b42311"],
+
+Cell["\<\
+It\[CloseCurlyQuote]s right about 2/3 of the time. We could improve this by \
+going back to the training step and using more training samples:\
+\>", "Text",
+ CellChangeTimes->{{3.82259110804383*^9, 
+  3.822591138974526*^9}},ExpressionUUID->"f9f18cef-b1e9-459d-921e-\
+07a640711df7"],
+
+Cell["Now this is close to 90% accurate", "Text",
+ CellChangeTimes->{{3.8225911746427097`*^9, 
+  3.822591182160274*^9}},ExpressionUUID->"55ae742b-48bf-4d01-9f48-\
+2028131cf4d5"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{968, 679},
+WindowMargins->{{Automatic, 204}, {Automatic, 0}},
+TaggingRules->{"TryRealOnly" -> False},
+FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"760b7fc6-f67a-4775-ac2e-be8e285d9855"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 179, 3, 98, "Title",ExpressionUUID->"a4305c4f-c3d1-401c-a457-a8f332cc52ee"],
+Cell[CellGroupData[{
+Cell[784, 29, 215, 4, 67, "Section",ExpressionUUID->"855011b2-effd-4f4c-8a6c-ff4d2d7ea5df"],
+Cell[CellGroupData[{
+Cell[1024, 37, 689, 10, 54, "Subsection",ExpressionUUID->"9e1ea565-b32b-4676-a286-125f6cb6a65c"],
+Cell[1716, 49, 312, 7, 35, "Text",ExpressionUUID->"c8c7110b-a8ff-48c7-88e8-683f59e6b4f0"],
+Cell[2031, 58, 606, 13, 58, "Text",ExpressionUUID->"63cf96ff-c09b-435e-98f1-7a4f802d82d6"],
+Cell[2640, 73, 8279, 156, 35, "Input",ExpressionUUID->"d8326d55-2984-4375-a087-2288d5d31151"],
+Cell[CellGroupData[{
+Cell[10944, 233, 161, 3, 45, "Subsubsection",ExpressionUUID->"3fcde024-09d1-4a32-9647-6d0fdf0d1648"],
+Cell[11108, 238, 235, 4, 35, "Text",ExpressionUUID->"9ec25fcd-950f-4b13-bef4-11ce9ed5ea7e"],
+Cell[11346, 244, 240, 6, 35, "Text",ExpressionUUID->"6f1e0977-e988-40bb-a39e-d4a6a43a53a1"],
+Cell[11589, 252, 654, 15, 58, "Text",ExpressionUUID->"57dde213-1794-4dc7-8589-b4cc835b4eb9"],
+Cell[12246, 269, 229, 4, 35, "Text",ExpressionUUID->"82ff26bd-ab12-42a4-94f6-bb165d937e64"],
+Cell[12478, 275, 427, 8, 58, "Text",ExpressionUUID->"487c1937-74ef-44bf-a2ab-effe5a506a0e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12954, 289, 237, 4, 54, "Subsection",ExpressionUUID->"79c7919a-4881-428a-a2a9-a8b52c6fdc97"],
+Cell[13194, 295, 817, 23, 58, "Text",ExpressionUUID->"a5a02d49-c636-4c43-8e31-bbb19b3d978a"],
+Cell[14014, 320, 627, 11, 104, "Text",ExpressionUUID->"76a079be-070f-4dca-8114-7e17bb7c8605"],
+Cell[14644, 333, 754, 19, 35, "Text",ExpressionUUID->"b1df831c-747f-4e25-9dda-8b54d97a7c18"],
+Cell[15401, 354, 477, 12, 35, "Text",ExpressionUUID->"da747775-bf1c-47c6-ad5c-1b6a1d42e777"],
+Cell[15881, 368, 2799, 77, 140, "Text",ExpressionUUID->"d898eb7f-6472-4e15-b527-217ed67630b7"],
+Cell[CellGroupData[{
+Cell[18705, 449, 1099, 33, 67, "Subsubsection",ExpressionUUID->"b5a120ec-cccc-4363-aaaf-50e46849ff34"],
+Cell[19807, 484, 353, 7, 58, "Text",ExpressionUUID->"53a91ac4-6adc-4bf4-8e5a-a08d2d0e525b"],
+Cell[20163, 493, 253, 4, 35, "Text",ExpressionUUID->"3d02e62f-26cd-40f4-950f-85a9f6023c71"],
+Cell[20419, 499, 1270, 40, 62, "Text",ExpressionUUID->"e64985fb-d617-40b5-8a0a-1a9f24e1e984"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21726, 544, 163, 3, 45, "Subsubsection",ExpressionUUID->"b3a69c86-b440-488d-acfd-da813965d537"],
+Cell[21892, 549, 2031, 69, 58, "Text",ExpressionUUID->"acd17b2b-82a7-4ca4-95ac-a63e22e6c4e7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23960, 623, 174, 3, 45, "Subsubsection",ExpressionUUID->"6b879a35-9c3b-476f-9155-9021baae854d"],
+Cell[24137, 628, 231, 6, 35, "Text",ExpressionUUID->"0ebaa31d-54ec-42c6-89f1-136becb82ecd"],
+Cell[24371, 636, 199, 3, 35, "Text",ExpressionUUID->"78a124ef-4c65-41ac-ae45-c1ed5714053c"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24619, 645, 228, 4, 54, "Subsection",ExpressionUUID->"2970e3d7-7a1f-42c8-8ce6-71f29c104e7d"],
+Cell[24850, 651, 681, 11, 104, "Text",ExpressionUUID->"1cfd99a0-c589-47a7-8bca-06b1d74721c7"],
+Cell[25534, 664, 547, 10, 81, "Text",ExpressionUUID->"889f3b84-bbde-44f0-8abd-c24ccfba82e1"],
+Cell[26084, 676, 301, 7, 35, "Text",ExpressionUUID->"c0880606-215c-447f-9d90-157b69d72bb9"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26422, 688, 233, 5, 54, "Subsection",ExpressionUUID->"90c529a4-5521-498c-9c73-6a64002a1c44"],
+Cell[26658, 695, 409, 10, 58, "Text",ExpressionUUID->"b62b1b71-9c51-4f82-b9d2-f5f115cb0ef7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27104, 710, 192, 3, 54, "Subsection",ExpressionUUID->"bae440e7-eac6-40bc-8683-2b157c5146ba"],
+Cell[27299, 715, 219, 5, 35, "Text",ExpressionUUID->"2b821004-930f-47c1-a9bc-e0362ee42db2"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27567, 726, 167, 3, 67, "Section",ExpressionUUID->"61354bb9-a0da-4c72-9de9-bb9d03cc7d70"],
+Cell[27737, 731, 363, 7, 58, "Text",ExpressionUUID->"80596a33-288f-4293-975d-56e95d708a2c"],
+Cell[28103, 740, 185, 3, 35, "Text",ExpressionUUID->"e8f83470-48e8-4d23-9548-2f9394925bda"],
+Cell[28291, 745, 295, 4, 35, "Text",ExpressionUUID->"69f2904c-3028-4ed5-b30b-2098217f41de"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28623, 754, 166, 3, 67, "Section",ExpressionUUID->"13e1676f-6ac7-475b-a6be-454999329565"],
+Cell[28792, 759, 319, 7, 58, "Text",ExpressionUUID->"00d4f850-bc20-4a02-ad81-add7f188ea1a"],
+Cell[29114, 768, 217, 5, 35, "Text",ExpressionUUID->"23042e1c-3664-4263-8b68-91be2dfca1dd"],
+Cell[29334, 775, 622, 13, 81, "Text",ExpressionUUID->"b9a9abf1-2ac1-4278-889c-7c257272998e"],
+Cell[29959, 790, 304, 6, 35, "Text",ExpressionUUID->"ed301760-c6f5-4eb9-b268-22d20f2860d6"],
+Cell[30266, 798, 251, 6, 35, "Text",ExpressionUUID->"14e67a9a-389d-4414-880b-1a81b3b42311"],
+Cell[30520, 806, 291, 6, 35, "Text",ExpressionUUID->"f9f18cef-b1e9-459d-921e-07a640711df7"],
+Cell[30814, 814, 177, 3, 35, "Text",ExpressionUUID->"55ae742b-48bf-4d01-9f48-2028131cf4d5"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
