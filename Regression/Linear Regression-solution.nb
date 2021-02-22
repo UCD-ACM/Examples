@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     65842,       1662]
-NotebookOptionsPosition[     56318,       1525]
-NotebookOutlinePosition[     56754,       1542]
-CellTagsIndexPosition[     56711,       1539]
+NotebookDataLength[     66613,       1695]
+NotebookOptionsPosition[     56999,       1557]
+NotebookOutlinePosition[     57440,       1574]
+CellTagsIndexPosition[     57397,       1571]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -100,105 +100,128 @@ Cell[BoxData[
        Dynamic[Typeset`open]},
       "IconizedObject"]],
     {{0, 0}, {
-     Rational[1, 5] Pi, Rational[-99, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[2, 5] Pi, Rational[-49, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[3, 5] Pi, Rational[-291, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[4, 5] Pi, Rational[-96, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[1, 5] Pi, (Rational[-99, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[2, 5] Pi, (Rational[-49, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[3, 5] Pi, (Rational[-291, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[4, 5] Pi, (Rational[-96, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      Pi, 19 Pi^2}, {
-     Rational[6, 5] Pi, Rational[-141, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[7, 5] Pi, Rational[-651, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[8, 5] Pi, Rational[-184, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[9, 5] Pi, Rational[-819, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
+     Rational[6, 5] Pi, (Rational[-141, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[7, 5] Pi, (Rational[-651, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[8, 5] Pi, (Rational[-184, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[9, 5] Pi, (Rational[-819, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
      2 Pi, (-36) Pi^2}, {
-     Rational[11, 5] Pi, Rational[-979, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[12, 5] Pi, Rational[-264, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[13, 5] Pi, Rational[-1131, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[14, 5] Pi, Rational[-301, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[11, 5] Pi, (Rational[-979, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[12, 5] Pi, (Rational[-264, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[13, 5] Pi, (Rational[-1131, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[14, 5] 
+      Pi, (Rational[-301, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      3 Pi, 51 Pi^2}, {
-     Rational[16, 5] Pi, Rational[-336, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[17, 5] Pi, Rational[-1411, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[18, 5] Pi, Rational[-369, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[19, 5] Pi, Rational[-1539, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     4 Pi, (-64) Pi^2}, {
-     Rational[21, 5] Pi, Rational[-1659, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[22, 5] Pi, Rational[-429, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[23, 5] Pi, Rational[-1771, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[24, 5] Pi, Rational[-456, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[16, 5] Pi, (Rational[-336, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[17, 5] Pi, (Rational[-1411, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[18, 5] 
+      Pi, (Rational[-369, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[19, 5] Pi, (Rational[-1539, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {4 Pi, (-64) Pi^2}, {
+     Rational[21, 5] Pi, (Rational[-1659, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[22, 5] 
+      Pi, (Rational[-429, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[23, 5] Pi, (Rational[-1771, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[24, 5] 
+      Pi, (Rational[-456, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      5 Pi, 75 Pi^2}, {
-     Rational[26, 5] Pi, Rational[-481, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[27, 5] Pi, Rational[-1971, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[28, 5] Pi, Rational[-504, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[29, 5] Pi, Rational[-2059, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     6 Pi, (-84) Pi^2}, {
-     Rational[31, 5] Pi, Rational[-2139, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[32, 5] Pi, Rational[-544, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[33, 5] Pi, Rational[-2211, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[34, 5] Pi, Rational[-561, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[26, 5] Pi, (Rational[-481, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[27, 5] Pi, (Rational[-1971, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[28, 5] 
+      Pi, (Rational[-504, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[29, 5] Pi, (Rational[-2059, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {6 Pi, (-84) Pi^2}, {
+     Rational[31, 5] Pi, (Rational[-2139, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[32, 5] 
+      Pi, (Rational[-544, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[33, 5] Pi, (Rational[-2211, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[34, 5] 
+      Pi, (Rational[-561, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      7 Pi, 91 Pi^2}, {
-     Rational[36, 5] Pi, Rational[-576, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[37, 5] Pi, Rational[-2331, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[38, 5] Pi, Rational[-589, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[39, 5] Pi, Rational[-2379, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     8 Pi, (-96) Pi^2}, {
-     Rational[41, 5] Pi, Rational[-2419, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[42, 5] Pi, Rational[-609, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[43, 5] Pi, Rational[-2451, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[44, 5] Pi, Rational[-616, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[36, 5] Pi, (Rational[-576, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[37, 5] Pi, (Rational[-2331, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[38, 5] 
+      Pi, (Rational[-589, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[39, 5] Pi, (Rational[-2379, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {8 Pi, (-96) Pi^2}, {
+     Rational[41, 5] Pi, (Rational[-2419, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[42, 5] 
+      Pi, (Rational[-609, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[43, 5] Pi, (Rational[-2451, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[44, 5] 
+      Pi, (Rational[-616, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      9 Pi, 99 Pi^2}, {
-     Rational[46, 5] Pi, Rational[-621, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[47, 5] Pi, Rational[-2491, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[48, 5] Pi, Rational[-624, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[49, 5] Pi, Rational[-2499, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     10 Pi, (-100) Pi^2}, {
-     Rational[51, 5] Pi, Rational[-2499, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[52, 5] Pi, Rational[-624, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[53, 5] Pi, Rational[-2491, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[54, 5] Pi, Rational[-621, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[46, 5] Pi, (Rational[-621, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[47, 5] Pi, (Rational[-2491, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[48, 5] 
+      Pi, (Rational[-624, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[49, 5] Pi, (Rational[-2499, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {10 Pi, (-100) Pi^2}, {
+     Rational[51, 5] Pi, (Rational[-2499, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[52, 5] 
+      Pi, (Rational[-624, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[53, 5] Pi, (Rational[-2491, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[54, 5] 
+      Pi, (Rational[-621, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      11 Pi, 99 Pi^2}, {
-     Rational[56, 5] Pi, Rational[-616, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[57, 5] Pi, Rational[-2451, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[58, 5] Pi, Rational[-609, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[59, 5] Pi, Rational[-2419, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     12 Pi, (-96) Pi^2}, {
-     Rational[61, 5] Pi, Rational[-2379, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[62, 5] Pi, Rational[-589, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[63, 5] Pi, Rational[-2331, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[64, 5] Pi, Rational[-576, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[56, 5] Pi, (Rational[-616, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[57, 5] Pi, (Rational[-2451, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[58, 5] 
+      Pi, (Rational[-609, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[59, 5] Pi, (Rational[-2419, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {12 Pi, (-96) Pi^2}, {
+     Rational[61, 5] Pi, (Rational[-2379, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[62, 5] 
+      Pi, (Rational[-589, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[63, 5] Pi, (Rational[-2331, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[64, 5] 
+      Pi, (Rational[-576, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      13 Pi, 91 Pi^2}, {
-     Rational[66, 5] Pi, Rational[-561, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[67, 5] Pi, Rational[-2211, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[68, 5] Pi, Rational[-544, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[69, 5] Pi, Rational[-2139, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     14 Pi, (-84) Pi^2}, {
-     Rational[71, 5] Pi, Rational[-2059, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[72, 5] Pi, Rational[-504, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[73, 5] Pi, Rational[-1971, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[74, 5] Pi, Rational[-481, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[66, 5] Pi, (Rational[-561, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[67, 5] Pi, (Rational[-2211, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[68, 5] 
+      Pi, (Rational[-544, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[69, 5] Pi, (Rational[-2139, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {14 Pi, (-84) Pi^2}, {
+     Rational[71, 5] Pi, (Rational[-2059, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[72, 5] 
+      Pi, (Rational[-504, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[73, 5] Pi, (Rational[-1971, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[74, 5] 
+      Pi, (Rational[-481, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      15 Pi, 75 Pi^2}, {
-     Rational[76, 5] Pi, Rational[-456, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[77, 5] Pi, Rational[-1771, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[78, 5] Pi, Rational[-429, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[79, 5] Pi, Rational[-1659, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     16 Pi, (-64) Pi^2}, {
-     Rational[81, 5] Pi, Rational[-1539, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[82, 5] Pi, Rational[-369, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[83, 5] Pi, Rational[-1411, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[84, 5] Pi, Rational[-336, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[76, 5] Pi, (Rational[-456, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[77, 5] Pi, (Rational[-1771, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[78, 5] 
+      Pi, (Rational[-429, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[79, 5] Pi, (Rational[-1659, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {16 Pi, (-64) Pi^2}, {
+     Rational[81, 5] Pi, (Rational[-1539, 100] (1 + 5^Rational[1, 2])) 
+      Pi^2}, {Rational[82, 5] 
+      Pi, (Rational[-369, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[83, 5] Pi, (Rational[-1411, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[84, 5] 
+      Pi, (Rational[-336, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      17 Pi, 51 Pi^2}, {
-     Rational[86, 5] Pi, Rational[-301, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[87, 5] Pi, Rational[-1131, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[88, 5] Pi, Rational[-264, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[89, 5] Pi, Rational[-979, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
+     Rational[86, 5] Pi, (Rational[-301, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[87, 5] Pi, (Rational[-1131, 100] (1 - 5^Rational[1, 2])) 
+      Pi^2}, {Rational[88, 5] 
+      Pi, (Rational[-264, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[89, 5] Pi, (Rational[-979, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
      18 Pi, (-36) Pi^2}, {
-     Rational[91, 5] Pi, Rational[-819, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[92, 5] Pi, Rational[-184, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[93, 5] Pi, Rational[-651, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[94, 5] Pi, Rational[-141, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
+     Rational[91, 5] Pi, (Rational[-819, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[92, 5] Pi, (Rational[-184, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[93, 5] Pi, (Rational[-651, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[94, 5] Pi, (Rational[-141, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
      19 Pi, 19 Pi^2}, {
-     Rational[96, 5] Pi, Rational[-96, 25] (-1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[97, 5] Pi, Rational[-291, 100] (1 - 5^Rational[1, 2]) Pi^2}, {
-     Rational[98, 5] Pi, Rational[-49, 25] (-1 + 5^Rational[1, 2]) Pi^2}, {
-     Rational[99, 5] Pi, Rational[-99, 100] (1 + 5^Rational[1, 2]) Pi^2}, {
+     Rational[96, 5] Pi, (Rational[-96, 25] (-1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[97, 5] Pi, (Rational[-291, 100] (1 - 5^Rational[1, 2])) Pi^2}, {
+     Rational[98, 5] Pi, (Rational[-49, 25] (-1 + 5^Rational[1, 2])) Pi^2}, {
+     Rational[99, 5] Pi, (Rational[-99, 100] (1 + 5^Rational[1, 2])) Pi^2}, {
      20 Pi, 0}},
     SelectWithContents->True,
     Selectable->False]}], ";"}]], "Input",
@@ -1366,6 +1389,15 @@ Cell[BoxData[
  CellLabel->
   "In[339]:=",ExpressionUUID->"2ba2cef8-265f-46a8-9651-26c935c47169"],
 
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MNISTbynumber", "=", 
+   RowBox[{"GroupBy", "[", 
+    RowBox[{"MNIST", ",", 
+     RowBox[{"Last", "\[Rule]", "First"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.822033207695846*^9, 3.822033301592517*^9}},
+ CellLabel->"In[47]:=",ExpressionUUID->"079df9ec-9b5d-4dba-8681-73c5789dccd6"],
+
 Cell["\<\
 To save time, we will train the model using a subset of the data.\
 \>", "Text",
@@ -1524,7 +1556,7 @@ Cell[BoxData[
 }, Open  ]]
 },
 WindowSize->{968, 679},
-WindowMargins->{{Automatic, -3}, {Automatic, 0}},
+WindowMargins->{{Automatic, -1837}, {Automatic, 110}},
 TaggingRules->{"TryRealOnly" -> False},
 FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
 StyleDefinitions->"Default.nb",
@@ -1549,119 +1581,120 @@ Cell[CellGroupData[{
 Cell[1024, 37, 689, 10, 54, "Subsection",ExpressionUUID->"9e1ea565-b32b-4676-a286-125f6cb6a65c"],
 Cell[1716, 49, 312, 7, 35, "Text",ExpressionUUID->"c8c7110b-a8ff-48c7-88e8-683f59e6b4f0"],
 Cell[2031, 58, 606, 13, 58, "Text",ExpressionUUID->"63cf96ff-c09b-435e-98f1-7a4f802d82d6"],
-Cell[2640, 73, 7928, 133, 35, InheritFromParent,ExpressionUUID->"d8326d55-2984-4375-a087-2288d5d31151"],
+Cell[2640, 73, 8279, 156, 35, "Input",ExpressionUUID->"d8326d55-2984-4375-a087-2288d5d31151"],
 Cell[CellGroupData[{
-Cell[10593, 210, 161, 3, 45, "Subsubsection",ExpressionUUID->"3fcde024-09d1-4a32-9647-6d0fdf0d1648"],
-Cell[10757, 215, 235, 4, 35, "Text",ExpressionUUID->"9ec25fcd-950f-4b13-bef4-11ce9ed5ea7e"],
-Cell[10995, 221, 1149, 28, 54, "Input",ExpressionUUID->"7da11e59-d878-459c-873f-ab5586cecd18",
+Cell[10944, 233, 161, 3, 45, "Subsubsection",ExpressionUUID->"3fcde024-09d1-4a32-9647-6d0fdf0d1648"],
+Cell[11108, 238, 235, 4, 35, "Text",ExpressionUUID->"9ec25fcd-950f-4b13-bef4-11ce9ed5ea7e"],
+Cell[11346, 244, 1149, 28, 54, "Input",ExpressionUUID->"7da11e59-d878-459c-873f-ab5586cecd18",
  CellID->196749448],
-Cell[12147, 251, 240, 6, 35, "Text",ExpressionUUID->"6f1e0977-e988-40bb-a39e-d4a6a43a53a1"],
-Cell[12390, 259, 388, 8, 30, "Input",ExpressionUUID->"a03cb623-aaa8-427d-abd5-c7bebc1a7949"],
-Cell[12781, 269, 654, 15, 58, "Text",ExpressionUUID->"57dde213-1794-4dc7-8589-b4cc835b4eb9"],
-Cell[13438, 286, 909, 26, 33, "Input",ExpressionUUID->"054b2643-5526-47b3-b957-4ae8bd018608",
+Cell[12498, 274, 240, 6, 35, "Text",ExpressionUUID->"6f1e0977-e988-40bb-a39e-d4a6a43a53a1"],
+Cell[12741, 282, 388, 8, 30, "Input",ExpressionUUID->"a03cb623-aaa8-427d-abd5-c7bebc1a7949"],
+Cell[13132, 292, 654, 15, 58, "Text",ExpressionUUID->"57dde213-1794-4dc7-8589-b4cc835b4eb9"],
+Cell[13789, 309, 909, 26, 33, "Input",ExpressionUUID->"054b2643-5526-47b3-b957-4ae8bd018608",
  CellID->831553048],
-Cell[14350, 314, 229, 4, 35, "Text",ExpressionUUID->"82ff26bd-ab12-42a4-94f6-bb165d937e64"],
-Cell[14582, 320, 586, 15, 30, "Input",ExpressionUUID->"050435b0-9389-458e-bacf-e0de36d24267"],
-Cell[15171, 337, 427, 8, 58, "Text",ExpressionUUID->"487c1937-74ef-44bf-a2ab-effe5a506a0e"]
+Cell[14701, 337, 229, 4, 35, "Text",ExpressionUUID->"82ff26bd-ab12-42a4-94f6-bb165d937e64"],
+Cell[14933, 343, 586, 15, 30, "Input",ExpressionUUID->"050435b0-9389-458e-bacf-e0de36d24267"],
+Cell[15522, 360, 427, 8, 58, "Text",ExpressionUUID->"487c1937-74ef-44bf-a2ab-effe5a506a0e"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15647, 351, 237, 4, 54, "Subsection",ExpressionUUID->"79c7919a-4881-428a-a2a9-a8b52c6fdc97"],
-Cell[15887, 357, 817, 23, 58, "Text",ExpressionUUID->"a5a02d49-c636-4c43-8e31-bbb19b3d978a"],
-Cell[16707, 382, 627, 11, 104, "Text",ExpressionUUID->"76a079be-070f-4dca-8114-7e17bb7c8605"],
-Cell[17337, 395, 993, 23, 52, "Input",ExpressionUUID->"14b44add-0deb-4287-b7e8-f671cd8afe85"],
-Cell[18333, 420, 754, 19, 35, "Text",ExpressionUUID->"b1df831c-747f-4e25-9dda-8b54d97a7c18"],
-Cell[19090, 441, 513, 15, 52, "Input",ExpressionUUID->"45522dc4-0069-4474-92c2-b8c5b95fb3f2"],
-Cell[19606, 458, 477, 12, 35, "Text",ExpressionUUID->"da747775-bf1c-47c6-ad5c-1b6a1d42e777"],
-Cell[20086, 472, 452, 13, 52, "Input",ExpressionUUID->"01446fc9-10f7-4d49-b024-dbcd6598ad38"],
-Cell[20541, 487, 308, 8, 30, "Input",ExpressionUUID->"b2524a57-857e-4838-b754-950d041a9e4a"],
-Cell[20852, 497, 2799, 77, 140, "Text",ExpressionUUID->"d898eb7f-6472-4e15-b527-217ed67630b7"],
+Cell[15998, 374, 237, 4, 54, "Subsection",ExpressionUUID->"79c7919a-4881-428a-a2a9-a8b52c6fdc97"],
+Cell[16238, 380, 817, 23, 58, "Text",ExpressionUUID->"a5a02d49-c636-4c43-8e31-bbb19b3d978a"],
+Cell[17058, 405, 627, 11, 104, "Text",ExpressionUUID->"76a079be-070f-4dca-8114-7e17bb7c8605"],
+Cell[17688, 418, 993, 23, 52, "Input",ExpressionUUID->"14b44add-0deb-4287-b7e8-f671cd8afe85"],
+Cell[18684, 443, 754, 19, 35, "Text",ExpressionUUID->"b1df831c-747f-4e25-9dda-8b54d97a7c18"],
+Cell[19441, 464, 513, 15, 52, "Input",ExpressionUUID->"45522dc4-0069-4474-92c2-b8c5b95fb3f2"],
+Cell[19957, 481, 477, 12, 35, "Text",ExpressionUUID->"da747775-bf1c-47c6-ad5c-1b6a1d42e777"],
+Cell[20437, 495, 452, 13, 52, "Input",ExpressionUUID->"01446fc9-10f7-4d49-b024-dbcd6598ad38"],
+Cell[20892, 510, 308, 8, 30, "Input",ExpressionUUID->"b2524a57-857e-4838-b754-950d041a9e4a"],
+Cell[21203, 520, 2799, 77, 140, "Text",ExpressionUUID->"d898eb7f-6472-4e15-b527-217ed67630b7"],
 Cell[CellGroupData[{
-Cell[23676, 578, 1099, 33, 67, "Subsubsection",ExpressionUUID->"b5a120ec-cccc-4363-aaaf-50e46849ff34"],
-Cell[24778, 613, 353, 7, 58, "Text",ExpressionUUID->"53a91ac4-6adc-4bf4-8e5a-a08d2d0e525b"],
-Cell[25134, 622, 844, 21, 33, "Input",ExpressionUUID->"ccc65d3c-b5b6-46d7-a4d8-dc4bf6137c65"],
-Cell[25981, 645, 253, 4, 35, "Text",ExpressionUUID->"3d02e62f-26cd-40f4-950f-85a9f6023c71"],
-Cell[26237, 651, 1267, 33, 56, "Input",ExpressionUUID->"ccc99c11-7eb6-4ba6-b042-e04e84939ef3"],
-Cell[27507, 686, 1270, 40, 62, "Text",ExpressionUUID->"e64985fb-d617-40b5-8a0a-1a9f24e1e984"],
-Cell[28780, 728, 535, 14, 30, "Input",ExpressionUUID->"14a19473-c240-4aa9-9ab6-7fa46d3c8319"],
-Cell[29318, 744, 413, 10, 30, "Input",ExpressionUUID->"955ed707-7e0d-45b7-9597-2bbea4998a26"],
-Cell[29734, 756, 397, 9, 30, "Input",ExpressionUUID->"4f8dfab5-f340-41a2-8841-210b20f7cc46"],
-Cell[30134, 767, 287, 6, 30, "Input",ExpressionUUID->"230d33e1-bd0e-4642-913e-08b8f72e37e3"]
+Cell[24027, 601, 1099, 33, 67, "Subsubsection",ExpressionUUID->"b5a120ec-cccc-4363-aaaf-50e46849ff34"],
+Cell[25129, 636, 353, 7, 58, "Text",ExpressionUUID->"53a91ac4-6adc-4bf4-8e5a-a08d2d0e525b"],
+Cell[25485, 645, 844, 21, 33, "Input",ExpressionUUID->"ccc65d3c-b5b6-46d7-a4d8-dc4bf6137c65"],
+Cell[26332, 668, 253, 4, 35, "Text",ExpressionUUID->"3d02e62f-26cd-40f4-950f-85a9f6023c71"],
+Cell[26588, 674, 1267, 33, 56, "Input",ExpressionUUID->"ccc99c11-7eb6-4ba6-b042-e04e84939ef3"],
+Cell[27858, 709, 1270, 40, 62, "Text",ExpressionUUID->"e64985fb-d617-40b5-8a0a-1a9f24e1e984"],
+Cell[29131, 751, 535, 14, 30, "Input",ExpressionUUID->"14a19473-c240-4aa9-9ab6-7fa46d3c8319"],
+Cell[29669, 767, 413, 10, 30, "Input",ExpressionUUID->"955ed707-7e0d-45b7-9597-2bbea4998a26"],
+Cell[30085, 779, 397, 9, 30, "Input",ExpressionUUID->"4f8dfab5-f340-41a2-8841-210b20f7cc46"],
+Cell[30485, 790, 287, 6, 30, "Input",ExpressionUUID->"230d33e1-bd0e-4642-913e-08b8f72e37e3"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[30458, 778, 163, 3, 45, "Subsubsection",ExpressionUUID->"b3a69c86-b440-488d-acfd-da813965d537"],
-Cell[30624, 783, 2031, 69, 58, "Text",ExpressionUUID->"acd17b2b-82a7-4ca4-95ac-a63e22e6c4e7"],
-Cell[32658, 854, 357, 9, 30, "Input",ExpressionUUID->"64779275-0869-4589-8f08-a826e90e5ef7"],
-Cell[33018, 865, 482, 12, 30, "Input",ExpressionUUID->"17a18d48-f179-4a84-bc80-c63645af431b"],
-Cell[33503, 879, 338, 7, 30, "Input",ExpressionUUID->"98156093-6efd-4eb3-b847-1c460ded9854"],
-Cell[33844, 888, 244, 5, 30, "Input",ExpressionUUID->"66d8d64d-351c-4dd2-b9a0-4a06d47076bf"]
+Cell[30809, 801, 163, 3, 45, "Subsubsection",ExpressionUUID->"b3a69c86-b440-488d-acfd-da813965d537"],
+Cell[30975, 806, 2031, 69, 58, "Text",ExpressionUUID->"acd17b2b-82a7-4ca4-95ac-a63e22e6c4e7"],
+Cell[33009, 877, 357, 9, 30, "Input",ExpressionUUID->"64779275-0869-4589-8f08-a826e90e5ef7"],
+Cell[33369, 888, 482, 12, 30, "Input",ExpressionUUID->"17a18d48-f179-4a84-bc80-c63645af431b"],
+Cell[33854, 902, 338, 7, 30, "Input",ExpressionUUID->"98156093-6efd-4eb3-b847-1c460ded9854"],
+Cell[34195, 911, 244, 5, 30, "Input",ExpressionUUID->"66d8d64d-351c-4dd2-b9a0-4a06d47076bf"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[34125, 898, 174, 3, 45, "Subsubsection",ExpressionUUID->"6b879a35-9c3b-476f-9155-9021baae854d"],
-Cell[34302, 903, 231, 6, 35, "Text",ExpressionUUID->"0ebaa31d-54ec-42c6-89f1-136becb82ecd"],
-Cell[34536, 911, 242, 5, 30, "Input",ExpressionUUID->"a103eb09-1861-42f6-8052-985bca011a72"],
-Cell[34781, 918, 199, 3, 35, "Text",ExpressionUUID->"78a124ef-4c65-41ac-ae45-c1ed5714053c"],
-Cell[34983, 923, 371, 9, 30, "Input",ExpressionUUID->"98a7dd01-f16f-40c9-85e9-77458a8bfe36"],
-Cell[35357, 934, 376, 8, 52, "Input",ExpressionUUID->"fe39d6ba-ce4f-4aa2-9c4d-85ae68decab0"],
-Cell[35736, 944, 378, 7, 30, "Input",ExpressionUUID->"0c2bbb6d-9620-4ee2-b44e-da4eb643cdbc"]
+Cell[34476, 921, 174, 3, 45, "Subsubsection",ExpressionUUID->"6b879a35-9c3b-476f-9155-9021baae854d"],
+Cell[34653, 926, 231, 6, 35, "Text",ExpressionUUID->"0ebaa31d-54ec-42c6-89f1-136becb82ecd"],
+Cell[34887, 934, 242, 5, 30, "Input",ExpressionUUID->"a103eb09-1861-42f6-8052-985bca011a72"],
+Cell[35132, 941, 199, 3, 35, "Text",ExpressionUUID->"78a124ef-4c65-41ac-ae45-c1ed5714053c"],
+Cell[35334, 946, 371, 9, 30, "Input",ExpressionUUID->"98a7dd01-f16f-40c9-85e9-77458a8bfe36"],
+Cell[35708, 957, 376, 8, 52, "Input",ExpressionUUID->"fe39d6ba-ce4f-4aa2-9c4d-85ae68decab0"],
+Cell[36087, 967, 378, 7, 30, "Input",ExpressionUUID->"0c2bbb6d-9620-4ee2-b44e-da4eb643cdbc"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[36163, 957, 228, 4, 54, "Subsection",ExpressionUUID->"2970e3d7-7a1f-42c8-8ce6-71f29c104e7d"],
-Cell[36394, 963, 681, 11, 104, "Text",ExpressionUUID->"1cfd99a0-c589-47a7-8bca-06b1d74721c7"],
-Cell[37078, 976, 1113, 29, 75, "Input",ExpressionUUID->"65af08b8-e8a6-45d7-97e4-8dc55e01d4a4"],
-Cell[38194, 1007, 611, 14, 30, "Input",ExpressionUUID->"14489321-0be3-4083-a55a-d6fbb8cd48d1"],
-Cell[38808, 1023, 547, 10, 81, "Text",ExpressionUUID->"889f3b84-bbde-44f0-8abd-c24ccfba82e1"],
-Cell[39358, 1035, 301, 7, 35, "Text",ExpressionUUID->"c0880606-215c-447f-9d90-157b69d72bb9"]
+Cell[36514, 980, 228, 4, 54, "Subsection",ExpressionUUID->"2970e3d7-7a1f-42c8-8ce6-71f29c104e7d"],
+Cell[36745, 986, 681, 11, 104, "Text",ExpressionUUID->"1cfd99a0-c589-47a7-8bca-06b1d74721c7"],
+Cell[37429, 999, 1113, 29, 75, "Input",ExpressionUUID->"65af08b8-e8a6-45d7-97e4-8dc55e01d4a4"],
+Cell[38545, 1030, 611, 14, 30, "Input",ExpressionUUID->"14489321-0be3-4083-a55a-d6fbb8cd48d1"],
+Cell[39159, 1046, 547, 10, 81, "Text",ExpressionUUID->"889f3b84-bbde-44f0-8abd-c24ccfba82e1"],
+Cell[39709, 1058, 301, 7, 35, "Text",ExpressionUUID->"c0880606-215c-447f-9d90-157b69d72bb9"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[39696, 1047, 233, 5, 54, "Subsection",ExpressionUUID->"90c529a4-5521-498c-9c73-6a64002a1c44"],
-Cell[39932, 1054, 409, 10, 58, "Text",ExpressionUUID->"b62b1b71-9c51-4f82-b9d2-f5f115cb0ef7"],
-Cell[40344, 1066, 1332, 37, 73, "Input",ExpressionUUID->"62c14d69-7494-497d-9fda-3e0fe46614ac"]
+Cell[40047, 1070, 233, 5, 54, "Subsection",ExpressionUUID->"90c529a4-5521-498c-9c73-6a64002a1c44"],
+Cell[40283, 1077, 409, 10, 58, "Text",ExpressionUUID->"b62b1b71-9c51-4f82-b9d2-f5f115cb0ef7"],
+Cell[40695, 1089, 1332, 37, 73, "Input",ExpressionUUID->"62c14d69-7494-497d-9fda-3e0fe46614ac"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[41713, 1108, 192, 3, 54, "Subsection",ExpressionUUID->"bae440e7-eac6-40bc-8683-2b157c5146ba"],
-Cell[41908, 1113, 219, 5, 35, "Text",ExpressionUUID->"2b821004-930f-47c1-a9bc-e0362ee42db2"],
-Cell[42130, 1120, 1670, 48, 77, "Input",ExpressionUUID->"cfb714b1-ef8f-4444-b0f9-84516cc61b76"],
-Cell[43803, 1170, 627, 20, 73, "Input",ExpressionUUID->"516aa8a2-2a68-407b-898a-b65e25ba1cca"],
-Cell[44433, 1192, 556, 15, 33, "Input",ExpressionUUID->"ed24f831-e7ad-41f3-b4ff-0ef4fbc81863"],
-Cell[44992, 1209, 290, 6, 30, "Input",ExpressionUUID->"7f5f7ad0-cd77-40a9-973c-b78a92bd4171"],
-Cell[45285, 1217, 180, 3, 30, "Input",ExpressionUUID->"454aa79a-5478-4a9c-9e6a-b36063c696dc"]
+Cell[42064, 1131, 192, 3, 54, "Subsection",ExpressionUUID->"bae440e7-eac6-40bc-8683-2b157c5146ba"],
+Cell[42259, 1136, 219, 5, 35, "Text",ExpressionUUID->"2b821004-930f-47c1-a9bc-e0362ee42db2"],
+Cell[42481, 1143, 1670, 48, 77, "Input",ExpressionUUID->"cfb714b1-ef8f-4444-b0f9-84516cc61b76"],
+Cell[44154, 1193, 627, 20, 73, "Input",ExpressionUUID->"516aa8a2-2a68-407b-898a-b65e25ba1cca"],
+Cell[44784, 1215, 556, 15, 33, "Input",ExpressionUUID->"ed24f831-e7ad-41f3-b4ff-0ef4fbc81863"],
+Cell[45343, 1232, 290, 6, 30, "Input",ExpressionUUID->"7f5f7ad0-cd77-40a9-973c-b78a92bd4171"],
+Cell[45636, 1240, 180, 3, 30, "Input",ExpressionUUID->"454aa79a-5478-4a9c-9e6a-b36063c696dc"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[45514, 1226, 167, 3, 67, "Section",ExpressionUUID->"61354bb9-a0da-4c72-9de9-bb9d03cc7d70"],
-Cell[45684, 1231, 363, 7, 58, "Text",ExpressionUUID->"80596a33-288f-4293-975d-56e95d708a2c"],
-Cell[46050, 1240, 723, 20, 30, "Input",ExpressionUUID->"915712de-6a7e-4e5f-9c7d-127a674e5a51",
+Cell[45865, 1249, 167, 3, 67, "Section",ExpressionUUID->"61354bb9-a0da-4c72-9de9-bb9d03cc7d70"],
+Cell[46035, 1254, 363, 7, 58, "Text",ExpressionUUID->"80596a33-288f-4293-975d-56e95d708a2c"],
+Cell[46401, 1263, 723, 20, 30, "Input",ExpressionUUID->"915712de-6a7e-4e5f-9c7d-127a674e5a51",
  CellID->2100409069],
-Cell[46776, 1262, 185, 3, 35, "Text",ExpressionUUID->"e8f83470-48e8-4d23-9548-2f9394925bda"],
-Cell[46964, 1267, 695, 19, 30, "Input",ExpressionUUID->"ba4766db-96c1-42f3-940c-ef2409473932",
+Cell[47127, 1285, 185, 3, 35, "Text",ExpressionUUID->"e8f83470-48e8-4d23-9548-2f9394925bda"],
+Cell[47315, 1290, 695, 19, 30, "Input",ExpressionUUID->"ba4766db-96c1-42f3-940c-ef2409473932",
  CellID->1239033297],
-Cell[47662, 1288, 447, 11, 30, "Input",ExpressionUUID->"3963a008-65dd-4076-82c6-14c99c4a92eb"],
-Cell[48112, 1301, 295, 4, 35, "Text",ExpressionUUID->"69f2904c-3028-4ed5-b30b-2098217f41de"],
-Cell[48410, 1307, 511, 13, 30, "Input",ExpressionUUID->"0f9daaae-bcbd-4b71-b94c-ac703443a483"]
+Cell[48013, 1311, 447, 11, 30, "Input",ExpressionUUID->"3963a008-65dd-4076-82c6-14c99c4a92eb"],
+Cell[48463, 1324, 295, 4, 35, "Text",ExpressionUUID->"69f2904c-3028-4ed5-b30b-2098217f41de"],
+Cell[48761, 1330, 511, 13, 30, "Input",ExpressionUUID->"0f9daaae-bcbd-4b71-b94c-ac703443a483"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[48958, 1325, 166, 3, 67, "Section",ExpressionUUID->"13e1676f-6ac7-475b-a6be-454999329565"],
-Cell[49127, 1330, 319, 7, 58, "Text",ExpressionUUID->"00d4f850-bc20-4a02-ad81-add7f188ea1a"],
-Cell[49449, 1339, 539, 12, 30, "Input",ExpressionUUID->"1db8a14c-1e75-461e-aa55-a81e7f83b573"],
-Cell[49991, 1353, 589, 13, 30, "Input",ExpressionUUID->"2ba2cef8-265f-46a8-9651-26c935c47169"],
-Cell[50583, 1368, 217, 5, 35, "Text",ExpressionUUID->"23042e1c-3664-4263-8b68-91be2dfca1dd"],
-Cell[50803, 1375, 397, 9, 30, "Input",ExpressionUUID->"5a732da9-c3cc-4c2e-82f9-6605fc484e8d"],
-Cell[51203, 1386, 622, 13, 81, "Text",ExpressionUUID->"b9a9abf1-2ac1-4278-889c-7c257272998e"],
-Cell[51828, 1401, 389, 9, 30, "Input",ExpressionUUID->"3ed9bf55-d5a7-4de1-92bb-ec2e743a0a60",
+Cell[49309, 1348, 166, 3, 67, "Section",ExpressionUUID->"13e1676f-6ac7-475b-a6be-454999329565"],
+Cell[49478, 1353, 319, 7, 58, "Text",ExpressionUUID->"00d4f850-bc20-4a02-ad81-add7f188ea1a"],
+Cell[49800, 1362, 539, 12, 30, "Input",ExpressionUUID->"1db8a14c-1e75-461e-aa55-a81e7f83b573"],
+Cell[50342, 1376, 589, 13, 30, "Input",ExpressionUUID->"2ba2cef8-265f-46a8-9651-26c935c47169"],
+Cell[50934, 1391, 327, 7, 30, "Input",ExpressionUUID->"079df9ec-9b5d-4dba-8681-73c5789dccd6"],
+Cell[51264, 1400, 217, 5, 35, "Text",ExpressionUUID->"23042e1c-3664-4263-8b68-91be2dfca1dd"],
+Cell[51484, 1407, 397, 9, 30, "Input",ExpressionUUID->"5a732da9-c3cc-4c2e-82f9-6605fc484e8d"],
+Cell[51884, 1418, 622, 13, 81, "Text",ExpressionUUID->"b9a9abf1-2ac1-4278-889c-7c257272998e"],
+Cell[52509, 1433, 389, 9, 30, "Input",ExpressionUUID->"3ed9bf55-d5a7-4de1-92bb-ec2e743a0a60",
  CellID->1726682747],
-Cell[52220, 1412, 304, 6, 35, "Text",ExpressionUUID->"ed301760-c6f5-4eb9-b268-22d20f2860d6"],
-Cell[52527, 1420, 220, 4, 30, "Input",ExpressionUUID->"43753dfc-f2d7-4f9e-a5c3-3d3a86502534"],
-Cell[52750, 1426, 251, 6, 35, "Text",ExpressionUUID->"14e67a9a-389d-4414-880b-1a81b3b42311"],
-Cell[53004, 1434, 653, 17, 30, "Input",ExpressionUUID->"471e20c1-486d-4190-a1fd-1db8d5288f2a"],
-Cell[53660, 1453, 291, 6, 35, "Text",ExpressionUUID->"f9f18cef-b1e9-459d-921e-07a640711df7"],
-Cell[53954, 1461, 419, 9, 30, "Input",ExpressionUUID->"2b0c472c-ee82-4bb7-a81b-eac11de6d05a"],
-Cell[54376, 1472, 444, 10, 30, "Input",ExpressionUUID->"6ea609b4-8e5e-45b7-a43a-15592461c6f8",
+Cell[52901, 1444, 304, 6, 35, "Text",ExpressionUUID->"ed301760-c6f5-4eb9-b268-22d20f2860d6"],
+Cell[53208, 1452, 220, 4, 30, "Input",ExpressionUUID->"43753dfc-f2d7-4f9e-a5c3-3d3a86502534"],
+Cell[53431, 1458, 251, 6, 35, "Text",ExpressionUUID->"14e67a9a-389d-4414-880b-1a81b3b42311"],
+Cell[53685, 1466, 653, 17, 30, "Input",ExpressionUUID->"471e20c1-486d-4190-a1fd-1db8d5288f2a"],
+Cell[54341, 1485, 291, 6, 35, "Text",ExpressionUUID->"f9f18cef-b1e9-459d-921e-07a640711df7"],
+Cell[54635, 1493, 419, 9, 30, "Input",ExpressionUUID->"2b0c472c-ee82-4bb7-a81b-eac11de6d05a"],
+Cell[55057, 1504, 444, 10, 30, "Input",ExpressionUUID->"6ea609b4-8e5e-45b7-a43a-15592461c6f8",
  CellID->1905138556],
-Cell[54823, 1484, 705, 17, 30, "Input",ExpressionUUID->"92ea5c85-548d-4247-b08c-65b25daf2511"],
-Cell[55531, 1503, 177, 3, 35, "Text",ExpressionUUID->"55ae742b-48bf-4d01-9f48-2028131cf4d5"],
-Cell[55711, 1508, 579, 13, 30, "Input",ExpressionUUID->"1022f20d-75d9-4855-81d1-4038b3d633f4"]
+Cell[55504, 1516, 705, 17, 30, "Input",ExpressionUUID->"92ea5c85-548d-4247-b08c-65b25daf2511"],
+Cell[56212, 1535, 177, 3, 35, "Text",ExpressionUUID->"55ae742b-48bf-4d01-9f48-2028131cf4d5"],
+Cell[56392, 1540, 579, 13, 30, "Input",ExpressionUUID->"1022f20d-75d9-4855-81d1-4038b3d633f4"]
 }, Open  ]]
 }, Open  ]]
 }
